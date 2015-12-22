@@ -170,7 +170,9 @@
                         android:layout_centerInParent="true"
                         android:gravity="center_horizontal"
                         android:textStyle="bold"
-                        android:layout_gravity="center" />
+                        android:layout_gravity="center"
+                        android:onClick="setupFBbutton"
+                        android:nestedScrollingEnabled="false" />
                 </LinearLayout>
 
                 <TextView
