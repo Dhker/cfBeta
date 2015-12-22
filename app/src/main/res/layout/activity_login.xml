@@ -1,0 +1,198 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/Linearcadre1">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/logo"
+            android:src="@drawable/home_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/email_f"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="10" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="90"
+            android:layout_gravity="center"
+            android:gravity="bottom"
+            android:weightSum="10">
+
+            <AutoCompleteTextView android:id="@+id/email_f" android:layout_width="match_parent"
+                android:layout_height="50dp"  android:hint="@string/prompt_email"
+                android:inputType="textEmailAddress" android:maxLines="1"
+                android:singleLine="true"
+                android:layout_above="@+id/password_f"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:paddingLeft="10dp"
+                android:drawablePadding="10dp"
+                android:background="@xml/borderedittext"
+                android:textSize="15sp"
+                android:cursorVisible="true"
+
+                android:drawableLeft ="@drawable/ic_email"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center" />
+
+            <EditText android:id="@+id/password_f" android:layout_width="match_parent"
+                android:layout_height="50dp" android:hint="@string/prompt_password"
+                android:textSize="15sp"
+
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified" android:inputType="textPassword"
+                android:maxLines="1" android:singleLine="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:drawableLeft ="@drawable/ic_password"
+                android:drawablePadding="10dp"
+
+                android:cursorVisible="true"
+
+                android:background="@xml/borderedittext"
+
+                android:paddingLeft="10dp"
+
+
+                android:layout_marginTop="10dp"
+
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/password_f"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:weightSum="10"
+                android:layout_weight="2">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/checkbox1"
+                    android:id="@+id/rememberme"
+                    android:checked="false"
+                    android:layout_below="@+id/password_f"
+                    android:layout_alignLeft="@+id/login_form"
+                    android:layout_alignStart="@+id/login_form"
+                    android:layout_marginTop="5dp"
+                    android:shadowColor="@color/Black"
+                    android:layout_alignParentLeft="true"
+                    android:layout_weight="6"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center|right"
+                    android:layout_weight="4"
+                    android:id="@+id/forgot_pass_click">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/forgotpassword"
+                        android:id="@+id/forgot"
+                        android:textColor="#070707"
+                        android:clickable="true"
+                        android:textColorHighlight="@color/Black"
+
+
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/password_f"
+
+                        android:textIsSelectable="true"
+                        android:layout_weight="5"
+                        android:layout_gravity="center|right"
+                        android:gravity="center_horizontal|end"
+                        android:layout_marginRight="10dp" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:weightSum="100"
+                android:foregroundGravity="center_vertical|bottom"
+                android:id="@+id/buttons"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_weight="7">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="40"
+                    android:gravity="center_vertical">
+
+                    <ImageButton
+                        android:layout_width="300dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/custom_email_button"
+                        android:id="@+id/email_btn"
+                        android:layout_above="@+id/register_btn"
+                        android:layout_centerHorizontal="true"
+
+
+                        android:layout_gravity="center" />
+
+                    <ImageButton
+                        android:layout_width="300dp"
+                        android:layout_height="50dp"
+
+                        android:id="@+id/fb_btn"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/custom_fb_button"
+
+
+                        android:layout_below="@+id/rememberme"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_horizontal"
+                        android:textStyle="bold"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/register_btn"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="NEW? SIGN UP HERE"
+                    android:textColor="#000000"
+                    android:textStyle="italic"
+                    android:allowUndo="true"
+                    android:layout_below="@+id/buttons"
+
+                    android:layout_gravity="center"
+                    android:foregroundGravity="bottom"
+                    android:gravity="center_horizontal|bottom"
+                    android:layout_weight="40" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+

@@ -1,0 +1,289 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="wrap_content"
+    android:layout_height="fill_parent" tools:context="com.fide.ae.chessfamilybeta.EventFragment"
+    android:background="@xml/shaded_border"
+    android:scrollIndicators="bottom">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Linearmenu"
+            android:baselineAligned="true"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cup"
+                android:src="@drawable/event_cup"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event"
+                android:id="@+id/gameText"
+                android:textColor="#ffffff"
+                android:layout_alignTop="@+id/cup"
+                android:layout_toRightOf="@+id/cup"
+                android:layout_toEndOf="@+id/cup"
+                android:layout_marginLeft="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="event title"
+                android:id="@+id/member_name"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_alignBottom="@+id/cup"
+                android:layout_alignLeft="@+id/gameText"
+                android:layout_alignStart="@+id/gameText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Date"
+                android:id="@+id/event_date"
+                android:layout_alignBaseline="@+id/member_name"
+                android:layout_alignBottom="@+id/member_name"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textColor="#ffffff"
+                android:layout_marginRight="25dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/event_time"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textColor="#ffffff"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|top"
+                android:weightSum="1"
+                android:orientation="vertical"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Nouveau flash-back, 1968. Le jeune auteur est en villégiature au Grand Budapest Hotel, qui n’est plus que l’ombre de l’établissement prestigieux qu’il fut. Il est intrigué par un personnage apparemment esseulé, dont il s’enquiert aupcvcxccxcxcxcxcxcrès du"
+                    android:id="@+id/event_details"
+                    android:layout_gravity="left|top"
+                    android:textColor="@color/Black" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <Button
+                        android:layout_width="50dp"
+                        android:layout_height="28dp"
+                        android:text="@string/join"
+                        android:id="@+id/join_btn"
+                        android:background="@drawable/oval_border"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:layout_width="55dp"
+                        android:layout_height="28dp"
+                        android:text="@string/maybe"
+                        android:id="@+id/maybe_btn"
+                        android:background="@drawable/oval_border"
+
+                        android:layout_marginLeft="15dp"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:layout_width="60dp"
+                        android:layout_height="28dp"
+                        android:text="@string/ignore"
+                        android:id="@+id/ignore_btn"
+                        android:background="@drawable/oval_border"
+
+
+                        android:layout_marginLeft="15dp"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hosted By"
+                    android:id="@+id/textView"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right|fill_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Joined / Maybe"
+                    android:id="@+id/event_state"
+
+                    android:drawableLeft="@drawable/attendance"
+                    android:drawablePadding="5dp"
+
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="8:00 PM"
+                    android:id="@+id/Time"
+                    android:textStyle="bold"
+                    android:drawableLeft="@drawable/time"
+                    android:drawablePadding="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Grand Hotel Budapest"
+                    android:id="@+id/event_adress"
+                    android:drawableLeft="@drawable/location_event"
+                    android:drawablePadding="5dp"
+
+
+
+                    android:ellipsize="end"
+
+                    android:scrollHorizontally="true"
+                    android:scrollIndicators="bottom"
+                    android:layout_gravity="center" />
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Linearcadre1"
+            android:id="@+id/bottom_menu"
+            android:weightSum="12"
+            android:foregroundGravity="center|fill|bottom"
+            android:layout_gravity="bottom">
+
+            <Button
+                android:focusable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/more_info"
+                android:text="More info"
+                android:background="@null"
+                android:id="@+id/more_info"
+                android:textColor="#7d7b7b"
+
+
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:layout_weight="3"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/favorite"
+                android:layout_toEndOf="@+id/favorite"
+                android:layout_gravity="center"
+                android:singleLine="true"
+                android:layout_marginLeft="2dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/favourite"
+
+                android:text="Favorite"
+                android:background="@null"
+                android:id="@+id/favorite"
+                android:textColor="#7d7b7b"
+                android:layout_weight="3"
+
+
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/comment_button"
+                android:layout_toStartOf="@+id/comment_button"
+                android:layout_gravity="center"
+                android:layout_marginLeft="2dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comment"
+                android:drawableLeft="@drawable/comment"
+                android:textColor="#7d7b7b"
+                android:id="@+id/comment_button"
+                android:background="@null"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:layout_weight="3"
+                android:layout_below="@+id/more_info"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="2dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/share"
+                android:text="Share Event"
+                android:textColor="#7d7b7b"
+                android:background="@null"
+                android:id="@+id/share_button"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:layout_weight="3"
+
+                android:layout_below="@+id/more_info"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="2dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

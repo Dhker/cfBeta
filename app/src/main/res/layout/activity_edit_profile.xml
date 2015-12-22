@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100">
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.fide.ae.chessfamilybeta.Top_menu_fragment"
+        android:id="@+id/top_menu_edit"
+        android:layout_gravity="center_horizontal"
+        tools:layout="@layout/fragment_top_menu"
+        class="com.fide.ae.chessfamilybeta.Top_menu_fragment" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:layout_weight="100" />
+
+    <fragment
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:name="com.fide.ae.chessfamilybeta.Bottom_Menu_Fragment"
+        android:id="@+id/bottom_menu_edit"
+        tools:layout="@layout/fragment_bottom__menu"
+        android:layout_gravity="center|bottom"
+        class="com.fide.ae.chessfamilybeta.Bottom_Menu_Fragment" />
+</LinearLayout>

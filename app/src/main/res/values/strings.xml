@@ -1,0 +1,158 @@
+<resources>
+    <string name="app_name">Chessfamily</string>
+    
+    <!-- Strings related to login -->
+    <string name="prompt_name">Name</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+	
+	
+	
+    <string name="prompt_birthday">Birthday</string>
+    <string name="prompt_gender">Gender</string>
+    <string name="prompt_register">Register</string>
+
+    <string name="age">Ages</string>
+    <string name="gender">Gender</string>
+    <string name="Location">Location</string>
+    <string name="Language">Language</string>
+    <string name="chessprofil">Chess Profile</string>
+    <string name="player">Player</string>
+    <string name="arbitre">Arbitre</string>
+    <string name="trainer">Trainer</string>
+    <string name="organizer">Organizer</string>
+	
+	
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_register">Register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_register">Register</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+    <string-array name="spinner_item">
+        <item>Man</item>
+        <item>women</item>
+    </string-array>
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="title_activity_regiter">Register</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="facebook_app_id">1685576621699942</string>
+    <string name="checkbox1">REMEMBER ME</string>
+    <string name="forgotpassword">FORGOT PASSWORD ?</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="home">HOME</string>
+    <string name="search_title">HOME</string>
+    <string name="search_hint">Search</string>
+    <string name="pulication">Say somthing . . .</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="event_string">Event</string>
+    <string name="join">Join</string>
+    <string name="maybe">Maybe</string>
+    <string name="ignore">Ignore</string>
+    <string name="accept">Accept</string>
+    <string name="moreinfo">More Info</string>
+    <string name="favorite">Favourite</string>
+    <string name="comment">Comment</string>
+    <string name="shareevent">Share Event</string>
+    <string name="invit_game">Game Invitation</string>
+    <string name="title_activity_player_list">PlayerListActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="textTabTitle1">Players</string>
+    <string name="textTabTitle2">Events</string>
+    <string name="textTabTitle3">LOCATIONS</string>
+    <string name="forgot_passwod">Enter your email adresse</string>
+    <string name="forgot_pass">Forgot password</string>
+    <string name="send">Send email</string>
+    <string name="cancel">Cancel</string>
+    <string name="registerdialog">Confirm your registration</string>
+    <string name="registertext">Register</string>
+    <string name="confirm">Confirm</string>
+    <string name="edit">Edit</string>
+    <string name="emailSend">We have sent you an Email to recover your password </string>
+    <string name="email">Email sent</string>
+    <string name="Lastname">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="result">Result</string>
+    <string name="femle">Female</string>
+    <string name="male">Male</string>
+    <string name="user_not_found_title">User not found !</string>
+    <string name="user_not_found_message">Please check your email or password</string>
+    <string name="time_out_title">Connection timed out</string>
+    <string name="time_out_message">Connection error</string>
+    <string name="availble">Availbility</string>
+    <string name="search_member">Search a member</string>
+    <string name="search_location">Search a location</string>
+    <string name="search_event">Search an event</string>
+
+
+</resources>

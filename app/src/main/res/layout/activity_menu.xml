@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="100"
+    android:background="@color/colorBackground">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:background="@color/colorBackground"
+        android:layout_height="wrap_content"
+        android:weightSum="10"
+        android:layout_weight="20"
+        android:gravity="top">
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:background="@xml/designe_image"
+            android:src="@drawable/com_facebook_profile_picture_blank_portrait"
+            android:layout_marginTop="20dp"
+            android:layout_weight="4" />
+        <TextView android:id="@+id/FulName"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Miladi Maamoun "
+            android:textColor="#666666"
+
+            android:textSize="20sp"
+            android:minWidth="30sp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="70"
+        android:layout_weight="80"
+        android:layout_gravity="center">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:background="@color/colorBackground"
+            android:layout_height="wrap_content"
+            android:id="@+id/mygames_lay"
+            android:weightSum="10"
+            android:layout_weight="10"
+            android:clickable="true"
+            android:onClick="setUpGames"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/play"
+                android:layout_marginLeft="35dp" />
+            <TextView android:id="@+id/MyGame"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="My Games "
+                android:layout_marginLeft="10dp"
+                android:textColor="#666666"
+
+                android:textSize="25.0sp"
+                android:minWidth="50sp"
+                android:shadowColor="#333333"
+                android:layout_gravity="center_vertical" />
+
+
+        </LinearLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal" android:layout_width="fill_parent"
+            android:background="@color/colorBackground"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:id="@+id/event_lay"
+            android:layout_weight="10"
+            android:onClick="setUpEvents"
+            android:clickable="true">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:src="@drawable/event_gray" />
+            <TextView android:id="@+id/event"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Events "
+                android:layout_marginLeft="10dp"
+                android:textColor="#666666"
+
+                android:textSize="25.0sp"
+                android:minWidth="50sp"
+                android:layout_gravity="center_vertical|left"
+                android:shadowColor="#333333" />
+        </LinearLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal" android:layout_width="match_parent"
+            android:background="@color/colorBackground"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:layout_gravity="center"
+            android:id="@+id/myprofile_lay"
+            android:layout_weight="10"
+            android:clickable="true"
+            android:onClick="setUpProfile">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/profil" />
+            <TextView android:id="@+id/profil"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="My Profile "
+                android:layout_marginLeft="10dp"
+                android:textColor="#666666"
+
+                android:textSize="25.0sp"
+                android:shadowColor="#333333"
+                android:layout_gravity="center_vertical|left" />
+        </LinearLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal" android:layout_width="match_parent"
+            android:background="@color/colorBackground"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/faq"
+            android:weightSum="10"
+            android:layout_weight="10"
+            android:onClick="setUpFaq"
+            android:clickable="true">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/faq" />
+            <TextView android:id="@+id/FAQ"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="F.A.Q "
+
+                android:textColor="#666666"
+
+                android:textSize="25.0sp"
+                android:layout_marginLeft="10dp"
+                android:shadowColor="#333333"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal" android:layout_width="match_parent"
+            android:background="@color/colorBackground"
+            android:layout_height="wrap_content"
+            android:id="@+id/setting_lay"
+            android:weightSum="10"
+            android:layout_weight="10"
+            android:clickable="true"
+            android:onClick="setUpSetting"
+            android:layout_gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/setting"
+                android:layout_marginLeft="35dp"
+
+                />
+            <TextView android:id="@+id/Setting"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Settings"
+                android:layout_marginLeft="10dp"
+                android:textColor="#666666"
+                android:shadowColor="#333333"
+                android:textSize="25.0sp"
+                android:minWidth="50sp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal" android:layout_width="match_parent"
+            android:background="@color/colorBackground"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:layout_gravity="center"
+            android:id="@+id/privacy_lay"
+            android:weightSum="10"
+            android:onClick="setUpPrivacy"
+            android:clickable="true">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/privicy"
+                android:layout_marginLeft="35dp" />
+            <TextView android:id="@+id/privacy"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Privacy Policy"
+                android:layout_marginLeft="10dp"
+                android:textColor="#666666"
+                android:shadowColor="#333333"
+                android:textSize="25.0sp"
+                android:minWidth="50sp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal" android:layout_width="match_parent"
+            android:background="@color/colorBackground"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="left"
+            android:id="@+id/logout_lay"
+            android:layout_gravity="bottom"
+            android:layout_weight="10"
+            android:clickable="true"
+            android:nestedScrollingEnabled="false"
+            android:onClick="setUpLogout">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logout"
+                android:layout_marginLeft="35dp" />
+            <TextView android:id="@+id/Logout"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Logout "
+                android:layout_marginLeft="10dp"
+                android:textColor="#666666"
+                android:shadowColor="#333333"
+                android:textSize="25.0sp"
+                android:minWidth="50sp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

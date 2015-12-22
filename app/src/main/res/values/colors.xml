@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+	   <color name="colorBackground">#f1d6a1</color>
+    <color name="DarkBrown">#592E1D</color>
+    <color name="Linearcadre1">#f1d6a1</color>
+    <color name="Linearmenu">#965a36</color>
+    <color name="colorTextEditProfil1">#999999</color>
+    <color name="colorTextEditProfil2">#666666</color>
+    <color name="colorPartieInformationTextEditProfil">#ececec</color>
+    <color name="Black">#000000</color>
+    <color name="couleur_layout_menu">#f1d6a1</color>
+    <color name="spots_dialog_color">#965a36</color>
+
+    
+</resources>

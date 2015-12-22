@@ -1,0 +1,99 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:weightSum="100"
+    android:gravity="center_vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Linearmenu"
+            android:weightSum="10"
+            android:layout_weight="10">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Member Name"
+                    android:id="@+id/Member_name"
+                    android:textColor="#ffffff"
+                    android:layout_gravity="center|left"
+                    android:layout_marginTop="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Age"
+                    android:id="@+id/member_age"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center|left" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Distance"
+                android:id="@+id/distance_text"
+                android:textColor="#ffffff"
+                android:layout_gravity="center|right" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView3"
+            android:src="@drawable/com_facebook_profile_picture_blank_portrait"
+            android:layout_gravity="center"
+            android:layout_weight="80" />
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Linearcadre1"
+            android:layout_weight="10"
+            android:layout_gravity="center"
+            android:weightSum="10">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/invite_btn"
+                android:src="@drawable/play"
+                android:background="@null"
+                android:adjustViewBounds="false"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/favorite_btn"
+                android:src="@drawable/favourite_player"
+                android:background="@null"
+                android:layout_gravity="center"
+                android:adjustViewBounds="false"
+                android:nestedScrollingEnabled="false"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="false"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+

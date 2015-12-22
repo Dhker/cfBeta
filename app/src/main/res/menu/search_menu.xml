@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="schemas.android.com/tools"
+    xmlns:compat="http://schemas.android.com/apk/res-auto"
+    tools:context="com.fide.ae.chessfamilybeta.SearchActivity">
+        <item android:id="@+id/search_member"
+            android:title="@string/search_member"
+            android:icon="@drawable/ic_action"
+
+            />
+    <item android:id="@+id/search_event"
+        android:title="@string/search_event"
+        android:icon="@drawable/ic_search_event_menu"
+
+        />
+    <item android:id="@+id/search_location"
+        android:title="@string/search_location"
+        android:icon="@drawable/ic_search_location_menu"
+
+        />
+
+    </menu>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:id="@+id/login_form"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_alignParentBottom="true"
+    android:background="@color/colorBackground"
+
+    >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" android:paddingBottom="@dimen/activity_vertical_margin"
+        android:background="@color/colorBackground"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" tools:context=".Login">
+
+
+
+
+
+
+        <LinearLayout android:id="@+id/email_login_form" android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:weightSum="1"
+            android:orientation="vertical"
+            >
+
+            <EditText android:id="@+id/name_f" android:layout_width="match_parent"
+                android:layout_height="50dp" android:hint="@string/first_name"
+                android:inputType="text" android:maxLines="1"
+                android:singleLine="true" android:layout_marginTop="20dp"
+                android:background="@xml/borderedittext"
+                android:drawableLeft="@drawable/ic_action"
+                android:paddingLeft="5dp"/>
+            <EditText android:id="@+id/name_l" android:layout_width="match_parent"
+                android:layout_height="50dp" android:hint="@string/Lastname"
+                android:inputType="text" android:maxLines="1"
+                android:singleLine="true" android:layout_marginTop="20dp"
+                android:background="@xml/borderedittext"
+                android:drawableLeft="@drawable/ic_action"
+                android:paddingLeft="5dp"/>
+
+            <EditText android:id="@+id/birthday_f"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:clickable="true"
+                android:hint="@string/prompt_birthday"
+                android:drawableLeft="@drawable/ic_birthday"
+                android:background="@xml/borderedittext"
+                android:maxLines="1" android:singleLine="true" android:layout_marginTop="20dp"
+                android:paddingLeft="5dp"
+                android:editable="false" />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:weightSum="4"
+                android:layout_gravity="center"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    android:weightSum="2">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageView2"
+                        android:src="@drawable/ic_gender"
+                        android:layout_marginRight="5dp"
+                        android:layout_gravity="left" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/gender"
+                        android:id="@+id/textView3"
+                        android:layout_gravity="center"
+
+                        android:foregroundGravity="fill|clip_horizontal"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <RadioGroup
+                    android:id="@+id/genderGroupe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:checkedButton="@+id/male_radio_btn"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/male"
+                        android:id="@+id/male_radio_btn"
+                        android:layout_marginRight="5dp" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/femle"
+                        android:id="@+id/female_radio_btn" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <EditText android:id="@+id/email_f" android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/prompt_email"
+                android:drawableLeft="@drawable/ic_email"
+                android:imeActionLabel="email"
+                android:inputType="textEmailAddress"
+                android:background="@xml/borderedittext"
+                android:maxLines="1" android:singleLine="true" android:layout_marginTop="20dp"
+                android:paddingLeft="5dp"/>
+
+
+
+
+            <EditText android:id="@+id/password_f" android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/prompt_password"
+                android:drawableLeft="@drawable/ic_password"
+                android:imeActionId="@+id/login"
+                android:background="@xml/borderedittext"
+                android:imeOptions="actionUnspecified" android:inputType="textPassword"
+                android:maxLines="1" android:singleLine="true" android:layout_marginTop="20dp"
+                android:paddingLeft="5dp"/>
+
+            <EditText android:id="@+id/password_c" android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/confirm_password"
+                android:drawableLeft="@drawable/ic_password"
+                android:imeActionId="@+id/login"
+                android:background="@xml/borderedittext"
+                android:imeOptions="actionUnspecified" android:inputType="textPassword"
+                android:maxLines="1" android:singleLine="true" android:layout_marginTop="20dp"
+                android:paddingLeft="5dp"/>
+            <Button android:id="@+id/BTNRegister" style="?android:textAppearanceSmall"
+                android:layout_width="match_parent" android:layout_height="match_parent"
+                android:layout_marginTop="20dp" android:text="@string/prompt_register"
+                android:background="@color/Linearmenu"
+                android:textStyle="bold"
+
+
+                android:layout_gravity="center|bottom"
+                android:onClick="RegisterBtn" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>
