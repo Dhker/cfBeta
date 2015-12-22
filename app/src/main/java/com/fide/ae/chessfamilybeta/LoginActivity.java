@@ -33,6 +33,7 @@ import model.Member;
 import repository.MemberRepository;
 import repository.MemberRepositroyImpl;
 import utils.AsyncTaskResult;
+import utils.FacebookLogin;
 
 import static utils.ChessFamilyUtils.createNiftyDialog;
 
@@ -59,6 +60,8 @@ public class LoginActivity extends AppCompatActivity {
     private String password ;
     private boolean saveLogin;
 
+
+    FacebookLogin fbLogin ;
     // user repository
     private MemberRepository  repository = new MemberRepositroyImpl() ;
 
@@ -118,8 +121,9 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void setupFBbutton()
+    public void setupFBbutton(View v)
     {
+      fbLogin = new FacebookLogin(this);
 
 
     }
@@ -544,6 +548,13 @@ public class LoginActivity extends AppCompatActivity {
         email = emailField.getText().toString() ;
         password =passwordField.getText().toString();
         saveUserDetails(email, password,saveLogin);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        fbLogin.getCallbackManager().onActivityResult(resultCode,resultCode,data) ;
     }
 }
 
