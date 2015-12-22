@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private ImageButton fbbtn;
     private TextView forgottext ;
     private CheckBox rememberMeBtn ;
-
+aaaaaaaaaaa
     //Preferences for storing user Login and Password
     private SharedPreferences loginPreferences;
     private SharedPreferences.Editor loginPrefsEditor;
