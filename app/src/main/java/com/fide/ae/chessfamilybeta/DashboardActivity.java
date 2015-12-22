@@ -28,6 +28,9 @@ import model.Member;
 public class DashboardActivity extends AppCompatActivity {
 
     private   FrameLayout layout ;
+
+
+    private  Member  member ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +45,8 @@ public class DashboardActivity extends AppCompatActivity {
 
 
        Bundle bundle= this.getIntent().getExtras();
-       Member member =(Member) bundle.get("member");
-        Log.d("Member" ,""+ (member.getDeviceToken()==null)) ;
+        member =(Member) bundle.get("member");
+        Log.d("Member" ,""+(member==null)) ;
       //  this.addFragment(new GameFragment(),300);
       //  this.addFragment(new GameFragment(),400);
 

@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private ImageButton fbbtn;
     private TextView forgottext ;
     private CheckBox rememberMeBtn ;
+    private FrameLayout forgotpass;
 
     //Preferences for storing user Login and Password
     private SharedPreferences loginPreferences;
@@ -57,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
     private String email ;
     private String password ;
     private boolean saveLogin;
-private FrameLayout forgotpass;
+
     // user repository
     private MemberRepository  repository = new MemberRepositroyImpl() ;
 
@@ -84,11 +85,25 @@ private FrameLayout forgotpass;
         passwordField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
-                    startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+              //  if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+                {
+                   // startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+
+                    Log.d("IME", "true") ;
+
+                    try {
+
+                        connectByEmail();
+
+                    } catch (IllegalArgumentException e) {
+                        Log.d("error", e.getMessage());
+                        createNiftyDialog("Email and password ", "check your email and password" , LoginActivity.this);
+                        return false ;
+                    }
+
                     return true;
                 }
-                return false;
+               // return false;
             }
         });
 
@@ -98,7 +113,7 @@ private FrameLayout forgotpass;
         this.loginButtonOnClick();
         this.setupForgotpassword();
         this.setupRegisterbutton();
-
+        this.setupRemberme();
 
 
     }
@@ -114,13 +129,7 @@ private FrameLayout forgotpass;
     // Save the user email password in the preferences
     private void saveUserDetails(String email, String password , boolean saveMe)
     {
-        if(email==null|| password==null)
-        {//  Log.d("error","null") ;
-         throw new IllegalArgumentException("Null values") ;}
-        if(email.isEmpty()|| password.isEmpty())
-        {//  Log.d("error","empty") ;
-            throw new IllegalArgumentException("Empty values") ;
-        }
+
 
         if (saveMe) {
             loginPrefsEditor.putBoolean("saveLogin", true);
@@ -130,6 +139,7 @@ private FrameLayout forgotpass;
         } else {
             loginPrefsEditor.clear();
             loginPrefsEditor.commit();
+
         }
 
     }
@@ -154,8 +164,12 @@ private FrameLayout forgotpass;
     }
 
     // private method that make a call to the web service API
-    private void connectByEmail(String email , String password)
+    private void connectByEmail()
        {
+
+           email = emailField.getText().toString();
+           password = passwordField.getText().toString();
+           saveLogin = rememberMeBtn.isChecked();
            if(email==null|| password==null)
            {
               //  Log.d("error","null") ;
@@ -230,8 +244,9 @@ private FrameLayout forgotpass;
                            Log.d("member is null", "false");
                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                            intent.putExtra("member", member);
-
                            startActivity(intent);
+                         //  LoginActivity.this.finish();
+
                        }
                        else
                        {
@@ -253,6 +268,7 @@ private FrameLayout forgotpass;
                            String title =getResources().getString(R.string.time_out_title);
                            String message = getResources().getString(R.string.time_out_message);
                            createNiftyDialog(title, message , LoginActivity.this);
+
                        }
 
                    }
@@ -276,16 +292,10 @@ private FrameLayout forgotpass;
 
                 try {
 
-                    email = emailField.getText().toString();
-                    password = passwordField.getText().toString();
-                    saveLogin = rememberMeBtn.isChecked();
-                    //Log.d("saveLogin", ""+saveLogin) ;
-
-                    saveUserDetails(email, password, saveLogin);
-                    connectByEmail(email, password);
+                    connectByEmail();
 
                 } catch (IllegalArgumentException e) {
-                    Log.d("error", e.getMessage());
+                    //Log.d("error", e.getMessage());
                     createNiftyDialog("Email and password ", "check your email and password" , LoginActivity.this);
 
                 }
@@ -498,6 +508,20 @@ private FrameLayout forgotpass;
     public void setupRemberme()
     {
 
+       this.rememberMeBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                saveLogin  = rememberMeBtn.isChecked() ;
+
+                email = emailField.getText().toString() ;
+                password =passwordField.getText().toString();
+                saveUserDetails(email, password,saveLogin);
+
+                Log.d("clicked", ""+true) ;
+            }
+        });
+
     }
 
     @Override
@@ -513,6 +537,13 @@ private FrameLayout forgotpass;
         register.setTextColor(getResources().getColor(R.color.Black));
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
 
+        email = emailField.getText().toString() ;
+        password =passwordField.getText().toString();
+        saveUserDetails(email, password,saveLogin);
     }
+}
 
