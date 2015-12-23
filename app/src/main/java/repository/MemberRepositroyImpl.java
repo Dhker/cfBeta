@@ -181,7 +181,7 @@ public class MemberRepositroyImpl implements MemberRepository {
 		// TODO Auto-generated method stub
 		
 		
-		return null;
+		return new Member();
 	}
 
 	@Override

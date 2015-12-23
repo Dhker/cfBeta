@@ -39,10 +39,13 @@ import org.apache.http.conn.ConnectTimeoutException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
 
+import Exceptions.UserCreateException;
 import dmax.dialog.SpotsDialog;
 import model.Member;
 import repository.MemberRepository;
@@ -50,7 +53,8 @@ import repository.MemberRepositroyImpl;
 import utils.AsyncTaskResult;
 import utils.FacebookLogin;
 
-import static utils.ChessFamilyUtils.createNiftyDialog;
+import static utils.ChessFamilyUtils.*;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -76,7 +80,11 @@ public class LoginActivity extends AppCompatActivity {
     private boolean saveLogin;
 
 
-    FacebookLogin fbLogin ;
+
+    //facebook callbackManager
+    private   CallbackManager callbackManager;
+
+
     // user repository
     private MemberRepository  repository = new MemberRepositroyImpl() ;
 
@@ -98,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
         emailField = (AutoCompleteTextView) findViewById(R.id.email_f) ;
         register = (TextView)findViewById(R.id.register_btn) ;
         rememberMeBtn =(CheckBox)findViewById(R.id.rememberme) ;
-         forgotpass=(FrameLayout) findViewById(R.id.forgot_pass_click);
+        forgotpass=(FrameLayout) findViewById(R.id.forgot_pass_click);
 
         passwordField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -133,15 +141,6 @@ public class LoginActivity extends AppCompatActivity {
         this.setupRegisterbutton();
         this.setupRemberme();
 
-
-    }
-
-
-    public void setupFBbutton(View v)
-    {
-this.fbLogin = new FacebookLogin(this);
-       // FacebookLogin.bFacebookData.clear();
-//       Toast.makeText(this,this.fbLogin.getbFacebookData().toString(),Toast.LENGTH_LONG);
 
     }
 
@@ -183,6 +182,8 @@ this.fbLogin = new FacebookLogin(this);
             rememberMeBtn.setChecked(true);
         }
     }
+
+
 
     // private method that make a call to the web service API
     private void connectByEmail()
@@ -567,7 +568,297 @@ this.fbLogin = new FacebookLogin(this);
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        FacebookLogin.callbackManager.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
+
+
+
+
+
+    public void registerFb (Member member){
+        new  AsyncTask<Member , Member , AsyncTaskResult<Member>>()
+        {
+
+
+
+            @Override
+            protected void onProgressUpdate(Member... values) {
+
+                Log.d("Progress Update","true") ;
+
+            }
+
+            @Override
+            protected  AsyncTaskResult<Member> doInBackground(Member... params) {
+
+
+
+                AsyncTaskResult<Member> result =null ;
+
+                Member member =params[0];
+
+                try {
+                    boolean success = repository.createMember(member);
+
+                    //  throw new Exception() ;
+
+                    result = new AsyncTaskResult<Member>(member);
+
+
+
+                    return result;
+                } catch (Exception e) {
+                    Log.d("error", e.toString())    ;
+                    e.printStackTrace();
+                    result = new  AsyncTaskResult<Member>(e) ;
+                    return result ;
+                }
+                // publishProgress();
+
+            }
+
+            @Override
+            protected void onPostExecute( AsyncTaskResult<Member> result) {
+
+                if (result.getError() == null)
+                {
+                    Log.d("isNull", "" + (null))    ;
+
+
+                    Member member =  result.getResult();
+
+                    if(member!=null) {
+                        Log.d("member is null", "false");
+                        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                        intent.putExtra("member", member);
+
+                        startActivity(intent);
+                    }
+
+
+
+
+
+                }else
+                {
+
+                    Exception exception=    result.getError() ;
+
+                    if(( exception instanceof UnknownHostException)||( exception instanceof ConnectTimeoutException)) {
+
+                        String title =getResources().getString(R.string.time_out_title);
+                        String message = getResources().getString(R.string.time_out_message);
+                        createNiftyDialog(title, message, LoginActivity.this) ;
+                    }
+
+                    if( exception instanceof UserCreateException)
+                    {
+                        {
+                            //  Log.d("member is null", "true" ) ;
+                            String title = getResources().getString(R.string.user_not_found_title);
+                            String message =getResources().getString(R.string.user_not_found_message);
+                            createNiftyDialog("enable to create ", "jjjjj", LoginActivity.this) ;
+                        }
+                    }
+
+                    if( exception instanceof IllegalArgumentException)
+                    {
+                        {
+                            //  Log.d("member is null", "true" ) ;
+                            String title = getResources().getString(R.string.user_not_found_title);
+                            String message =getResources().getString(R.string.user_not_found_message);
+                            createNiftyDialog("enable to create ", "jjjjj", LoginActivity.this) ;
+                        }
+                    }
+                }
+
+
+
+            }
+        }.execute(member) ;
+    }
+
+
+
+    public void setupFBbutton(View v) {
+        FacebookConnect();
+
+
+    }
+    private void connectByFacebookId(Member member) throws  Exception {
+
+
+
+        if(member==null)
+        {
+            Log.d("error","empty") ;
+
+            throw new IllegalArgumentException("Empty values") ;
+        }
+        else
+        {
+            // Create a annoynme class that makes the call to web service
+            new AsyncTask<Member , Member , AsyncTaskResult<Member>>()
+            {
+                private SpotsDialog progressDialog;
+
+                @Override
+                protected void onPreExecute() {
+                    progressDialog = new SpotsDialog(LoginActivity.this, R.style.progressDialogCustom);
+                    progressDialog.show();
+
+                }
+
+                @Override
+                protected void onProgressUpdate(Member... values) {
+
+                    Log.d("Progress Update","true") ;
+
+                }
+
+                @Override
+                protected  AsyncTaskResult<Member> doInBackground(Member... params) {
+
+                    Member param = params[0] ;
+                    AsyncTaskResult<Member> result =null ;
+                    Member member = null ;
+                    Log.d("memeber" , ""+param) ;
+                    try {
+                        member = repository.connectWithFacebook(param.getFacebook_ID()) ;
+                        //  throw new Exception() ;
+                        if(member==null)
+                        {
+                            registerFb(param);
+                        }
+
+                        result= new AsyncTaskResult<Member>(member) ;
+
+                        return result;
+                    } catch (Exception e) {
+                        Log.d("error", e.toString())    ;
+                        e.printStackTrace();
+                        result = new  AsyncTaskResult<Member>(e) ;
+                        return result ;
+                    }
+                    // publishProgress();
+
+                }
+
+                @Override
+                protected void onPostExecute( AsyncTaskResult<Member> result) {
+
+                    progressDialog.dismiss();
+                    if (result.getError() == null)
+                    {
+                        Log.d("isNull", ""+(null))    ;
+
+
+                        Member member = (Member) result.getResult();
+
+                        if(member!=null) {
+                            Log.d("member is null", "false");
+                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                            intent.putExtra("member", member);
+                            startActivity(intent);
+                            //  LoginActivity.this.finish();
+
+                        }else
+                        {
+
+                        }
+
+
+
+
+                    }else
+                    {
+
+                        Exception exception=    result.getError() ;
+
+                        if(( exception instanceof UnknownHostException)||( exception instanceof ConnectTimeoutException)) {
+
+                            String title =getResources().getString(R.string.time_out_title);
+                            String message = getResources().getString(R.string.time_out_message);
+                            createNiftyDialog(title, message , LoginActivity.this);
+
+                        }
+
+                    }
+
+
+
+                }
+            }.execute(member);
+        }
+
+
+    }
+    public void  FacebookConnect( ) {
+
+        FacebookSdk.sdkInitialize(this);
+        callbackManager = CallbackManager.Factory.create();
+
+
+        // Set permissions
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "user_photos", "public_profile"));
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+
+                        GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                Log.i("LoginActivity", response.toString());
+                                // Get facebook data from login
+                                Member member = getFacebookData(object);
+                                Log.d("member", member.toString());
+
+
+                                    try{
+                                        if(member!=null) {
+                                          Log.d("fbid", member.getFacebook_ID()) ;
+                                            connectByFacebookId(member);
+                                        }else
+                                        {
+                                            throw new Exception() ;
+                                        }
+                                    }catch(Exception e){
+                                        String title ="facebook connection" ;
+                                        String message = "Enable to connect with facebook " ;
+                                        createNiftyDialog(title ,message ,LoginActivity.this);
+                                            // /  LoginActivity.this.finish();
+                                    }
+
+
+                            }
+                        });
+                        Bundle parameters = new Bundle();
+                        parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location");
+                        request.setParameters(parameters);
+                        request.executeAsync();
+                    }
+
+
+                    @Override
+                    public void onCancel() {
+                        Log.d("test", "On cancel");
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                        Log.d("test", error.toString());
+                    }
+                });
+
+
+
+
+    }
+
+
 }
 
