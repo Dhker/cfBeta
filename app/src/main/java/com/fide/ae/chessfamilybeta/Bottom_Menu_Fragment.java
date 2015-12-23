@@ -11,6 +11,8 @@ import android.widget.ImageButton;
 
 import com.readystatesoftware.viewbadger.BadgeView;
 
+import utils.ChessFamilyUtils;
+
 
 public class Bottom_Menu_Fragment extends Fragment {
 
@@ -22,6 +24,16 @@ private ImageButton home_btn,favorite_btn,message_btn,notification_btn,menu_btn 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ChessFamilyUtils.ClickEffect(home_btn);
+        ChessFamilyUtils.ClickEffect(favorite_btn);
+
+        ChessFamilyUtils.ClickEffect(message_btn);
+        ChessFamilyUtils.ClickEffect(menu_btn);
+
+        ChessFamilyUtils.ClickEffect(notification_btn);
+
+
 
 
 

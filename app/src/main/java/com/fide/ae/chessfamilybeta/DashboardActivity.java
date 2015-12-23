@@ -2,32 +2,29 @@ package com.fide.ae.chessfamilybeta;
 
 
 
-import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 
 
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.FragmentManager;
+
 import android.os.Bundle;
 
 
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
-import android.widget.TableLayout;
+import android.widget.ImageButton;
+
 
 import model.Member;
+import utils.ChessFamilyUtils;
 
 
 public class DashboardActivity extends AppCompatActivity {
 
     private   FrameLayout layout ;
+    private ImageButton home_btn,notif_btn,message_btn,favorite_btn ;
 
 
     private  Member  member ;
@@ -36,6 +33,13 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_dashboard);
+
+        //SETUP VIEWS
+
+        this.home_btn = (ImageButton) findViewById(R.id.home_menu_btn);
+        this.notif_btn=(ImageButton) findViewById(R.id.notification_menu_btn);
+        this.message_btn=(ImageButton) findViewById(R.id.message_menu_btn);
+        this.favorite_btn= (ImageButton) findViewById(R.id.favorite_menu_btn);
 
 
 
@@ -46,7 +50,7 @@ public class DashboardActivity extends AppCompatActivity {
 
        Bundle bundle= this.getIntent().getExtras();
         member =(Member) bundle.get("member");
-        Log.d("Member" ,""+(member==null)) ;
+        Log.d("Member", "" + (member == null)) ;
       //  this.addFragment(new GameFragment(),300);
       //  this.addFragment(new GameFragment(),400);
 
@@ -54,36 +58,21 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
+    public void HomeBtn(View v)
 
+    {
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.dashboard, menu);
+        android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.add(R.id.dashboard_content, new HomeFragment()).commit();
 
-
-
-        return true;
     }
 
 
-int top =10;
 
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.search:
-                startActivity(new Intent(DashboardActivity.this,SearchActivity.class));
-                return true;
 
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+
 
 
 }

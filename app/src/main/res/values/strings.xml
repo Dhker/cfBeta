@@ -154,6 +154,7 @@
     <string name="search_member">Search a member</string>
     <string name="search_location">Search a location</string>
     <string name="search_event">Search an event</string>
+    <string name="send_message">enter your text message</string>
 
 
 </resources>

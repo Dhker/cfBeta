@@ -2,15 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:background="@color/colorTextEditProfil1">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/say_somthing"
         android:background="@xml/shaded_border"
-        android:layout_margin="16dp">
+        android:layout_margin="16dp"
+        android:weightSum="10">
 
         <ImageView
             android:layout_width="50dp"
@@ -18,39 +21,45 @@
             android:id="@+id/member_photo"
             android:src="@drawable/com_facebook_profile_picture_blank_portrait"
             android:layout_gravity="left"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="5dp" />
 
-        <EditText
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/status_text"
+            android:layout_gravity="center"
+            android:layout_weight="10"
+            android:paddingTop="@dimen/pad_10dp"/>
+
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-
-            android:id="@+id/pub_text"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/say_somthing"
-            android:layout_toEndOf="@+id/say_somthing"
-            android:layout_marginTop="-40dp"
-            android:layout_marginLeft="90dp"
-            android:hint="@string/pulication"
-            android:layout_marginRight="20dp" />
-
-
+            android:id="@+id/status_publish"
+            android:src="@drawable/ic_publish"
+            android:background="@null"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="10dp" />
 
 
     </LinearLayout>
 
-    <fragment
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:name="com.fide.ae.chessfamilybeta.Bottom_Menu_Fragment"
-        android:id="@+id/fragment3"
-        class="com.fide.ae.chessfamilybeta.Bottom_Menu_Fragment"
-        tools:layout="@layout/fragment_bottom__menu" />
+        <ListView
+            android:id="@+id/list"
+            android:layout_weight="10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:dividerHeight="2dp"
+            tools:listitem="@layout/publication_item"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
+        </ListView>
 
 
 </LinearLayout>
