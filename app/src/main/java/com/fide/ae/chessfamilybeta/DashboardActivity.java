@@ -36,7 +36,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         //SETUP VIEWS
 
-        this.home_btn = (ImageButton) findViewById(R.id.home_menu_btn);
+       // this.home_btn = (ImageButton) findViewById(R.id.home_menu_btn);
         this.notif_btn=(ImageButton) findViewById(R.id.notification_menu_btn);
         this.message_btn=(ImageButton) findViewById(R.id.message_menu_btn);
         this.favorite_btn= (ImageButton) findViewById(R.id.favorite_menu_btn);
