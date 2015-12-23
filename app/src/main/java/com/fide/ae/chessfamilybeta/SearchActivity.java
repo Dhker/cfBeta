@@ -70,7 +70,7 @@ public class SearchActivity extends  AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return fragment1;
+                    return new FragmentSearchMember();
                 case 1:
                     return new Fragment();
                 default:
@@ -87,11 +87,11 @@ public class SearchActivity extends  AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Players";
+                    return getResources().getString(R.string.member);
                 case 1:
-                    return "Events";
+                    return getResources().getString(R.string.event);
                 default:
-                    return "Locations";
+                    return getResources().getString(R.string.location);
             }
         }
 
