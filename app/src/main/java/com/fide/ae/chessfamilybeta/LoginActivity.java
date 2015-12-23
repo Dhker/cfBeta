@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -23,10 +24,24 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 
 import org.apache.http.conn.ConnectTimeoutException;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.List;
 
 import dmax.dialog.SpotsDialog;
 import model.Member;
@@ -121,10 +136,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+
     public void setupFBbutton(View v)
     {
-      fbLogin = new FacebookLogin(this);
-
+this.fbLogin = new FacebookLogin(this);
+       // FacebookLogin.bFacebookData.clear();
+//       Toast.makeText(this,this.fbLogin.getbFacebookData().toString(),Toast.LENGTH_LONG);
 
     }
 
@@ -443,21 +460,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-        forgottext.setTextColor(getResources().getColor(R.color.colorPartieInformationTextEditProfil));
+                forgottext.setTextColor(getResources().getColor(R.color.colorPartieInformationTextEditProfil));
 
-                LinearLayout dialogLayout= new LinearLayout(LoginActivity.this);
+                LinearLayout dialogLayout = new LinearLayout(LoginActivity.this);
                 dialogLayout.setOrientation(LinearLayout.VERTICAL);
 
 
-
-
-
-
-                final  EditText edittext = new EditText(LoginActivity.this);
+                final EditText edittext = new EditText(LoginActivity.this);
 
 
                 edittext.setBackgroundResource(R.drawable.border_style);
-
 
 
                 Button confirm = new Button(LoginActivity.this);
@@ -466,7 +478,7 @@ public class LoginActivity extends AppCompatActivity {
                 confirm.setText(R.string.confirm);
                 dialogLayout.addView(edittext);
                 FrameLayout layout = new FrameLayout(LoginActivity.this);
-                layout.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,10));
+                layout.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 10));
                 dialogLayout.addView(layout);
                 dialogLayout.addView(confirm);
 
@@ -477,7 +489,7 @@ public class LoginActivity extends AppCompatActivity {
                 emaildialog.setMessage(getResources().getString(R.string.forgot_pass));
 
 
-                        emaildialog.setView(dialogLayout, 10, 10, 10, 10);
+                emaildialog.setView(dialogLayout, 10, 10, 10, 10);
 
                 emaildialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
@@ -486,24 +498,25 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
-                        confirm.setOnClickListener(new Button.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                //envoyer email ici
+                confirm.setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //envoyer email ici
 
-                                String emailRecover = edittext.getText().toString();
-                                if (!emailRecover.isEmpty()) {
-                                    emaildialog.dismiss();
-                                    sendRecoverEmail(emailRecover);
-                                }
+                        String emailRecover = edittext.getText().toString();
+                        if (!emailRecover.isEmpty()) {
+                            emaildialog.dismiss();
+                            sendRecoverEmail(emailRecover);
+                        }
 
-                            }
-                        });
+                    }
+                });
 
 
                 emaildialog.show();
 
-            }  });
+            }
+        });
 
 
     }
@@ -512,19 +525,19 @@ public class LoginActivity extends AppCompatActivity {
     public void setupRemberme()
     {
 
-       this.rememberMeBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
+       this.rememberMeBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
 
-                saveLogin  = rememberMeBtn.isChecked() ;
+               saveLogin = rememberMeBtn.isChecked();
 
-                email = emailField.getText().toString() ;
-                password =passwordField.getText().toString();
-                saveUserDetails(email, password,saveLogin);
+               email = emailField.getText().toString();
+               password = passwordField.getText().toString();
+               saveUserDetails(email, password, saveLogin);
 
-                Log.d("clicked", ""+true) ;
-            }
-        });
+               Log.d("clicked", "" + true);
+           }
+       });
 
     }
 
@@ -547,14 +560,14 @@ public class LoginActivity extends AppCompatActivity {
 
         email = emailField.getText().toString() ;
         password =passwordField.getText().toString();
-        saveUserDetails(email, password,saveLogin);
+        saveUserDetails(email, password, saveLogin);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        fbLogin.getCallbackManager().onActivityResult(resultCode,resultCode,data) ;
+        FacebookLogin.callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }
 
