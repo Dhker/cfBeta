@@ -14,8 +14,15 @@ import com.fide.ae.chessfamilybeta.R;
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import model.Member;
 
 /**
  * Created by wassim on 21/12/15.
@@ -43,8 +50,15 @@ public class ChessFamilyUtils {
 
     }
     public static Date convertStringToDate (String date)throws Exception{
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        return  formatter.parse(date) ;
+
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            return formatter.parse(date);
+        }catch(Exception e)
+        {
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/DD/YYYY");
+            return formatter.parse(date);
+        }
 
     }
 
@@ -78,5 +92,51 @@ public class ChessFamilyUtils {
                 return true;
             }
         });
+    }
+
+    public static Member getFacebookData(JSONObject object) {
+        Member member =null;
+        try {
+            member = new Member() ;
+
+
+
+
+            if(object.has("id"))
+
+                member.setFacebook_ID( object.getString("id")) ;
+            if (object.has("first_name"))
+                member.setName(object.getString("first_name"));
+            if (object.has("last_name"))
+                member.setLast_Name(object.getString("last_name"));
+            if (object.has("email"))
+                member.setEmail(object.getString("email"));
+            if (object.has("gender"))
+                member.setGender( object.getString("gender").equals("male")? 1:2);
+            if (object.has("birthday"))
+
+            {
+                try {
+                    member.setBirthday(convertStringToDate(object.getString("birthday")));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                URL profile_pic = new URL("https://graph.facebook.com/" + member.getFacebook_ID()+ "/picture?width=200&height=150");
+                member.setPhoto(profile_pic.toString());
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return null;
+            }
+
+            //Log.d("member", member.toString()
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+
+        }
+        return member ;
     }
 }

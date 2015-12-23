@@ -21,6 +21,8 @@ import org.json.JSONObject;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import static utils.ChessFamilyUtils .*;
+import model.Member;
 
 
 /**
@@ -28,13 +30,11 @@ import java.util.Arrays;
  */
 public class FacebookLogin {
     public static   CallbackManager callbackManager;
-    public static    Bundle bFacebookData ;
 
-    private AppCompatActivity activity ;
 
-    public FacebookLogin(AppCompatActivity activityContext) {
-        this.activity = activityContext;
-        FacebookSdk.sdkInitialize(this.activity);
+    public void  FacebookConnect(AppCompatActivity activity ) {
+
+        FacebookSdk.sdkInitialize(activity);
         callbackManager = CallbackManager.Factory.create();
 
 
@@ -52,15 +52,15 @@ public class FacebookLogin {
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 Log.i("LoginActivity", response.toString());
                                 // Get facebook data from login
-                                 bFacebookData = getFacebookData(object);
-
+                              Member   member = getFacebookData(object);
+                                Log.d("member", member.toString())  ;
 
 
                         }
                     });
                     Bundle parameters = new Bundle();
-                    parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location"); // Parámetros que pedimos a facebook
-                    request.setParameters(parameters);
+                    parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location");
+                        request.setParameters(parameters);
                     request.executeAsync();
                 }
 
@@ -90,46 +90,52 @@ public class FacebookLogin {
 
 
 
-    private Bundle getFacebookData(JSONObject object) {
-        Bundle bundle = new Bundle();
+    private  Member getFacebookData(JSONObject object) {
+        Member member =null;
         try {
+         member = new Member() ;
 
-            String id = object.getString("id");
-            Log.v("tester",id);
 
+
+
+             if(object.has("id"))
+
+              member.setFacebook_ID( object.getString("id")) ;
+            if (object.has("first_name"))
+                member.setName(object.getString("first_name"));
+            if (object.has("last_name"))
+                member.setLast_Name(object.getString("last_name"));
+            if (object.has("email"))
+                member.setEmail(object.getString("email"));
+            if (object.has("gender"))
+                member.setGender( object.getString("gender").equals("male")? 1:2);
+            if (object.has("birthday"))
+
+            {
+                try {
+                    member.setBirthday(convertStringToDate(object.getString("birthday")));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             try {
-                URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
-                Log.i("profile_pic", profile_pic + "");
-                bundle.putString("profile_pic", profile_pic.toString());
+                URL profile_pic = new URL("https://graph.facebook.com/" + member.getFacebook_ID()+ "/picture?width=200&height=150");
+                member.setPhoto(profile_pic.toString());
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
                 return null;
             }
 
-            bundle.putString("idFacebook", id);
-            if (object.has("first_name"))
-                bundle.putString("first_name", object.getString("first_name"));
-            if (object.has("last_name"))
-                bundle.putString("last_name", object.getString("last_name"));
-            if (object.has("email"))
-                bundle.putString("email", object.getString("email"));
-            if (object.has("gender"))
-                bundle.putString("gender", object.getString("gender"));
-            if (object.has("birthday"))
-                bundle.putString("birthday", object.getString("birthday"));
-            if (object.has("location"))
-                bundle.putString("location", object.getJSONObject("location").getString("name"));
-            Log.d("Hadhami",bundle.toString());
-            return bundle;
-
+             //Log.d("member", member.toString()
 
         } catch (JSONException e) {
             e.printStackTrace();
 
         }
+        return member ;
+    }
 
-        return bundle; }
 
 
 }

@@ -3,6 +3,8 @@ package com.fide.ae.chessfamilybeta;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
@@ -19,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 
@@ -27,10 +30,22 @@ import model.Member;
 
 public class DashboardActivity extends AppCompatActivity {
 
+
+    //UI components
     private   FrameLayout layout ;
+    private   ImageButton homeButton  ;
+    private   ImageButton favoriteButton ;
+    private   ImageButton messageButton ;
+    private   ImageButton notificationButton ;
 
 
-    private  Member  member ;
+    //Preferences for storing user information
+    private SharedPreferences userPreferences;
+    private SharedPreferences.Editor userPrefsEditor;
+
+
+
+    private  Member  user ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +53,15 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
 
+        //UI components intilialization
+        messageButton = (ImageButton) findViewById(R.id.message_menu_btn) ;
+        homeButton = (ImageButton) findViewById(R.id.home_menu_btn) ;
+        favoriteButton =(ImageButton) findViewById(R.id.favorite_menu_btn) ;
+        notificationButton =(ImageButton) findViewById(R.id.notification_menu_btn);
+
+
+        // set OnClick listener for menu buttons
+         menuButtonsOnclickListener();
 
 
 
@@ -45,8 +69,8 @@ public class DashboardActivity extends AppCompatActivity {
 
 
        Bundle bundle= this.getIntent().getExtras();
-        member =(Member) bundle.get("member");
-        Log.d("Member" ,""+(member==null)) ;
+        user =(Member) bundle.get("member");
+        Log.d("Member" ,""+(user==null)) ;
       //  this.addFragment(new GameFragment(),300);
       //  this.addFragment(new GameFragment(),400);
 
@@ -68,7 +92,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
 
-int top =10;
+
 
 
 
@@ -85,5 +109,33 @@ int top =10;
         }
     }
 
+
+    // set on click listener for each Menu Button
+    private void menuButtonsOnclickListener()
+    {
+        homeButtonOnclickListener();
+        messageButtonOnClickListener();
+        favoriteButtonOnClickListener();
+        notificationButtonOnClickListener();
+    }
+
+    // set on click  listener for home button
+    private void homeButtonOnclickListener()
+    {
+
+    }
+    // set on click listener for message button
+    private void messageButtonOnClickListener()
+    {
+
+    }
+    // set on click listener for favorite button
+    private void favoriteButtonOnClickListener(){
+
+    }
+    // set on click listener for notification button
+    private void notificationButtonOnClickListener(){
+
+    }
 
 }
