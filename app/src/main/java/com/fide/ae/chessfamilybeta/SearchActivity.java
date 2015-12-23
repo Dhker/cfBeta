@@ -1,16 +1,11 @@
 
 package com.fide.ae.chessfamilybeta;
 
-import android.content.Intent;
+
 import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.SearchView;
-import android.widget.TextView;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 
@@ -60,32 +55,6 @@ public class SearchActivity extends  AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.search_menu, menu);
-
-
-
-        return true;
-    }
-
-
-
-
-
-    public void click()
-    {
-
-        startActivity(new Intent(SearchActivity.this,ProfileActivity.class));
-    }
-
-
-
-
-// classe interne
-
 
 
     public class SectionPagerAdapter extends FragmentPagerAdapter implements TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener {
@@ -95,7 +64,7 @@ public class SearchActivity extends  AppCompatActivity {
         }
 
         Member_list_Fragment fragment1 = new Member_list_Fragment();
-        GameFragment fragment2= new GameFragment();
+
 
         @Override
         public Fragment getItem(int position) {
