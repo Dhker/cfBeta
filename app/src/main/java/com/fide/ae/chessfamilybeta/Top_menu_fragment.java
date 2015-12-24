@@ -2,7 +2,9 @@ package com.fide.ae.chessfamilybeta;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,8 @@ public class Top_menu_fragment extends Fragment {
         // Required empty public constructor
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,28 +42,45 @@ public class Top_menu_fragment extends Fragment {
         this.back_btn=(ImageButton)root.getRootView().findViewById(R.id.top_menu_back_btn);
         this.positon_btn=(ImageButton)root.getRootView().findViewById(R.id.top_menu_location);
         this.search_btn=(ImageButton)root.getRootView().findViewById(R.id.search_top_menu);
-        this.setUpListener();
 
-        ChessFamilyUtils.ClickEffect(back_btn);
-        ChessFamilyUtils.ClickEffect(positon_btn);
-        ChessFamilyUtils.ClickEffect(search_btn);
+        if (getActivity().getLocalClassName().equals("DashboardActivity"))
+        {
+            back_btn.setImageResource(R.drawable.ic_logout);
+
+        }
+//BUTTON RESEARCH
+        this.search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    startActivity(new Intent(getActivity(), SearchActivity.class));
+
+
+
+            }
+        });
+
+//BUTTON BACK
+
+        this.back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavUtils.navigateUpFromSameTask(getActivity());
+                if (getActivity().getLocalClassName().equals("DashboardActivity"))
+                {
+                   startActivity(new Intent(getActivity(),LoginActivity.class));
+
+
+                }
+
+
+            }
+        });
+
         // Inflate the layout for this fragment
         return root;
     }
 
-    private void setUpListener()
-    {
-
-        this.search_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popupmenu= new PopupMenu(Top_menu_fragment.this.getActivity(),search_btn);
-                popupmenu.getMenuInflater().inflate(R.menu.search_menu, popupmenu.getMenu());
-                popupmenu.show();
-            }
-        });
-
-    }
 
 
 

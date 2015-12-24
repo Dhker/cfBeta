@@ -155,6 +155,12 @@
     <string name="search_location">Search a location</string>
     <string name="search_event">Search an event</string>
     <string name="send_message">enter your text message</string>
+    <string name="member">Member</string>
+    <string name="event">Event</string>
+    <string name="location">Location</string>
+    <string name="distance">Distance</string>
+    <string name="meeting_loc">Meeting Location</string>
+    <string name="profile">Profile</string>
 
 
 </resources>

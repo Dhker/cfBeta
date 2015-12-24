@@ -39,7 +39,8 @@
             android:layout_weight="25"
             android:clickable="true"
             android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:nestedScrollingEnabled="false" />
 
         <ImageButton
             android:layout_width="wrap_content"

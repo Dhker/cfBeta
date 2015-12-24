@@ -48,6 +48,7 @@ public class DashboardActivity extends AppCompatActivity {
 
 
 
+
        Bundle bundle= this.getIntent().getExtras();
         member =(Member) bundle.get("member");
         Log.d("Member", "" + (member == null)) ;
