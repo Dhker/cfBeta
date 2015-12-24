@@ -12,6 +12,8 @@ import org.json.JSONObject;
 import Exceptions.UserCreateException;
 import configuration.Configuration;
 import model.ChessProfile;
+import model.City;
+import model.Country;
 import model.Member;
 import model.Title;
 import model.TrainerFor;
@@ -80,12 +82,22 @@ public class MemberRepositroyImpl implements MemberRepository {
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 	    params.add(new BasicNameValuePair("authentication", AUTH));
 	    params.add(new BasicNameValuePair("action", "member_add"));
+
+		if(member.getName()!=null)
 	    params.add(new BasicNameValuePair("name",member.getName() ));
+		if(member.getLast_Name()!=null )
 	    params.add(new BasicNameValuePair("last_name", member.getLast_Name()));
+		if(member.getEmail()!=null)
 	    params.add(new BasicNameValuePair("email", member.getEmail()));
+		if(member.getGender()!=0 )
 	    params.add(new BasicNameValuePair("gender", String.valueOf(member.getGender())));
+		if(member.getPassword()!=null)
 	    params.add(new BasicNameValuePair("password",member.getPassword()));
+		if(member.getOS()!=null)
 	    params.add(new BasicNameValuePair("os",member.getOS()));
+		if(member.getFacebook_ID()!=null)
+		params.add(new BasicNameValuePair("facebool_id",member.getFacebook_ID()));
+
 		     System.out.println(params);
 	    JSONObject json = jsonParser.getJSONFromUrl(URL, params);
 		boolean sucess =json.getInt("success")==1  ;
@@ -110,13 +122,13 @@ public class MemberRepositroyImpl implements MemberRepository {
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 	    params.add(new BasicNameValuePair("authentication", AUTH));
 	    params.add(new BasicNameValuePair("action", "member_edit"));
-	    params.add(new BasicNameValuePair("id",String.valueOf( member.getID())));
+	    params.add(new BasicNameValuePair("id",String.valueOf(member.getID())));
 	    params.add(new BasicNameValuePair("name", member.getName()));
 	    params.add(new BasicNameValuePair("last_name", member.getLast_Name()));
 	    params.add(new BasicNameValuePair("email", member.getEmail()));
 	    params.add(new BasicNameValuePair("gender", String.valueOf(member.getGender())));
 	    params.add(new BasicNameValuePair("password",member.getPassword()));
-	    params.add(new BasicNameValuePair("os",member.getOS()));
+	    params.add(new BasicNameValuePair("os", member.getOS()));
 	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	    String date = formatter.format(member.getBirthday()) ; 
 	    params.add(new BasicNameValuePair("birthday",date));
@@ -176,12 +188,55 @@ public class MemberRepositroyImpl implements MemberRepository {
 		return null;
 	}
 
+
+
+
+
+
 	@Override
-	public Member connectWithFacebook(String fbId) {
+	public Member connectWithFacebook(String fbId) throws Exception {
 		// TODO Auto-generated method stub
-		
-		
-		return new Member();
+
+
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		Member Result =null ;
+		params.add(new BasicNameValuePair("authentication", AUTH));
+		params.add(new BasicNameValuePair("action", "member_connect"));
+		params.add(new BasicNameValuePair("facebool_id", fbId));
+		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
+		System.out.println(json);
+		if (json.getInt("success") == 1) {
+			Result = new Member();
+			JSONObject memberJson = json.getJSONObject("member");
+			Country country = new Country();
+			City city = new City();
+			ChessProfile ChessProfile = new ChessProfile();
+			Result.setID(memberJson.getInt("id"));
+			Result.setEmail(memberJson.getString("email"));
+			Result.setLast_Name(memberJson.getString("last_name"));
+			Result.setGender(memberJson.getInt("gender"));
+			Result.setName(memberJson.getString("name"));
+			Result.setOS(memberJson.getString("os"));
+			Result.setFacebook_ID(memberJson.getString("facebool_id"));
+			Result.setGoogle_ID(memberJson.getString("google_id"));
+			Result.setDeviceToken(memberJson.getString("device_token"));
+			Result.setAvailble(memberJson.getInt("availability"));
+			Result.setPhoto(memberJson.getString("photo"));
+			Result.setStatus(memberJson.getInt("status"));
+			country.setId(memberJson.getInt("residence_countryid"));
+			city.setId(memberJson.getInt("residence_cityid"));
+			//Result.setID_city(city);
+			Result.setID_country(country);
+			ChessProfile.setIsArbiter(memberJson.getInt("is_arbiter"));
+			ChessProfile.setIsOrganizer(memberJson.getInt("organizer"));
+			ChessProfile.setIsPlayer(memberJson.getInt("is_player"));
+			ChessProfile.setIsTitled(memberJson.getInt("is_titled_player"));
+			//ChessProfile.setTitle(Enum.valueOf(Title.class, memberJson.getString("title")));
+			ChessProfile.setIsTrainer(memberJson.getInt("is_trainer"));
+		//	ChessProfile.setTrainerLevel(Enum.valueOf(TrainerFor.class, memberJson.getString("lesson_level")));
+			Result.setProfile(ChessProfile);
+		}
+		return Result ;
 	}
 
 	@Override

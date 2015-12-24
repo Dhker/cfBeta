@@ -1,6 +1,8 @@
 package model;
 
-public enum TrainerFor {
+import java.io.Serializable;
+
+public enum TrainerFor  implements Serializable {
 	
 	
 	BEGINNERS {

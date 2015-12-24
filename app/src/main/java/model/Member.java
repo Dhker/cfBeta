@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Member implements Serializable {
+public class Member implements Serializable  {
 
 	private int	ID ;
 	private String	DeviceToken ;

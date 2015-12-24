@@ -1,6 +1,8 @@
 package model;
 
-public class ChessProfile {
+import java.io.Serializable;
+
+public class ChessProfile implements Serializable {
 
 	private int	isPlayer;// IsPlayer: 1=Yes (Default), 1=No
 	private int isArbiter;		//	Is Arbiter: 1=Yes, 0=No (default) (optional)

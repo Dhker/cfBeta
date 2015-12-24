@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MeetingPlace {
+public class MeetingPlace  implements Serializable {
 
 	
 	private int id ;//�	ID

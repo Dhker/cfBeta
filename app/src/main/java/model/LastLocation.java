@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
-public class LastLocation {
+public class LastLocation  implements Serializable {
 
 	
 	

@@ -723,12 +723,15 @@ public class LoginActivity extends AppCompatActivity {
                     Member param = params[0] ;
                     AsyncTaskResult<Member> result =null ;
                     Member member = null ;
-                    Log.d("memeber" , ""+param) ;
+                    Log.d("param" , ""+param) ;
                     try {
                         member = repository.connectWithFacebook(param.getFacebook_ID()) ;
                         //  throw new Exception() ;
+                        Log.d("memberIn", ""+member) ;
                         if(member==null)
                         {
+
+                            Log.d("register","fb") ;
                             registerFb(param);
                         }
 

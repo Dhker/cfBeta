@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MemberFavoriteEvents {
+public class MemberFavoriteEvents   implements Serializable {
 
 
 	private int id ;//	ID

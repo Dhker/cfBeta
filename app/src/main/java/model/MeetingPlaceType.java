@@ -1,6 +1,8 @@
 package model;
 
-public class MeetingPlaceType {
+import java.io.Serializable;
+
+public class MeetingPlaceType   implements Serializable {
 	
 	
 	

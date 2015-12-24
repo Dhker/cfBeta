@@ -14,7 +14,7 @@ public interface MemberRepository {
 	boolean updateMemberInformation(Member member) throws Exception;
 	void updateMemberChessProfile(Member member) throws Exception;
 	Member Connect(String Email, String password) throws Exception;
-	Member connectWithFacebook(String fbId) ;
+	Member connectWithFacebook(String fbId)throws Exception ;
 	Member connectWithGoogle(String gId) ;
 	boolean sendForgetPasswordEmail(String email) throws Exception ;
 	

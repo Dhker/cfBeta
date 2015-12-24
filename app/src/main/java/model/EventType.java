@@ -1,6 +1,8 @@
 package model;
 
-public class EventType {
+import java.io.Serializable;
+
+public class EventType  implements Serializable {
 	
 	
 	

@@ -1,6 +1,8 @@
 package model;
 
-public class MemberPublicationPhoto {
+import java.io.Serializable;
+
+public class MemberPublicationPhoto  implements Serializable {
 
 	
 	private MemberPublication pub ;

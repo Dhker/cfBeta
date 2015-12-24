@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Event {
+public class Event   implements Serializable {
 
 	private int id ; // 	ID
 	private Member announcer ; //	ID Announcer (Member ID)

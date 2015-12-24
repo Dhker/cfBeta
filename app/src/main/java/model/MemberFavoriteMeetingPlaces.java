@@ -1,6 +1,8 @@
 package model;
 
-public class MemberFavoriteMeetingPlaces {
+import java.io.Serializable;
+
+public class MemberFavoriteMeetingPlaces  implements Serializable {
 
  private int id ; // 		ID
 	private Member member ; // 	ID Member

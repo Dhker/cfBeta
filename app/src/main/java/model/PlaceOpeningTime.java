@@ -1,6 +1,8 @@
 package model;
 
-public class PlaceOpeningTime {
+import java.io.Serializable;
+
+public class PlaceOpeningTime   implements Serializable {
 
 	
 	

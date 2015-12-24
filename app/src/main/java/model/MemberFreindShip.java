@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MemberFreindShip {
+public class MemberFreindShip  implements Serializable {
 
 	
 	
