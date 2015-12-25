@@ -49,7 +49,8 @@ import Exceptions.UserCreateException;
 import dmax.dialog.SpotsDialog;
 import model.Member;
 import repository.MemberRepository;
-import repository.MemberRepositroyImpl;
+import repository.MemberRepositoryImpl;
+
 import utils.AsyncTaskResult;
 import utils.FacebookLogin;
 
@@ -86,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     // user repository
-    private MemberRepository  repository = new MemberRepositroyImpl() ;
+    private MemberRepository  repository = new MemberRepositoryImpl() ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

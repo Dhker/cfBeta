@@ -19,7 +19,7 @@ import model.Title;
 import model.TrainerFor;
 import utils.JSONParser;
 
-public class MemberRepositroyImpl implements MemberRepository {
+public class MemberRepositoryImpl implements MemberRepository {
 
 
 	  private final String URL  =   Configuration.URL ; 
@@ -96,7 +96,7 @@ public class MemberRepositroyImpl implements MemberRepository {
 		if(member.getOS()!=null)
 	    params.add(new BasicNameValuePair("os",member.getOS()));
 		if(member.getFacebook_ID()!=null)
-		params.add(new BasicNameValuePair("facebool_id",member.getFacebook_ID()));
+		params.add(new BasicNameValuePair("facebook_id",member.getFacebook_ID()));
 
 		     System.out.println(params);
 	    JSONObject json = jsonParser.getJSONFromUrl(URL, params);
@@ -202,7 +202,7 @@ public class MemberRepositroyImpl implements MemberRepository {
 		Member Result =null ;
 		params.add(new BasicNameValuePair("authentication", AUTH));
 		params.add(new BasicNameValuePair("action", "member_connect"));
-		params.add(new BasicNameValuePair("facebool_id", fbId));
+		params.add(new BasicNameValuePair("facebook_id", fbId));
 		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
 		System.out.println(json);
 		if (json.getInt("success") == 1) {
@@ -217,7 +217,7 @@ public class MemberRepositroyImpl implements MemberRepository {
 			Result.setGender(memberJson.getInt("gender"));
 			Result.setName(memberJson.getString("name"));
 			Result.setOS(memberJson.getString("os"));
-			Result.setFacebook_ID(memberJson.getString("facebool_id"));
+			Result.setFacebook_ID(memberJson.getString("facebook_id"));
 			Result.setGoogle_ID(memberJson.getString("google_id"));
 			Result.setDeviceToken(memberJson.getString("device_token"));
 			Result.setAvailble(memberJson.getInt("availability"));
@@ -286,7 +286,7 @@ public class MemberRepositroyImpl implements MemberRepository {
 		{}Result.setOS(memberJson.getString("os"));
 		try{
 		}catch(Exception e)
-		{}Result.setFacebook_ID(memberJson.getString("facebool_id"));
+		{}Result.setFacebook_ID(memberJson.getString("facebook_id"));
 		try{
 		}catch(Exception e)
 		{}Result.setGoogle_ID(memberJson.getString("google_id"));

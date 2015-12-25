@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="120dp">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/say_somthing"
+        android:background="@xml/shaded_border"
+        android:layout_margin="16dp"
+        android:weightSum="10">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/member_photo"
+            android:src="@drawable/com_facebook_profile_picture_blank_portrait"
+            android:layout_gravity="left"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/status_text"
+            android:layout_gravity="center"
+            android:layout_weight="10"
+            android:paddingTop="@dimen/pad_10dp"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/status_publish"
+            android:src="@drawable/ic_publish"
+            android:background="@null"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="10dp" />
+
+
+    </LinearLayout>
+
+</FrameLayout>
