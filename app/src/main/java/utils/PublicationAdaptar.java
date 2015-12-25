@@ -11,7 +11,6 @@ import com.fide.ae.chessfamilybeta.R;
 
 import java.util.ArrayList;
 
-import model.Member;
 import model.MemberPublication;
 
 /**
@@ -42,7 +41,7 @@ public class PublicationAdaptar extends ArrayAdapter<MemberPublication> {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.publication_item, parent, false);
+            convertView = inflater.inflate(R.layout.item_publication, parent, false);
             viewHolder.publicationText =(TextView) convertView.findViewById(R.id.short_publication_text) ;
             viewHolder.date = (TextView) convertView.findViewById(R.id.pubication_date) ;
             convertView.setTag(viewHolder);

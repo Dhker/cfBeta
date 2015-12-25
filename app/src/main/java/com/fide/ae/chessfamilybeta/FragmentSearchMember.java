@@ -1,5 +1,6 @@
 package com.fide.ae.chessfamilybeta;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -54,10 +55,31 @@ private View root,resultroot ;
         resultroot= inflater.inflate(R.layout.search_result_layout, container, false);
 
         this.setupviews();
+        this.searchAction();
 
 
 
     return root ;
+    }
+
+    //SENDING VALUES WITHING INTENT
+
+    private void searchAction()
+    {
+        Bundle memberquery = new Bundle();
+        memberquery.putString("Distance",String.valueOf(getDistanceValue()));
+        memberquery.putString("Location",getLocationValue());
+        memberquery.putString("AgeFrom", String.valueOf(getAgeFromValue()));
+        memberquery.putString("AgeTo",String.valueOf(getAgeToValue()));
+        memberquery.putString("Gender",String.valueOf(getGenderValue()));
+        memberquery.putString("Profile",getProfileValue());
+
+
+        Intent search = new Intent(this.getActivity(),SearchActivity.class);
+        search.putExtra("member",memberquery);
+
+        startActivity(search);
+
     }
 
 //SETING UP VIEWS
@@ -89,6 +111,8 @@ private View root,resultroot ;
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 km.setText(progress + " Km");
+                setDistanceValue(progress);
+
                 Toast.makeText(current.getActivity(), progress + " Km", Toast.LENGTH_SHORT).show();
             }
 
@@ -96,20 +120,23 @@ private View root,resultroot ;
         this.setupPicker(from_age);
         this.setupPicker(to_age);
 
+        //radio test
+
+        if (this.radio_btns.getCheckedRadioButtonId()==R.id.male_radio)
+        {
+            this.genderValue=1 ;
+        }
+        else
+            this.genderValue=2 ;
+
+
 
 
 
 
     }
 
-    private ListView member_list ;
-    //SETUP VIEWS FOR RESULT
-    private void setUpSearchViews()
-    {
-        this.member_list = (ListView)resultroot.findViewById(R.id.listsearch_result);
 
-
-    }
 
     private int from, to ;
 
@@ -131,9 +158,11 @@ private View root,resultroot ;
                 if (np.getId()==R.id.age_value_from)
                 {
                     from = newVal ;
+                    setFromAgeValue(newVal);
                 }
                 else
                     to=newVal;
+                setToAgeValue(newVal);
 
 
 
@@ -142,6 +171,53 @@ private View root,resultroot ;
             }
         });
 
+    }
+
+    private int distanceValue=0,genderValue,ageFromValue, ageToValue ;
+    private String locationValue,profileValue ;
+
+
+    public int getGenderValue() {
+        return genderValue;
+    }
+
+    public int getAgeFromValue() {
+        return ageFromValue;
+    }
+    public int getAgeToValue() {
+        return ageToValue;
+    }
+
+    public String getLocationValue() {
+        return this.locationSpinner.getSelectedItem().toString() ;
+
+    }
+
+    public String getProfileValue() {
+
+        return this.profileSpinner.getSelectedItem().toString();
+    }
+
+    public int getDistanceValue() {
+        return distanceValue;
+    }
+
+
+
+    public void setDistanceValue(int distanceValue) {
+        this.distanceValue = distanceValue;
+    }
+
+    public void setGenderValue(int genderValue) {
+        this.genderValue = genderValue;
+    }
+
+    public void setFromAgeValue(int ageValue) {
+        this.ageFromValue = ageValue;
+    }
+    public void setToAgeValue(int ageValue)
+    {
+        this.ageToValue=ageValue;
     }
 
 

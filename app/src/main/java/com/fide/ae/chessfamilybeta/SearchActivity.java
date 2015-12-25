@@ -22,13 +22,15 @@ import android.view.ViewGroup;
 
 public class SearchActivity extends  AppCompatActivity {
 
+    public  ViewPager viewPager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setOffscreenPageLimit(1);
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.DarkBrown));
         tabLayout.setSelectedTabIndicatorHeight(5);
@@ -70,25 +72,28 @@ private FragmentManager fm;
         }
 
 
-
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            return super.instantiateItem(container, position);
+        }
 
         @Override
         public Fragment getItem(int position) {
-            Fragment fragment= null ;
-            switch (position) {
+            Fragment fragment= new FragmentSearchMember() ;
+         /*   switch (position) {
                 case 0:fragment =new FragmentSearchMember() ;
 
                     break ;
 
                 case 1:
-                    fragment= new FragmentSearchEvent();break ;
+                   // fragment= new FragmentSearchEvent();break ;
                 case 2 :
-                    fragment= new FragmentSearchLocation();
+                   // fragment= new FragmentSearchLocation();
 
                 default:
 
 
-            }
+            }*/
             return fragment ;
         }
 
@@ -111,6 +116,12 @@ private FragmentManager fm;
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+
+
+            viewPager.setCurrentItem(position);
+
+
 
         }
 
