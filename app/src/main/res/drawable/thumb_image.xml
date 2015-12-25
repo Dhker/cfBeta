@@ -1,12 +1,13 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item>
-        <shape>
+        <shape android:shape="oval">
             <size
-                android:height="40dp"
-                android:width="40dp" />
+                android:height="15dp"
+                android:width="10dp" />
+            <corners android:radius="80dp" />
 
-            <solid android:color="@android:color/transparent" />
+            <solid android:color="@android:color/black" />
         </shape>
     </item>
 

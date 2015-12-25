@@ -36,7 +36,8 @@
                 android:layout_alignTop="@+id/cup"
                 android:layout_toRightOf="@+id/cup"
                 android:layout_toEndOf="@+id/cup"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"

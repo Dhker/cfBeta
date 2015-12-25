@@ -52,6 +52,7 @@ import repository.MemberRepository;
 import repository.MemberRepositoryImpl;
 
 import utils.AsyncTaskResult;
+import utils.ChessFamilyUtils;
 import utils.FacebookLogin;
 
 import static utils.ChessFamilyUtils.*;
@@ -818,7 +819,6 @@ public class LoginActivity extends AppCompatActivity {
                     public void onSuccess(LoginResult loginResult) {
 
 
-
                         GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 
                             @Override
@@ -861,7 +861,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(FacebookException error) {
-                        Log.d("test", error.toString());
+                        Log.d("test", error.getMessage());
+                        ChessFamilyUtils.createNiftyDialog("Erruer",error.getMessage(),LoginActivity.this);
                     }
                 });
 
