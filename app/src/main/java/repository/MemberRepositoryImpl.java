@@ -206,9 +206,10 @@ public class MemberRepositoryImpl implements MemberRepository {
 		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
 		System.out.println(json);
 		if (json.getInt("success") == 1) {
-			Result = new Member();
+
 			JSONObject memberJson = json.getJSONObject("member");
-			Country country = new Country();
+			Result = jsonToMember(memberJson) ;
+		/*	Country country = new Country();
 			City city = new City();
 			ChessProfile ChessProfile = new ChessProfile();
 			Result.setID(memberJson.getInt("id"));
@@ -234,7 +235,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 			//ChessProfile.setTitle(Enum.valueOf(Title.class, memberJson.getString("title")));
 			ChessProfile.setIsTrainer(memberJson.getInt("is_trainer"));
 		//	ChessProfile.setTrainerLevel(Enum.valueOf(TrainerFor.class, memberJson.getString("lesson_level")));
-			Result.setProfile(ChessProfile);
+			Result.setProfile(ChessProfile);*/
 		}
 		return Result ;
 	}
@@ -306,7 +307,9 @@ public class MemberRepositoryImpl implements MemberRepository {
 			e.printStackTrace();
 		}
 
-		 try{Result.setPhoto(memberJson.getString("photo"));}catch(Exception e) {}
+		 try{ System.out.println(memberJson.getString("image")) ;
+			 Result.setPhoto(memberJson.getString("image"));}catch(Exception e) {}
+
 		return Result ;
 
 	}
@@ -326,8 +329,8 @@ public class MemberRepositoryImpl implements MemberRepository {
 		memberProfile.setIsPlayer(isPlayer);	
 		memberProfile.setIsTrainer(isTrainer); 
 		
-		memberProfile.setTitle(Enum.valueOf(Title.class,title)) ;
-		memberProfile.setTrainerLevel(Enum.valueOf(TrainerFor.class,level));
+//		memberProfile.setTitle(Enum.valueOf(Title.class,title)) ;
+//		memberProfile.setTrainerLevel(Enum.valueOf(TrainerFor.class,level));
 		return memberProfile ; 
     }
 }

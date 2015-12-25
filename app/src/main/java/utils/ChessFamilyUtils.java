@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.media.Image;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -124,6 +125,7 @@ public class ChessFamilyUtils {
             }
             try {
                 URL profile_pic = new URL("https://graph.facebook.com/" + member.getFacebook_ID()+ "/picture?width=200&height=150");
+              Log.d("url", "" + profile_pic.toString());
                 member.setPhoto(profile_pic.toString());
 
             } catch (MalformedURLException e) {

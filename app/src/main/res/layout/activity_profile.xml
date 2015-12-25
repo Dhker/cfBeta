@@ -24,7 +24,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp" />
 
-            <TextView android:id="@+id/Case1"
+            <TextView android:id="@+id/userName"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="Miladi Maamoun | ID:1925"
                 android:textColor="#000000"
