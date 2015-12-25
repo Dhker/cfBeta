@@ -22,8 +22,8 @@
     <string name="arbitre">Arbitre</string>
     <string name="trainer">Trainer</string>
     <string name="organizer">Organizer</string>
-	
-	
+    <string name="Male">Male</string>
+    <string name="Female">Femal</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_register">Register</string>
     <string name="action_sign_in_short">Sign in</string>

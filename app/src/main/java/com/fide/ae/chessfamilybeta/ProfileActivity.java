@@ -6,11 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.squareup.picasso.Picasso;
 
 import model.Member;
-import model.MemberPublication;
+
 import repository.MemberRepositoryImpl;
 import repository.MemberRepository;
 import utils.AsyncTaskResult;
@@ -19,12 +20,17 @@ public class ProfileActivity extends AppCompatActivity {
 
     MemberRepository memberRepository = new MemberRepositoryImpl();
 
-    // User informations
+
+    String path ="https://graph.facebook.com/10206862451313583/picture?width=200&height=150"  ;    // User informations
     private Member member ;
 
 
     // UI Components
     private ImageView  photo ;
+    private TextView userName ;
+    private TextView age ;
+    private TextView gender  ;
+
 
 
     @Override
@@ -35,9 +41,50 @@ public class ProfileActivity extends AppCompatActivity {
 
         // UI components initialization
         photo = (ImageView) findViewById(R.id.photo) ;
+        userName= (TextView)findViewById(R.id.userName);
+        age=(TextView)findViewById(R.id.age);
+        gender= (TextView)findViewById(R.id.gender) ;
+        Bundle bundle= this.getIntent().getExtras();
+        member =(Member) bundle.get("member");
+        loadUserInformation("" + member.getID());
+   //     Log.d("profileImage" , member.getPhoto()) ;
+
+
 
     }
 
+    // update the UI when the user information  are loaded
+    public void updateUI(Member member)
+    {
+        if(member!= null)
+        {
+
+
+
+
+                String userNameText = member.getName()+" "+member.getLast_Name()+" |ID:"+member.getID() ;
+            userName.setText(userNameText);
+                if(member.getPhoto()!=null)
+                {
+                    Picasso.with(ProfileActivity.this)
+                            .load(member.getPhoto())
+                            .into(photo);
+                }
+              if(member.getBirthday()!= null )
+              {
+                  // calculate age
+              }
+              if(member.getGender()!=0)
+              {
+
+                  gender.setText((member.getGender()==1)?  R.string.Male:R.string.Female );
+              }
+
+
+        }
+    }
+
+// load user information by id
 public void loadUserInformation(String id)
 {
 
@@ -57,12 +104,13 @@ public void loadUserInformation(String id)
 
                 if (result.getError() == null)
                 {
-
                     member = result.getResult()   ;
-
+                    Log.d("new",""+member) ;
+                    updateUI(member);
                 }else
                 {
                 }
+
 
             }
 
@@ -78,9 +126,6 @@ public void loadUserInformation(String id)
                     try {
 
                         Member member = memberRepository.getMemberById(id) ;
-
-
-
                         result= new AsyncTaskResult<Member>(member) ;
 
                         return result;
@@ -99,6 +144,7 @@ public void loadUserInformation(String id)
     }
 
 }
+
 
 
 

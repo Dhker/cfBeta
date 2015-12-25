@@ -630,7 +630,7 @@ public class LoginActivity extends AppCompatActivity {
                     Member member =  result.getResult();
 
                     if(member!=null) {
-                        Log.d("member is null", "false");
+                        Log.d("add", "false");
                         Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                         intent.putExtra("member", member);
 
@@ -762,7 +762,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         if(member!=null) {
                             Log.d("member is null", "false");
-                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                             intent.putExtra("member", member);
                             startActivity(intent);
                             //  LoginActivity.this.finish();
