@@ -1,9 +1,11 @@
 package com.fide.ae.chessfamilybeta;
 
+import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -20,11 +22,19 @@ public class ProfileActivity extends AppCompatActivity {
     // User informations
     private Member member ;
 
+
+    // UI Components
+    private ImageView  photo ;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_profile);
+
+        // UI components initialization
+        photo = (ImageView) findViewById(R.id.photo) ;
 
     }
 

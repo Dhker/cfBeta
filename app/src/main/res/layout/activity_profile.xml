@@ -14,7 +14,7 @@
             android:weightSum="100"
             android:gravity="top">
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/photo"
                 android:layout_width="116dp"
                 android:layout_height="116dp"
                 android:scaleType="centerCrop"

@@ -27,7 +27,8 @@ import java.util.Locale;
 import Exceptions.UserCreateException;
 import model.Member;
 import repository.MemberRepository;
-import repository.MemberRepositroyImpl;
+
+import repository.MemberRepositoryImpl;
 import utils.AsyncTaskResult;
 
 import static utils.ChessFamilyUtils.convertStringToDate;
@@ -36,6 +37,9 @@ import static utils.ChessFamilyUtils.isEmailValid;
 
 public class RegisterActivity extends AppCompatActivity {
 
+
+
+    MemberRepository repository = new MemberRepositoryImpl() ;
 
     private EditText nameField,lastnameField,emailField,passwordField,password2Field,birthdayField;
     private RadioGroup genderField ;
@@ -203,7 +207,7 @@ public class RegisterActivity extends AppCompatActivity {
         new  AsyncTask<Member , Member , AsyncTaskResult<Member>>()
         {
 
-            MemberRepository repository = new MemberRepositroyImpl() ;
+
 
             @Override
             protected void onProgressUpdate(Member... values) {

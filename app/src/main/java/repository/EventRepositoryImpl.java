@@ -23,7 +23,7 @@ public class EventRepositoryImpl implements EventRepository {
 
 	  private final String URL  =   Configuration.URL ;
 	  private final String AUTH = Configuration.AUTH ;
-	private MemberRepository memberRepository = new MemberRepositroyImpl() ; 
+		private MemberRepository memberRepository = new MemberRepositoryImpl() ;
 	@Override
 	public MemberFavoriteEvents getFavoriteEventsByMemberID(String memeberID) {
 		// TODO Auto-generated method stub
