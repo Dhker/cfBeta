@@ -18,6 +18,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v7.app.AppCompatActivity;
+import android.view.ViewGroup;
 
 public class SearchActivity extends  AppCompatActivity {
 
@@ -28,14 +29,13 @@ public class SearchActivity extends  AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager.setOffscreenPageLimit(1);
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.DarkBrown));
         tabLayout.setSelectedTabIndicatorHeight(5);
 
 
 
-        if (toolbar != null) {
-            this.setSupportActionBar(toolbar);
-        }
+
 
         SectionPagerAdapter pagerAdapter = new SectionPagerAdapter(getSupportFragmentManager()) ;
 
@@ -58,24 +58,38 @@ public class SearchActivity extends  AppCompatActivity {
 
 
     public class SectionPagerAdapter extends FragmentPagerAdapter implements TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener {
-
+private FragmentManager fm;
         public SectionPagerAdapter(FragmentManager fm) {
             super(fm);
+            this.fm=fm;
+            fm.beginTransaction().add(new FragmentSearchMember(),"Member").commit();
+            fm.beginTransaction().add(new FragmentSearchLocation(),"Location").commit();
+
+
+
         }
 
-        Member_list_Fragment fragment1 = new Member_list_Fragment();
+
 
 
         @Override
         public Fragment getItem(int position) {
+            Fragment fragment= null ;
             switch (position) {
-                case 0:
-                    return new FragmentSearchMember();
+                case 0:fragment =new FragmentSearchMember() ;
+
+                    break ;
+
                 case 1:
-                    return new Fragment();
+                    fragment= new FragmentSearchEvent();break ;
+                case 2 :
+                    fragment= new FragmentSearchLocation();
+
                 default:
-                    return new Fragment();
+
+
             }
+            return fragment ;
         }
 
         @Override
@@ -102,6 +116,10 @@ public class SearchActivity extends  AppCompatActivity {
 
         @Override
         public void onPageSelected(int position) {
+            getItem(position);
+            fm.beginTransaction().add(new FragmentSearchLocation(),"SearcgLocation").commit();
+
+
 
         }
 
@@ -116,8 +134,9 @@ public class SearchActivity extends  AppCompatActivity {
             switch (tab.getPosition())
             {
                 case 0 : tab.setIcon(getResources().getDrawable(R.drawable.player_selected));break ;
-                case 1 : tab.setIcon(getResources().getDrawable(R.drawable.event_selected)); break ;
-                case 2 :tab.setIcon(getResources().getDrawable(R.drawable.location_selected)) ; break ;
+                case 1 : tab.setIcon(getResources().getDrawable(R.drawable.event_selected)); this.getItem(1); break ;
+                case 2 :tab.setIcon(getResources().getDrawable(R.drawable.location_selected)) ; this.getItem(2);break ;
+
             }
 
         }
@@ -137,6 +156,21 @@ public class SearchActivity extends  AppCompatActivity {
         public void onTabReselected(TabLayout.Tab tab) {
 
         }
+        private Fragment mCurrentFragment;
+
+        public Fragment getCurrentFragment() {
+            return mCurrentFragment;
+        }
+        //...
+        @Override
+        public void setPrimaryItem(ViewGroup container, int position, Object object) {
+            if (getCurrentFragment() != object) {
+                mCurrentFragment = ((Fragment) object);
+            }
+            super.setPrimaryItem(container, position, object);
+        }
+
     }
+
 
 }

@@ -161,6 +161,16 @@
     <string name="distance">Distance</string>
     <string name="meeting_loc">Meeting Location</string>
     <string name="profile">Profile</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="female">Female</string>
+    <string name="resut">Result</string>
+    <string name="activity_now">Activity Now</string>
+    <string name="all">All</string>
+    <string name="only_opened">Only opened now</string>
+    <string name="search_loc">Search a location</string>
+    <string name="activity">Activity</string>
+    <string name="event_type">Event Type</string>
 
 
 </resources>

@@ -1,10 +1,140 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.fide.ae.chessfamilybeta.FragmentSearchLocation">
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:id="@+id/login_form"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_alignParentBottom="true">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.fide.ae.chessfamilybeta.FragmentSearchMember"
+        android:paddingBottom="10dp"
+        android:weightSum="8"
+        android:id="@+id/search_member_lay">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        <!-- TODO: Update blank fragment layout -->
 
-</FrameLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/distance_lay"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/distance"
+                android:id="@+id/distance"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <SeekBar
+                    android:id="@+id/distance_bar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:progress="20"
+                    android:progressDrawable="@drawable/progressbar"
+                    android:thumbTint="@color/DarkBrown"
+                    android:thumb="@drawable/ic_thumb"
+
+
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/kilometres"
+                    android:layout_gravity="center" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/meeting_location_ay"
+            android:layout_gravity="center"
+            android:weightSum="1"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/meeting_loc"
+                android:id="@+id/meeting_location"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner_locations"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/gender_lay"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/activity_now"
+                android:id="@+id/gender"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/gender_radio">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/male_radio"
+                    android:text="@string/all"
+                    android:layout_gravity="left" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/only_opened"
+                    android:id="@+id/female_radio"
+                    android:layout_gravity="center" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <Button android:id="@+id/search_member" style="?android:textAppearanceSmall"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" android:text="@string/search_loc"
+            android:background="@drawable/search_btn"
+            android:padding="5dp"
+
+
+
+            android:layout_gravity="center|bottom"
+            android:layout_weight="1"
+            android:clickable="true" />
+    </LinearLayout>
+</ScrollView>

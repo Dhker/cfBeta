@@ -39,6 +39,8 @@ dependencies {
     compile'com.github.castorflex.smoothprogressbar:library-circular:1.1.0'
     compile 'com.github.markomilos:paginate:0.5.0'
     compile 'com.squareup.picasso:picasso:2.3.3'
+    compile 'de.hdodenhof:circleimageview:2.0.0'
+
 
 
 

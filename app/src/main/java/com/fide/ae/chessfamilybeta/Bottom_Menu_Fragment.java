@@ -25,13 +25,7 @@ private ImageButton home_btn,favorite_btn,message_btn,notification_btn,menu_btn 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ChessFamilyUtils.ClickEffect(home_btn);
-        ChessFamilyUtils.ClickEffect(favorite_btn);
 
-        ChessFamilyUtils.ClickEffect(message_btn);
-        ChessFamilyUtils.ClickEffect(menu_btn);
-
-        ChessFamilyUtils.ClickEffect(notification_btn);
 
 
 
