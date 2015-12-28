@@ -40,6 +40,9 @@ dependencies {
     compile 'com.github.markomilos:paginate:0.5.0'
     compile 'com.squareup.picasso:picasso:2.3.3'
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'co.dift.ui.swipetoaction:library:1.1'
+    compile 'com.loopj.android:android-async-http:1.4.9'
+
 
 
 

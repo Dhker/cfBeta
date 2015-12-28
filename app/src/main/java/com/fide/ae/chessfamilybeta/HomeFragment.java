@@ -1,66 +1,76 @@
 package com.fide.ae.chessfamilybeta;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.paginate.Paginate;
-import com.paginate.abslistview.LoadingListItemCreator;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
+import co.dift.ui.SwipeToAction;
+import model.Member;
 import model.MemberPublication;
+import repository.MemberPublicationRepository;
+import repository.MemberPublicationRepositoryImpl;
 import utils.AsyncTaskResult;
-import utils.PublicationAdaptar;
+import utils.CustomRcyclerView;
+
+import utils.EndlessRecyclerOnScrollListener;
+import utils.PublicationAdapter;
 
 
-public class HomeFragment extends Fragment implements
-        Paginate.Callbacks,
-        AbsListView.OnScrollListener,
-        AdapterView.OnItemClickListener,
-        AdapterView.OnItemLongClickListener {
+public class HomeFragment extends Fragment implements SwipeToAction.SwipeListener<MemberPublication> {
 
+    RecyclerView recyclerView;
 
+    CustomRcyclerView customRcyclerView ;
+    List<MemberPublication> publications = new ArrayList<>();
 
+    LinearLayoutManager layoutManager ;
+    private Member  member ;
     private View RootView;
     private ListView  publicationList  ;
-    private PublicationAdaptar adapter;
-    private boolean loading = false;
+    private PublicationAdapter adapter;
+    private boolean loading = true;
+    private SwipeToAction swipeToAction;
 
-    private Handler handler;
     private Paginate paginate;
 
    //  pagination parameters
-    private int page = 2;
-    private int itemsPerPage = 10;
+    private int page = 1;
+    private int itemsPerPage = 2;
 
-    protected int threshold = 4;
+
     protected boolean  finish = false ;
 
     protected long networkDelay = 5000;
 
+    private MemberPublicationRepository  publicationRepository =  new MemberPublicationRepositoryImpl()  ;
+
 
     public HomeFragment() {
         // Required empty public constructor
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        handler = new Handler();
+      /*  Bundle bundle= this.getActivity().getIntent().getExtras();
+        member =(Member) bundle.get("member");*/
+
 
     }
 
@@ -69,50 +79,45 @@ public class HomeFragment extends Fragment implements
                              Bundle savedInstanceState) {
 
         this.RootView = inflater.inflate(R.layout.home_layout, container, false);
-        publicationList =(ListView) RootView.findViewById(R.id.list) ;
 
-        setupPagination() ;
-// Create the adapter to convert the array to views
-       // PublicationAdaptar adapter = new PublicationAdaptar (getActivity(), arrayOfUsers);
-// Attach the adapter to a ListView
 
-        return RootView;
+        recyclerView = (RecyclerView)RootView.findViewById(R.id.list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+
+        loadPublications(page);
+        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore(int current_page) {
+                // do something..
+                // .
+
+                if(!finish) {
+                    Log.d("currentPage", "" + current_page);
+
+                    //  populate();
+                    loadPublications(current_page);
+                    //  adapter.notifyDataSetChanged();
+                }
+            }
+        });
+        adapter = new PublicationAdapter(this.publications);
+
+        recyclerView.setAdapter(adapter);
+
+        swipeToAction = new SwipeToAction(recyclerView , this) ;
+
+
+
+
+return RootView ;
 
     }
 
 
 
 
-    protected void setupPagination() {
-        if (paginate != null) {
-            paginate.unbind();
-        }
-
-        ArrayList<MemberPublication> publications = new ArrayList<MemberPublication>();
-        handler.removeCallbacks(fakeCallback);
-        adapter = new PublicationAdaptar(getActivity(), publications);
-        loading = false;
-        page = 0;
-
-
-        AbsListView absListView = (AbsListView) RootView.findViewById(R.id.list);
-        if ((absListView instanceof ListView)) {
-            ListView listView = (ListView) absListView;
-            listView.addHeaderView(LayoutInflater.from(getActivity()).inflate(R.layout.list_view_header, absListView, false));
-         //   listView.addFooterView(LayoutInflater.from(getActivity()).inflate(R.layout.list_view_footer, absListView, false));
-        }
-
-        absListView.setAdapter(adapter);
-        absListView.setOnItemClickListener(this);
-        absListView.setOnItemLongClickListener(this);
-
-        paginate = Paginate.with(absListView, this)
-                .setOnScrollListener(this)
-                .setLoadingTriggerThreshold(threshold)
-                .addLoadingListItem(true)
-               // .setLoadingListItemCreator( new CustomLoadingListItemCreator() )
-                .build();
-    }
 
 
 
@@ -126,22 +131,30 @@ public class HomeFragment extends Fragment implements
             @Override
             protected void onPostExecute(AsyncTaskResult<ArrayList<MemberPublication>> result) {
 
-                if (result.getError() == null)
-                {
-                    ArrayList<MemberPublication> publications =result.getResult()  ;
+               if (result.getError() == null) {
+                    ArrayList<MemberPublication> publications = result.getResult();
 
-                    if(publications!= null )
-                        adapter.addAll(publications);
+                    if (publications != null)
+
+                    {
+                         ; Log.d("length", "" + publications.size()) ;
+                        adapter.add(publications);
+                      //  adapter.notifyDataSetChanged();
+
+                        finish=false ;
+
+                    }
                     else
                     {
-
-                        loading = false  ;
                         finish =true ;
+                        Log.d("finish",""+true) ;
                     }
                 }else
                 {
-                    loading = false  ;
-                    finish =true ;
+
+                    finish = true  ;
+                    Log.d("finish",""+true) ;
+
 
                 }
 
@@ -150,85 +163,71 @@ public class HomeFragment extends Fragment implements
             @Override
             protected AsyncTaskResult<ArrayList<MemberPublication>> doInBackground(Integer... params) {
 
-              int page  = params[0] ;
+                int page = params[0];
 
-                AsyncTaskResult<ArrayList<MemberPublication>> result =null ;
-                if(page!=0)
-                {
+                AsyncTaskResult<ArrayList<MemberPublication>> result = null;
+
 
                     try {
                         //  make the call to the web service
                         //  throw new Exception() ;
+                        Log.d("page", ""+page) ;
 
-                      //  result= new AsyncTaskResult<ArrayList<MemberPublication>>(null) ;
+
+                        ArrayList<MemberPublication> publications = publicationRepository.GetFeeds("4", itemsPerPage, page);
+
+                        result = new AsyncTaskResult<ArrayList<MemberPublication>>(publications);
 
                         return result;
                     } catch (Exception e) {
-                        Log.d("error", e.toString())    ;
+                        Log.d("error", e.toString());
                         e.printStackTrace();
-                        result = new  AsyncTaskResult<ArrayList<MemberPublication>>(e) ;
-                        return result ;
+                        result = new AsyncTaskResult<ArrayList<MemberPublication>>(e);
+                        return result;
                     }
-                }
 
-                return null;
+
             }
         }.execute(page);
     }
 
 
-    @Override
-    public void onLoadMore() {
-        Log.d("Paginate", "onLoadMore");
-        //handler.postDelayed(fakeCallback, networkDelay);
-        loadPublications(this.page) ;
 
+    private int removePublication(MemberPublication publication)
+    {
+        int pos = publications.indexOf(publication);
+        publications.remove(publication);
+        adapter.notifyItemRemoved(pos);
+        return pos;
+    }
+
+
+    @Override
+    public boolean swipeLeft(final MemberPublication itemData) {
+        final int pos = removePublication(itemData);
+
+        Log.d("swipeLeft", "" + true) ;
+        return true;
     }
 
     @Override
-    public boolean isLoading() {
-        return loading;
+    public boolean swipeRight(MemberPublication itemData) {
+        //  displaySnackbar(itemData.getTitle() + " loved", null, null);
+        Log.d("swipeRight",""+true) ;
+        return true;
     }
 
     @Override
-    public boolean hasLoadedAllItems() {
-        return finish;
+    public void onClick(MemberPublication itemData) {
+        //  displaySnackbar(itemData.getText() + " clicked", null, null);
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+    public void onLongClick(MemberPublication itemData) {
+        //  displaySnackbar(itemData.getText() + " long clicked", null, null);
     }
 
-    @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        return false;
-    }
 
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-    }
-
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
-    }
-
-    private Runnable fakeCallback = new Runnable() {
-        @Override
-        public void run() {
-            page++;
-            for( int i=0  ;i<5 ; i++)
-            {
-                MemberPublication pub  = new MemberPublication() ;
-                pub.setText("pub"+i);
-                pub.setTime(new Date());
-                adapter.add(pub);
-            }
-
-            loading = false;
-        }
-    };
 
 }
+

@@ -766,7 +766,7 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                             intent.putExtra("member", member);
                             startActivity(intent);
-                            //  LoginActivity.this.finish();
+                             LoginActivity.this.finish();
 
                         }else
                         {
@@ -863,7 +863,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onError(FacebookException error) {
                         Log.d("test", error.getMessage());
-                        ChessFamilyUtils.createNiftyDialog("Erruer",error.getMessage(),LoginActivity.this);
+                        ChessFamilyUtils.createNiftyDialog("Erruer", error.getMessage(), LoginActivity.this);
                     }
                 });
 

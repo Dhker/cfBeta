@@ -1,5 +1,11 @@
 package repository;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +17,7 @@ import org.json.JSONObject;
 
 import Exceptions.UserCreateException;
 import configuration.Configuration;
+import cz.msebera.android.httpclient.Header;
 import model.ChessProfile;
 import model.City;
 import model.Country;
@@ -121,17 +128,26 @@ public class MemberRepositoryImpl implements MemberRepository {
 	
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 	    params.add(new BasicNameValuePair("authentication", AUTH));
-	    params.add(new BasicNameValuePair("action", "member_edit"));
+	    params.add(new BasicNameValuePair("action", "member_edit")) ;
+		if(member.getID() != 0);
 	    params.add(new BasicNameValuePair("id",String.valueOf(member.getID())));
-	    params.add(new BasicNameValuePair("name", member.getName()));
+		if(member.getName()!= null);
+	     params.add(new BasicNameValuePair("name", member.getName()));
+		if(member.getLast_Name()!=null)
 	    params.add(new BasicNameValuePair("last_name", member.getLast_Name()));
+		if(member.getEmail()!=null)
 	    params.add(new BasicNameValuePair("email", member.getEmail()));
+		if(member.getGender()!=0)
 	    params.add(new BasicNameValuePair("gender", String.valueOf(member.getGender())));
+		if(member.getPassword()!=null)
 	    params.add(new BasicNameValuePair("password",member.getPassword()));
+		if(member.getOS()!=null)
 	    params.add(new BasicNameValuePair("os", member.getOS()));
-	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-	    String date = formatter.format(member.getBirthday()) ; 
-	    params.add(new BasicNameValuePair("birthday",date));
+		if(member.getBirthday()!= null) {
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			String date = formatter.format(member.getBirthday());
+			params.add(new BasicNameValuePair("birthday", date));
+		}
 	    System.out.println(params) ; 
 	    JSONObject json = jsonParser.getJSONFromUrl(URL, params); 
 	   // System.out.println("update"+json) ; 
@@ -261,6 +277,40 @@ public class MemberRepositoryImpl implements MemberRepository {
 
 		boolean  success = json.getInt("success") ==  1;
 		return success;
+	}
+
+	@Override
+	public void addPhotoToMember(String memberId, File photo) throws Exception {
+
+		//List<NameValuePair> params = new ArrayList<NameValuePair>();
+		RequestParams params = new RequestParams();
+
+		params.add("authentication", AUTH);
+		params.add("action", "member_set_photo");
+		params.add("member_id",memberId);
+		try {
+			params.put("photo", photo);
+		} catch(FileNotFoundException e) {}
+
+		AsyncHttpClient client = new AsyncHttpClient();
+		client.post(Configuration.URL, params, new AsyncHttpResponseHandler() {
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, byte[] bytes) {
+				// handle success response
+			}
+
+			@Override
+			public void onFailure(int statusCode, Header[] headers, byte[] bytes, Throwable throwable) {
+				// handle failure response
+
+			}
+		});
+
+	/*	params.add(new BasicNameValuePair("authentication", AUTH));
+		params.add(new BasicNameValuePair("action", "forget_password"));
+		params.add(new BasicNameValuePair("member_id",memberId));
+		params.add(new BasicNameValuePair("photo",photo));*/
+
 	}
 
 

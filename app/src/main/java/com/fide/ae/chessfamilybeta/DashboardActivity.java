@@ -48,10 +48,10 @@ public class DashboardActivity extends AppCompatActivity {
 
 
 
-
+ /*
        Bundle bundle= this.getIntent().getExtras();
         member =(Member) bundle.get("member");
-        Log.d("Member", "" + (member == null)) ;
+        Log.d("Member", "" + (member == null)) ;*/
       //  this.addFragment(new GameFragment(),300);
       //  this.addFragment(new GameFragment(),400);
 

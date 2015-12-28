@@ -1,6 +1,7 @@
 package repository;
 
 
+import java.io.File;
 import java.util.ArrayList;
 
 import model.Member;
@@ -17,6 +18,6 @@ public interface MemberRepository {
 	Member connectWithFacebook(String fbId)throws Exception ;
 	Member connectWithGoogle(String gId) ;
 	boolean sendForgetPasswordEmail(String email) throws Exception ;
-	
+	void addPhotoToMember(String memberId , File photo) throws Exception ;
 }
  
