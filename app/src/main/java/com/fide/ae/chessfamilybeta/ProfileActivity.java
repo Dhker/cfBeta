@@ -21,7 +21,6 @@ public class ProfileActivity extends AppCompatActivity {
     MemberRepository memberRepository = new MemberRepositoryImpl();
 
 
-    String path ="https://graph.facebook.com/10206862451313583/picture?width=200&height=150"  ;    // User informations
     private Member member ;
 
 
@@ -84,11 +83,11 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-// load user information by id
-public void loadUserInformation(String id)
-{
+    // update user information
+    public void updateUserInformation(Member member)
+    {
 
-    if((id==null)||(id.isEmpty()))
+    if((member==null))
     {
         throw new IllegalArgumentException();
 
@@ -97,16 +96,16 @@ public void loadUserInformation(String id)
 
 
 
-        new AsyncTask<String  ,String , AsyncTaskResult<Member>>(){
+        new AsyncTask<Member  ,Member , AsyncTaskResult<Boolean>>(){
 
             @Override
-            protected void onPostExecute(AsyncTaskResult<Member> result) {
+            protected void onPostExecute(AsyncTaskResult<Boolean> result) {
 
                 if (result.getError() == null)
                 {
-                    member = result.getResult()   ;
-                    Log.d("new",""+member) ;
-                    updateUI(member);
+                   Boolean success = result.getResult()   ;
+                    Log.d("Updated",""+success) ;
+                    // updateUI(member);
                 }else
                 {
                 }
@@ -115,11 +114,72 @@ public void loadUserInformation(String id)
             }
 
             @Override
-            protected AsyncTaskResult<Member> doInBackground(String... params) {
+            protected AsyncTaskResult<Boolean> doInBackground(Member... params) {
 
 
-                String id  = params[0] ;
-                AsyncTaskResult<Member> result =null ;
+                Member member1  = params[0] ;
+                AsyncTaskResult<Boolean> result =null ;
+
+
+
+                    try {
+
+                        Boolean sucess = memberRepository.updateMemberInformation(member1) ;
+                        result= new AsyncTaskResult<Boolean >(sucess) ;
+
+                        return result;
+                    } catch (Exception e) {
+                        Log.d("error", e.toString())    ;
+                        e.printStackTrace();
+                        result = new  AsyncTaskResult<Boolean>(e) ;
+                        return result ;
+                    }
+
+
+
+            }
+        }.execute(member);
+
+    }
+
+}
+
+    // load user informations
+    public void loadUserInformation(String id)
+    {
+
+        if((id==null)||(id.isEmpty()))
+        {
+            throw new IllegalArgumentException();
+
+        } else
+        {
+
+
+
+            new AsyncTask<String  ,String , AsyncTaskResult<Member>>(){
+
+                @Override
+                protected void onPostExecute(AsyncTaskResult<Member> result) {
+
+                    if (result.getError() == null)
+                    {
+                        member = result.getResult()   ;
+                        Log.d("new",""+member) ;
+                        updateUI(member);
+                    }else
+                    {
+                    }
+
+
+                }
+
+                @Override
+                protected AsyncTaskResult<Member> doInBackground(String... params) {
+
+
+                    String id  = params[0] ;
+                    AsyncTaskResult<Member> result =null ;
 
 
 
@@ -138,14 +198,12 @@ public void loadUserInformation(String id)
 
 
 
-            }
-        }.execute(id);
+                }
+            }.execute(id);
+
+        }
 
     }
-
-}
-
-
 
 
 
