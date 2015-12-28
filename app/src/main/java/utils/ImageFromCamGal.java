@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import model.Member;
 import repository.MemberRepository;
 import repository.MemberRepositoryImpl;
 
@@ -35,13 +36,14 @@ public class ImageFromCamGal {
     private CircleImageView ivImage;
     public String selectedImagePath ;
     private MemberRepository memberRepository = new MemberRepositoryImpl();
+    Member member ;
 
     public String getSelectedImagePath() {
         return selectedImagePath;
     }
 
-    public ImageFromCamGal(AppCompatActivity activity, CircleImageView ivImage) {
-
+    public ImageFromCamGal(AppCompatActivity activity, CircleImageView ivImage , Member member) {
+        this.member=member ;
         this.activity = activity;
         this.ivImage = ivImage;
     }
@@ -91,9 +93,13 @@ public class ImageFromCamGal {
 
                         try {
 
-
-                            memberRepository.addPhotoToMember("143" ,destination);
-                            return  true ;
+                            if(member!=null) {
+                                memberRepository.addPhotoToMember("" + member.getID(), destination);
+                                return true;
+                            }else
+                            {
+                                return  false ;
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                             return false;
@@ -145,9 +151,13 @@ public class ImageFromCamGal {
 
                         try {
 
-
-                            memberRepository.addPhotoToMember("143" ,new File(selectedImagePath));
-                            return  true ;
+                            if(member!=null) {
+                                memberRepository.addPhotoToMember(String.valueOf(member.getID()), new File(selectedImagePath));
+                                return true;
+                            }else
+                            {
+                                return  false ;
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                             return false;

@@ -25,6 +25,7 @@ import java.util.Locale;
 import android.view.View.OnClickListener ;
 
 
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import model.ChessProfile;
@@ -54,8 +55,10 @@ public class EditProfileActivity extends AppCompatActivity implements  OnClickLi
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_edit_profile);
         this.setupViews();
-        editPhoto=new ImageFromCamGal(this,profileImage);
-
+       member = new Member();
+        member.setID(143);
+        editPhoto=new ImageFromCamGal(this,profileImage,member);
+        loadUserInformation(String.valueOf(member.getID()));
         //PUSH TEST/*
         /*Parse.initialize(this, "0Ej5SNPfwkMoz57PlZatSp4nbk8DuBwXUqjYbe0V", "FUEv83u49TkaZMpNxGgd1cFLMQEnh3u9DaUZRJen");
         ParseInstallation.getCurrentInstallation().saveInBackground();
@@ -312,7 +315,7 @@ public class EditProfileActivity extends AppCompatActivity implements  OnClickLi
 
                         Member member = memberRepository.getMemberById(id) ;
                         result= new AsyncTaskResult<Member>(member) ;
-
+                        updateUI(member) ;
                         return result;
                     } catch (Exception e) {
                         Log.d("error", e.toString())    ;
@@ -331,6 +334,14 @@ public class EditProfileActivity extends AppCompatActivity implements  OnClickLi
     }
 
 
+public void updateUI(Member member)
+{
+    if (member.getPhoto()!=null)
+    {
+        Picasso.with(this).load(member.getPhoto()).into(this.profileImage);
 
+    }
+
+}
 
 }
