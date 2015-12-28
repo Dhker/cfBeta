@@ -1,0 +1,12 @@
+<resources>
+    <string-array name="TitleItems">
+        <item>CM</item>
+        <item>WCM</item>
+        <item>FM</item>
+        <item>WFM</item>
+        <item>IM</item>
+        <item>WIM</item>
+        <item>GM</item>
+        <item>WGM</item>
+    </string-array>
+</resources>

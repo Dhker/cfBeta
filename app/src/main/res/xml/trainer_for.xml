@@ -1,0 +1,9 @@
+<resources>
+    <string-array name="TitleItems">
+        <item> For Beginners</item>
+        <item>Intermediate</item>
+        <item>Advanced</item>
+        <item>High</item>
+
+    </string-array>
+</resources>

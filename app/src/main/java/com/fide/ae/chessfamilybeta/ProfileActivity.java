@@ -18,6 +18,8 @@ import utils.AsyncTaskResult;
 
 public class ProfileActivity extends AppCompatActivity {
 
+
+
     MemberRepository memberRepository = new MemberRepositoryImpl();
 
 
@@ -45,7 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
         gender= (TextView)findViewById(R.id.gender) ;
         Bundle bundle= this.getIntent().getExtras();
         member =(Member) bundle.get("member");
-        loadUserInformation("" + member.getID());
+        //loadUserInformation("" + member.getID());
    //     Log.d("profileImage" , member.getPhoto()) ;
 
 
@@ -84,126 +86,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     // update user information
-    public void updateUserInformation(Member member)
-    {
 
-    if((member==null))
-    {
-        throw new IllegalArgumentException();
-
-    } else
-    {
-
-
-
-        new AsyncTask<Member  ,Member , AsyncTaskResult<Boolean>>(){
-
-            @Override
-            protected void onPostExecute(AsyncTaskResult<Boolean> result) {
-
-                if (result.getError() == null)
-                {
-                   Boolean success = result.getResult()   ;
-                    Log.d("Updated",""+success) ;
-                    // updateUI(member);
-                }else
-                {
-                }
-
-
-            }
-
-            @Override
-            protected AsyncTaskResult<Boolean> doInBackground(Member... params) {
-
-
-                Member member1  = params[0] ;
-                AsyncTaskResult<Boolean> result =null ;
-
-
-
-                    try {
-
-                        Boolean sucess = memberRepository.updateMemberInformation(member1) ;
-                        result= new AsyncTaskResult<Boolean >(sucess) ;
-
-                        return result;
-                    } catch (Exception e) {
-                        Log.d("error", e.toString())    ;
-                        e.printStackTrace();
-                        result = new  AsyncTaskResult<Boolean>(e) ;
-                        return result ;
-                    }
-
-
-
-            }
-        }.execute(member);
-
-    }
-
-}
-
-    // load user informations
-    public void loadUserInformation(String id)
-    {
-
-        if((id==null)||(id.isEmpty()))
-        {
-            throw new IllegalArgumentException();
-
-        } else
-        {
-
-
-
-            new AsyncTask<String  ,String , AsyncTaskResult<Member>>(){
-
-                @Override
-                protected void onPostExecute(AsyncTaskResult<Member> result) {
-
-                    if (result.getError() == null)
-                    {
-                        member = result.getResult()   ;
-                        Log.d("new",""+member) ;
-                        updateUI(member);
-                    }else
-                    {
-                    }
-
-
-                }
-
-                @Override
-                protected AsyncTaskResult<Member> doInBackground(String... params) {
-
-
-                    String id  = params[0] ;
-                    AsyncTaskResult<Member> result =null ;
-
-
-
-                    try {
-
-                        Member member = memberRepository.getMemberById(id) ;
-                        result= new AsyncTaskResult<Member>(member) ;
-
-                        return result;
-                    } catch (Exception e) {
-                        Log.d("error", e.toString())    ;
-                        e.printStackTrace();
-                        result = new  AsyncTaskResult<Member>(e) ;
-                        return result ;
-                    }
-
-
-
-                }
-            }.execute(id);
-
-        }
-
-    }
 
 
 

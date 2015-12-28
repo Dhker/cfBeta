@@ -5,9 +5,26 @@
     <string name="prompt_name">Name</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-	
-	
-	
+
+    <string-array name="TrainerItems">
+        <item> For Beginners</item>
+        <item>Intermediate</item>
+        <item>Advanced</item>
+        <item>High</item>
+
+    </string-array>
+    <string-array name="TitleItems">
+    <item>CM</item>
+    <item>WCM</item>
+    <item>FM</item>
+    <item>WFM</item>
+    <item>IM</item>
+    <item>WIM</item>
+    <item>GM</item>
+    <item>WGM</item>
+    </string-array>
+
+
     <string name="prompt_birthday">Birthday</string>
     <string name="prompt_gender">Gender</string>
     <string name="prompt_register">Register</string>
@@ -171,6 +188,17 @@
     <string name="search_loc">Search a location</string>
     <string name="activity">Activity</string>
     <string name="event_type">Event Type</string>
+    <string name="activity_taking_place">Activity Taking place in</string>
+    <string name="days">Days</string>
+    <string name="activity_days">Activity Taking\\n place in</string>
+    <string name="password">Password</string>
+    <string name="is_player">Player</string>
+    <string name="is_arbiter">Arbiter</string>
+    <string name="is_title">Title</string>
+    <string name="is_organizer">Organizer</string>
+    <string name="click_birthday">Click Birthday to change birthday date</string>
+    <string name="update">Update profile</string>
+    <string name="is_trainer">Trainer</string>
 
 
 </resources>

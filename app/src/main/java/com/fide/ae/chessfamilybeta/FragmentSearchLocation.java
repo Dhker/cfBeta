@@ -108,18 +108,25 @@ private Fragment current ;
 
     private void searchAction()
     {
-        Bundle locationquery = new Bundle();
-        locationquery.putString("Distance",String.valueOf(getDistanceValue()));
-        locationquery.putString("Location",getLocation());
+        this.search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle locationquery = new Bundle();
+                locationquery.putString("Distance", String.valueOf(getDistanceValue()));
+                if(getLocation()!=null)
+                locationquery.putString("Location", getLocation());
 
-        locationquery.putString("Active",String.valueOf(getActivities()));
+                locationquery.putString("Active", String.valueOf(getActivities()));
 
 
+                Intent search = new Intent(current.getActivity(), SearchActivity.class);
+                search.putExtra("location", locationquery);
+                search.putExtra("Search","location") ;
 
-        Intent search = new Intent(this.getActivity(),SearchActivity.class);
-        search.putExtra("location",locationquery);
+                startActivity(search);
 
-        startActivity(search);
+            }
+        });
 
     }
     }

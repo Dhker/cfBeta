@@ -48,24 +48,36 @@ public class DashboardActivity extends AppCompatActivity {
 
 
 
- /*
+
        Bundle bundle= this.getIntent().getExtras();
-        member =(Member) bundle.get("member");
-        Log.d("Member", "" + (member == null)) ;*/
+//        member =(Member) bundle.get("member");
+        Log.d("Member", "" + (member == null)) ;
       //  this.addFragment(new GameFragment(),300);
       //  this.addFragment(new GameFragment(),400);
 
 
 
     }
+    private  android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+    private HomeFragment home ;
+    private FavoriteFragment favorite ;
 
     public void HomeBtn(View v)
 
     {
 
-        android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.add(R.id.dashboard_content, new HomeFragment()).commit();
+        this.home =new HomeFragment();
 
+
+        ft.add(R.id.dashboard_content, this.home).commit();
+
+    }
+
+    public void FavoriteBtn(View v )
+    {
+
+        this.favorite = new FavoriteFragment() ;
+ft.replace(R.id.dashboard_content,favorite).commit();
     }
 
 

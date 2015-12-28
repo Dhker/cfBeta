@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -52,7 +51,7 @@ private View root,resultroot ;
 
 
         root= inflater.inflate(R.layout.fragment_search_member, container, false);
-        resultroot= inflater.inflate(R.layout.search_result_layout, container, false);
+        resultroot= inflater.inflate(R.layout.activity_search_result, container, false);
 
         this.setupviews();
         this.searchAction();
@@ -66,19 +65,29 @@ private View root,resultroot ;
 
     private void searchAction()
     {
-        Bundle memberquery = new Bundle();
-        memberquery.putString("Distance",String.valueOf(getDistanceValue()));
-        memberquery.putString("Location",getLocationValue());
-        memberquery.putString("AgeFrom", String.valueOf(getAgeFromValue()));
-        memberquery.putString("AgeTo",String.valueOf(getAgeToValue()));
-        memberquery.putString("Gender",String.valueOf(getGenderValue()));
-        memberquery.putString("Profile",getProfileValue());
+        this.btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle memberquery = new Bundle();
+
+                memberquery.putString("Distance", String.valueOf(getDistanceValue()));
+                if(getLocationValue()!=null)
+                memberquery.putString("Location", getLocationValue());
+                memberquery.putString("AgeFrom", String.valueOf(getAgeFromValue()));
+                memberquery.putString("AgeTo", String.valueOf(getAgeToValue()));
+                memberquery.putString("Gender", String.valueOf(getGenderValue()));
+                if(getProfileValue()!=null)
+                memberquery.putString("Profile", getProfileValue());
 
 
-        Intent search = new Intent(this.getActivity(),SearchActivity.class);
-        search.putExtra("member",memberquery);
+                Intent search = new Intent(current.getActivity(), SearchActivity.class);
+                search.putExtra("member", memberquery);
+                search.putExtra("Search","member") ;
 
-        startActivity(search);
+                startActivity(search);
+            }
+        });
+
 
     }
 

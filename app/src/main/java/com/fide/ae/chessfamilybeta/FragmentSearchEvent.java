@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 
+import android.widget.NumberPicker;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -35,26 +36,29 @@ public class FragmentSearchEvent extends Fragment {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_search_event, container, false);
         this.setupviews();
+        this.searchAction();
     return  root ;
     }
 
 
 
     //SETTING UP VIEWS
-    private Button btn_evt ;
+    private Button search_btn ;
     private SeekBar distanceBar ;
     private RadioGroup radio_btns;
     private Spinner spinnerEtype ;
     private TextView km ;
-    private CalendarView calendar ;
+    private NumberPicker days ;
 
     private void setupviews(
     ) {
-        this.btn_evt = (Button) root.findViewById(R.id.search_event);
+        this.search_btn = (Button) root.findViewById(R.id.search_event);
         this.distanceBar = (SeekBar) root.findViewById(R.id.distance_bar);
 
         this.radio_btns = (RadioGroup) root.findViewById(R.id.gender_radio);
         this.spinnerEtype = (Spinner) root.findViewById(R.id.spinner_event_type);
+        this.days=(NumberPicker)root.findViewById(R.id.number_days);
+        this.setupPicker(days);
 
         this.km=(TextView) root.findViewById(R.id.kilometres);
         //SETUP SEEK BAR DISTANCE
@@ -81,47 +85,11 @@ public class FragmentSearchEvent extends Fragment {
 
         });}
 
-    public void initializeCalendar() {
-
-        calendar = (CalendarView) root.findViewById(R.id.activity_date);
 
 
 
-        // sets whether to show the week number.
+    private int distance,nb_days ;
 
-        calendar.setShowWeekNumber(false);
-
-
-
-        // sets the first day of week according to Calendar.
-
-        // here we set Monday as the first day of the Calendar
-
-        calendar.setFirstDayOfWeek(2);
-
-
-
-
-        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-
-                    //show the selected date as a toast
-
-            @Override
-
-            public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
-
-                setDate_evt( day + "/" + month + "/" + year);
-
-                Toast.makeText(current.getActivity(), day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
-
-            }
-
-        });
-
-    }
-
-    private int distance ;
-    private String eventType,date_evt ;
 
     public int getDistance()
     {
@@ -134,34 +102,59 @@ public class FragmentSearchEvent extends Fragment {
         this.spinnerEtype.getSelectedItem().toString();
 
     }
-    public String getDate_evt()
+    public int getNb_days()
     {
-        return this.date_evt ;
+        return this.nb_days ;
 
     }
 
-    public void setDate_evt(String date)
-    {
-        this.date_evt= date ;
-    }
+
+
 
 
     //SENDING VALUES WITHING INTENT
 
     private void searchAction()
     {
-        Bundle locationquery = new Bundle();
-        locationquery.putString("Distance",String.valueOf(getDistance()));
-        locationquery.putString("EventType",getEventType());
+        this.search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle locationquery = new Bundle();
+                locationquery.putString("Distance", String.valueOf(getDistance()));
+                if(getEventType() !=null)
+                locationquery.putString("EventType", getEventType());
 
-        locationquery.putString("ActivityDate",getDate_evt());
+                locationquery.putString("NumberDays", String.valueOf(getNb_days()));
 
 
+                Intent search = new Intent(current.getActivity(), SearchActivity.class);
+                search.putExtra("event", locationquery);
+                search.putExtra("Search","event") ;
 
-        Intent search = new Intent(this.getActivity(),SearchActivity.class);
-        search.putExtra("event",locationquery);
+                startActivity(search);
 
-        startActivity(search);
+            }
+        });
+
+
+    }
+    private void setupPicker(final NumberPicker np)
+    {
+
+
+        np.setMinValue(0);
+        np.setMaxValue(100);
+        np.setWrapSelectorWheel(false);
+
+        np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+
+nb_days=newVal ;
+
+            }
+        });
 
     }
 

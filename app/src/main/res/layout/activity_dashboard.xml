@@ -46,7 +46,8 @@
             android:layout_weight="25"
             android:src="@drawable/ic_favorite_menu"
             android:background="@drawable/image_background"
-            android:clickable="true" />
+            android:clickable="true"
+            android:onClick="FavoriteBtn" />
 
         <ImageButton
             android:layout_width="wrap_content"

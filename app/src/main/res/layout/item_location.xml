@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="fill_parent"
+    android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:weightSum="10"
     android:background="#FFFFFF">
@@ -10,29 +10,46 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:layout_weight="10">
+        android:layout_gravity="center"
+        android:layout_weight="9">
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Event title"
-            android:id="@+id/event_title"
-            android:layout_gravity="center" />
+            android:text="location_title"
+            android:id="@+id/location_title" />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="event_time"
-            android:id="@+id/event_time"
+            android:text="distance"
+            android:id="@+id/location_distance"
             android:layout_gravity="center" />
+
     </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/icon_active"
+        android:layout_gravity="center"
+        android:src="@android:drawable/presence_offline" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Type"
+        android:id="@+id/location_type"
+        android:layout_margin="10dp"
+        android:layout_gravity="center" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/imageView4"
-        android:src="@drawable/ic_country"
-        android:layout_margin="5dp" />
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/ic_right_arrow" />
 </LinearLayout>

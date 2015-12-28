@@ -80,20 +80,20 @@ private FragmentManager fm;
         @Override
         public Fragment getItem(int position) {
             Fragment fragment= new FragmentSearchMember() ;
-         /*   switch (position) {
+            switch (position) {
                 case 0:fragment =new FragmentSearchMember() ;
 
                     break ;
 
                 case 1:
-                   // fragment= new FragmentSearchEvent();break ;
+                    fragment= new FragmentSearchEvent();break ;
                 case 2 :
-                   // fragment= new FragmentSearchLocation();
+                    fragment= new FragmentSearchLocation();
 
                 default:
 
 
-            }*/
+            }
             return fragment ;
         }
 

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:weightSum="100">
 
@@ -16,10 +17,269 @@
         class="com.fide.ae.chessfamilybeta.Top_menu_fragment" />
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/scrollView"
-        android:layout_weight="100" />
+        android:layout_weight="100" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/profie_photo"
+                android:layout_gravity="center"
+                android:layout_weight="1">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/com_facebook_profile_picture_blank_portrait"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#ffffff"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginTop="5dp"
+                    android:clickable="true" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/profile"
+                android:id="@+id/textView8"
+                android:layout_margin="10dp"
+                android:typeface="serif"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/profile_layout"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1">
+
+
+                <com.github.florent37.materialtextfield.MaterialTextField
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mtf_image="@drawable/ic_action"
+
+
+
+                    app:mtf_animationDuration="500"
+                    app:mtf_cardColor="@color/Linearcadre1"
+                    app:mtf_labelColor="@color/cardview_dark_background"
+                    app:mtf_openKeyboardOnFocus="false"
+
+
+                    android:paddingBottom="10dp">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/first_name"
+                        android:textColor="#333"
+                        android:textColorHint="#666"
+                        android:id="@+id/first_name" />
+
+                </com.github.florent37.materialtextfield.MaterialTextField>
+                <com.github.florent37.materialtextfield.MaterialTextField
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mtf_image="@drawable/ic_action"
+                    app:mtf_animationDuration="500"
+                    app:mtf_cardColor="@color/Linearcadre1"
+                    app:mtf_labelColor="@color/cardview_dark_background"
+                    app:mtf_openKeyboardOnFocus="false"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/Lastname"
+                        android:textColor="#333"
+                        android:textColorHint="#666"
+                        android:id="@+id/last_name" />
+
+                </com.github.florent37.materialtextfield.MaterialTextField>
+                <com.github.florent37.materialtextfield.MaterialTextField
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mtf_image="@drawable/ic_action"
+                    app:mtf_animationDuration="500"
+                    app:mtf_cardColor="@color/Linearcadre1"
+                    app:mtf_labelColor="@color/cardview_dark_background"
+                    app:mtf_openKeyboardOnFocus="false"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/password"
+                        android:textColor="#333"
+                        android:textColorHint="#666"
+                        android:id="@+id/password" />
+
+                </com.github.florent37.materialtextfield.MaterialTextField>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp">
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/prompt_birthday"
+                   android:clickable="true"
+                   android:id="@+id/birthday_button"
+                   android:layout_marginTop="10dp"
+                   android:layout_marginLeft="10dp"
+                   android:textAppearance="?android:attr/textAppearanceLarge"
+                   android:layout_gravity="center"
+                   android:layout_marginBottom="10dp"
+                   android:background="@drawable/clickable_text"
+                   android:autoText="false" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/click_birthday"
+                        android:id="@+id/textView10"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/chess_profile_layout"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/chessprofil"
+                    android:id="@+id/textView9"
+                    android:layout_margin="10dp"
+                    android:typeface="serif"
+                    android:layout_weight="1" />
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/arbiter"
+                    android:layout_marginBottom="10dp">
+
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/is_arbiter"
+                        android:id="@+id/is_arbiter"
+                        android:checked="false" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/title"
+                    android:layout_marginBottom="10dp">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/is_title"
+                        android:id="@+id/is_titled"
+
+                        android:checked="false" />
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:id="@+id/titles"
+                        android:entries="@array/TitleItems"
+
+
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:spinnerMode="dialog" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/trainer"
+                    android:baselineAligned="false"
+                    android:layout_marginBottom="10dp">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/is_trainer"
+                        android:id="@+id/is_trainer"
+                        android:checked="false"
+                        android:singleLine="false" />
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/trainer_for"
+                        android:entries="@array/TrainerItems"
+                        android:spinnerMode="dialog"
+                        android:backgroundTintMode="multiply"
+                        android:layout_gravity="center_vertical" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/organizer">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/is_organizer"
+                        android:id="@+id/is_organizer"
+                        android:checked="false" />
+                </LinearLayout>
+            </LinearLayout>
+            <Button android:id="@+id/submit_edit" style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" android:text="@string/update"
+                android:padding="10dp"
+                android:layout_gravity="center|bottom"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:onClick="UpdateBtn"
+                android:background="@drawable/clickable_text" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
 
     <fragment
         android:layout_width="fill_parent"
