@@ -283,17 +283,17 @@ public class MemberRepositoryImpl implements MemberRepository {
 	public void addPhotoToMember(String memberId, File photo) throws Exception {
 
 		//List<NameValuePair> params = new ArrayList<NameValuePair>();
-		RequestParams params = new RequestParams();
+		RequestParams params1 = new RequestParams();
 
-		params.add("authentication", AUTH);
-		params.add("action", "member_set_photo");
-		params.add("member_id",memberId);
+		params1.add("authentication", AUTH);
+		params1.add("action", "member_set_photo");
+		params1.add("member_id",memberId);
 		try {
-			params.put("photo", photo);
+			params1.put("photo", photo);
 		} catch(FileNotFoundException e) {}
 
 		AsyncHttpClient client = new AsyncHttpClient();
-		client.post(Configuration.URL, params, new AsyncHttpResponseHandler() {
+		client.post(Configuration.URL, params1, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, byte[] bytes) {
 				// handle success response
