@@ -1,8 +1,11 @@
 package repository;
 
+import android.util.Log;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.SyncHttpClient;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -292,11 +295,12 @@ public class MemberRepositoryImpl implements MemberRepository {
 			params1.put("photo", photo);
 		} catch(FileNotFoundException e) {}
 
-		AsyncHttpClient client = new AsyncHttpClient();
+		SyncHttpClient client = new SyncHttpClient();
 		client.post(Configuration.URL, params1, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, byte[] bytes) {
-				// handle success response
+				// handle success response*
+				Log.d("photo","send") ;
 			}
 
 			@Override

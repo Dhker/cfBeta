@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import repository.MemberRepository;
+import repository.MemberRepositoryImpl;
 
 /**
  * Created by Dhker on 12/26/2015.
@@ -30,6 +33,12 @@ public class ImageFromCamGal {
     public static final int REQUEST_CAMERA = 1888;
     public static final int SELECT_FILE = 2016;
     private CircleImageView ivImage;
+    public String selectedImagePath ;
+    private MemberRepository memberRepository = new MemberRepositoryImpl();
+
+    public String getSelectedImagePath() {
+        return selectedImagePath;
+    }
 
     public ImageFromCamGal(AppCompatActivity activity, CircleImageView ivImage) {
 
@@ -70,9 +79,29 @@ public class ImageFromCamGal {
                 Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-                File destination = new File(Environment.getExternalStorageDirectory(),
+                final File destination = new File(Environment.getExternalStorageDirectory(),
                         System.currentTimeMillis() + ".jpg");
                 FileOutputStream fo;
+                new AsyncTask<Integer, Integer, Boolean>()
+                {
+
+
+                    @Override
+                    protected Boolean doInBackground(Integer... params) {
+
+                        try {
+
+
+                            memberRepository.addPhotoToMember("143" ,destination);
+                            return  true ;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return false;
+                        }
+                    }
+                }.execute() ;
+
+
                 try {
                     destination.createNewFile();
                     fo = new FileOutputStream(destination);
@@ -93,7 +122,7 @@ public class ImageFromCamGal {
                 Cursor cursor = cursorLoader.loadInBackground();
                 int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
                 cursor.moveToFirst();
-                String selectedImagePath = cursor.getString(column_index);
+                 selectedImagePath = cursor.getString(column_index);
                 Bitmap bm;
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inJustDecodeBounds = true;
@@ -107,6 +136,26 @@ public class ImageFromCamGal {
                 options.inJustDecodeBounds = false;
                 bm = BitmapFactory.decodeFile(selectedImagePath, options);
                 ivImage.setImageBitmap(bm);
+                new AsyncTask<Integer, Integer, Boolean>()
+                {
+
+
+                    @Override
+                    protected Boolean doInBackground(Integer... params) {
+
+                        try {
+
+
+                            memberRepository.addPhotoToMember("143" ,new File(selectedImagePath));
+                            return  true ;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return false;
+                        }
+                    }
+                }.execute() ;
+
+
             }
         }
 

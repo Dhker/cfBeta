@@ -17,7 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 
-
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,11 +25,6 @@ import java.util.Locale;
 import android.view.View.OnClickListener ;
 
 
-import com.parse.Parse;
-import com.parse.ParseInstallation;
-import com.parse.ParseObject;
-import com.parse.ParsePushBroadcastReceiver;
-import com.parse.PushService;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import model.ChessProfile;
@@ -61,15 +56,14 @@ public class EditProfileActivity extends AppCompatActivity implements  OnClickLi
         this.setupViews();
         editPhoto=new ImageFromCamGal(this,profileImage);
 
-        //PUSH TEST
-        Parse.initialize(this, "0Ej5SNPfwkMoz57PlZatSp4nbk8DuBwXUqjYbe0V", "FUEv83u49TkaZMpNxGgd1cFLMQEnh3u9DaUZRJen");
+        //PUSH TEST/*
+        /*Parse.initialize(this, "0Ej5SNPfwkMoz57PlZatSp4nbk8DuBwXUqjYbe0V", "FUEv83u49TkaZMpNxGgd1cFLMQEnh3u9DaUZRJen");
         ParseInstallation.getCurrentInstallation().saveInBackground();
         ParseObject parse =ParseObject.createWithoutData(Member.class.getName(),"member_id");
         parse.put("member_id", "1");
         parse.saveInBackground();
-        ParseInstallation obj = new ParseInstallation();
+        ParseInstallation obj = new ParseInstallation();*/
           //ParsePushBroadcastReceiver parsePush = new ParsePushBroadcastReceiver();
-
 
 
 
@@ -197,8 +191,9 @@ public class EditProfileActivity extends AppCompatActivity implements  OnClickLi
             dialogBirthday();
 
         }
-        else if(v.equals(this.profileImage))
+        else if(v.equals(this.profileImage)) {
             this.editPhoto.selectImage();
+        }
 
         else if (v.equals(this.editBtn))
         {
@@ -334,6 +329,8 @@ public class EditProfileActivity extends AppCompatActivity implements  OnClickLi
         }
 
     }
+
+
 
 
 }
