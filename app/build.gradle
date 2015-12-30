@@ -44,6 +44,12 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile  'com.github.florent37:materialtextfield:1.0.2@aar'
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.daimajia.slider:library:1.1.5@aar'
+
+
+    compile 'com.parse.bolts:bolts-android:1.+'
+    compile 'com.parse:parse-android:1.+'
+
 
 
 

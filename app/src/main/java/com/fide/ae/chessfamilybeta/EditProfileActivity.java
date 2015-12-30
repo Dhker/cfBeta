@@ -25,6 +25,9 @@ import java.util.Locale;
 import android.view.View.OnClickListener ;
 
 
+import com.parse.Parse;
+import com.parse.ParseInstallation;
+import com.parse.ParseObject;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -34,6 +37,7 @@ import repository.MemberRepository;
 import repository.MemberRepositoryImpl;
 import utils.AsyncTaskResult;
 import utils.ImageFromCamGal;
+import utils.ParsePushNotif;
 
 import static utils.ChessFamilyUtils.convertStringToDate;
 
@@ -58,14 +62,12 @@ public class EditProfileActivity extends AppCompatActivity implements  OnClickLi
        member = new Member();
         member.setID(143);
         editPhoto=new ImageFromCamGal(this,profileImage,member);
-        loadUserInformation(String.valueOf(member.getID()));
+       // loadUserInformation(String.valueOf(member.getID()));
         //PUSH TEST/*
-        /*Parse.initialize(this, "0Ej5SNPfwkMoz57PlZatSp4nbk8DuBwXUqjYbe0V", "FUEv83u49TkaZMpNxGgd1cFLMQEnh3u9DaUZRJen");
-        ParseInstallation.getCurrentInstallation().saveInBackground();
-        ParseObject parse =ParseObject.createWithoutData(Member.class.getName(),"member_id");
-        parse.put("member_id", "1");
-        parse.saveInBackground();
-        ParseInstallation obj = new ParseInstallation();*/
+
+
+
+
           //ParsePushBroadcastReceiver parsePush = new ParsePushBroadcastReceiver();
 
 
@@ -167,6 +169,8 @@ public class EditProfileActivity extends AppCompatActivity implements  OnClickLi
     public void UpdateBtn(View v)
     {
         this.initValues();
+       // ParsePushNotif.initParse(this);
+       // ParsePushNotif.sendNotificationToMember(123,"hello");
 
 
     }
