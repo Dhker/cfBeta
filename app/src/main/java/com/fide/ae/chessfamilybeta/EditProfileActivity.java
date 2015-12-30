@@ -1,12 +1,14 @@
 package com.fide.ae.chessfamilybeta;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -37,7 +39,7 @@ import utils.ImageFromCamGal;
 
 import static utils.ChessFamilyUtils.convertStringToDate;
 
-public class EditProfileActivity extends AppCompatActivity implements  OnClickListener{
+public class EditProfileActivity extends BaseActivity implements  OnClickListener{
 
     private CheckBox isTitle,isArbiter,isOrganizer,isTrainer;
     private Spinner titles,trainer_for ;
@@ -49,25 +51,23 @@ public class EditProfileActivity extends AppCompatActivity implements  OnClickLi
     private Member member ;
     private MemberRepository memberRepository = new MemberRepositoryImpl();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        setContentView(R.layout.activity_edit_profile);
+        // getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        //setContentView(R.layout.activity_edit_profile);
+        LayoutInflater inflater = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.activity_edit_profile, null, false);
+        drawerLayout.addView(contentView, 0) ;
+
+
         this.setupViews();
        member = new Member();
         member.setID(143);
         editPhoto=new ImageFromCamGal(this,profileImage,member);
         loadUserInformation(String.valueOf(member.getID()));
-        //PUSH TEST/*
-        /*Parse.initialize(this, "0Ej5SNPfwkMoz57PlZatSp4nbk8DuBwXUqjYbe0V", "FUEv83u49TkaZMpNxGgd1cFLMQEnh3u9DaUZRJen");
-        ParseInstallation.getCurrentInstallation().saveInBackground();
-        ParseObject parse =ParseObject.createWithoutData(Member.class.getName(),"member_id");
-        parse.put("member_id", "1");
-        parse.saveInBackground();
-        ParseInstallation obj = new ParseInstallation();*/
-          //ParsePushBroadcastReceiver parsePush = new ParsePushBroadcastReceiver();
-
 
 
 
@@ -108,6 +108,8 @@ public class EditProfileActivity extends AppCompatActivity implements  OnClickLi
         this.titles.setVisibility(View.INVISIBLE);
         this.trainer_for.setVisibility(View.INVISIBLE);
     }
+
+
     private DatePickerDialog fromDatePickerDialog;
     private SimpleDateFormat dateFormatter;
     private String lastNameValue,firstNameValue,passwordValue ;
@@ -294,7 +296,7 @@ public class EditProfileActivity extends AppCompatActivity implements  OnClickLi
                     {
                         member = result.getResult()   ;
                         Log.d("new", "" + member) ;
-                     //   updateUI(member);
+                        updateUI(member);
                     }else
                     {
                     }
@@ -315,7 +317,6 @@ public class EditProfileActivity extends AppCompatActivity implements  OnClickLi
 
                         Member member = memberRepository.getMemberById(id) ;
                         result= new AsyncTaskResult<Member>(member) ;
-                        updateUI(member) ;
                         return result;
                     } catch (Exception e) {
                         Log.d("error", e.toString())    ;
@@ -333,14 +334,24 @@ public class EditProfileActivity extends AppCompatActivity implements  OnClickLi
 
     }
 
-
-public void updateUI(Member member)
-{
+    public  void updateUI(Member member)
+    {
     if (member.getPhoto()!=null)
     {
         Picasso.with(this).load(member.getPhoto()).into(this.profileImage);
 
     }
+
+    if(member.getName()!=null)
+    {
+        this.firstN.setText(member.getName());
+
+    }
+    if(member.getLast_Name()!=null)
+        this.lastN.setText(member.getLast_Name());
+
+
+
 
 }
 

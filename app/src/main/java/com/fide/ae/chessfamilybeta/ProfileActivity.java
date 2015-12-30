@@ -47,7 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
         gender= (TextView)findViewById(R.id.gender) ;
         Bundle bundle= this.getIntent().getExtras();
         member =(Member) bundle.get("member");
-        //loadUserInformation("" + member.getID());
+        loadUserInformation("" + member.getID());
    //     Log.d("profileImage" , member.getPhoto()) ;
 
 
@@ -86,6 +86,64 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     // update user information
+    public void loadUserInformation(String id)
+    {
+
+        if((id==null)||(id.isEmpty()))
+        {
+            throw new IllegalArgumentException();
+
+        } else
+        {
+
+
+
+            new AsyncTask<String  ,String , AsyncTaskResult<Member>>(){
+
+                @Override
+                protected void onPostExecute(AsyncTaskResult<Member> result) {
+
+                    if (result.getError() == null)
+                    {
+                        member = result.getResult()   ;
+                        Log.d("new", "" + member) ;
+                        updateUI(member);
+                    }else
+                    {
+                    }
+
+
+                }
+
+                @Override
+                protected AsyncTaskResult<Member> doInBackground(String... params) {
+
+
+                    String id  = params[0] ;
+                    AsyncTaskResult<Member> result =null ;
+
+
+
+                    try {
+
+                        Member member = memberRepository.getMemberById(id) ;
+                        result= new AsyncTaskResult<Member>(member) ;
+                        return result;
+                    } catch (Exception e) {
+                        Log.d("error", e.toString())    ;
+                        e.printStackTrace();
+                        result = new  AsyncTaskResult<Member>(e) ;
+                        return result ;
+                    }
+
+
+
+                }
+            }.execute(id);
+
+        }
+
+    }
 
 
 
