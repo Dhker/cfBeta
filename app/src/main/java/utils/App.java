@@ -1,6 +1,8 @@
 package utils;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.util.Log;
 
 /**
  * Created by Dhker on 12/24/2015.
@@ -18,7 +20,10 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        if (fetchFirstRun())
+  //  ParsePushNotif.initParse(this);
         sFirstRun = true;
     }
+
+
 }

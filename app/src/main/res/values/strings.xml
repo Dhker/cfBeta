@@ -199,6 +199,15 @@
     <string name="click_birthday">Click Birthday to change birthday date</string>
     <string name="update">Update profile</string>
     <string name="is_trainer">Trainer</string>
+    <string name="title_activity_event">EventActivity</string>
+    <string name="description">Description</string>
+    <string name="start">Start</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="end">End</string>
+    <string name="adresse">Adresse</string>
+    <string name="Attendance" />
+    <string name="attendance">Attendance</string>
 
 
 </resources>
