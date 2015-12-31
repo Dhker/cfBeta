@@ -3,6 +3,7 @@ package com.fide.ae.chessfamilybeta;
 
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.view.MenuInflater;
 
@@ -19,6 +20,9 @@ import android.support.v7.widget.Toolbar;
 
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
+
+
+import utils.SectionPagerAdapter;
 
 public class SearchActivity extends  AppCompatActivity {
 
@@ -37,9 +41,23 @@ public class SearchActivity extends  AppCompatActivity {
 
 
 
+        SectionPagerAdapter pagerAdapter = new SectionPagerAdapter(getSupportFragmentManager())  ;
 
+        pagerAdapter.addTitle(getResources().getString(R.string.member));
+        pagerAdapter.addTitle(getResources().getString(R.string.event));
+        pagerAdapter.addTitle( getResources().getString(R.string.location));
+        //  setting the resource when the tab is selected
+        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.player_selected));
+        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.event_selected));
+        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.location_selected));
+        // setting the resource when the tab is not selected
+        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.player_not_selected));
+        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.event_not_selected));
+        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.location_not_selected));
 
-        SectionPagerAdapter pagerAdapter = new SectionPagerAdapter(getSupportFragmentManager()) ;
+        pagerAdapter.addFragement(new FragmentSearchMember());
+        pagerAdapter.addFragement(new FragmentSearchEvent());
+        pagerAdapter.addFragement(new FragmentSearchLocation());
 
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -57,131 +75,6 @@ public class SearchActivity extends  AppCompatActivity {
     }
 
 
-
-
-    public class SectionPagerAdapter extends FragmentPagerAdapter implements TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener {
-private FragmentManager fm;
-        public SectionPagerAdapter(FragmentManager fm) {
-            super(fm);
-            this.fm=fm;
-            fm.beginTransaction().add(new FragmentSearchMember(),"Member").commit();
-            fm.beginTransaction().add(new FragmentSearchLocation(),"Location").commit();
-
-
-
-        }
-
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            return super.instantiateItem(container, position);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            Fragment fragment= new FragmentSearchMember() ;
-            switch (position) {
-                case 0:fragment =new FragmentSearchMember() ;
-
-                    break ;
-
-                case 1:
-                    fragment= new FragmentSearchEvent();break ;
-                case 2 :
-                    fragment= new FragmentSearchLocation();
-
-                default:
-
-
-            }
-            return fragment ;
-        }
-
-        @Override
-        public int getCount() {
-            return 3;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return getResources().getString(R.string.member);
-                case 1:
-                    return getResources().getString(R.string.event);
-                default:
-                    return getResources().getString(R.string.location);
-            }
-        }
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-
-
-            viewPager.setCurrentItem(position);
-
-
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            getItem(position);
-            fm.beginTransaction().add(new FragmentSearchLocation(),"SearcgLocation").commit();
-
-
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-
-
-        @Override
-        public void onTabSelected(TabLayout.Tab tab) {
-            switch (tab.getPosition())
-            {
-                case 0 : tab.setIcon(getResources().getDrawable(R.drawable.player_selected));break ;
-                case 1 : tab.setIcon(getResources().getDrawable(R.drawable.event_selected)); this.getItem(1); break ;
-                case 2 :tab.setIcon(getResources().getDrawable(R.drawable.location_selected)) ; this.getItem(2);break ;
-
-            }
-
-        }
-
-        @Override
-        public void onTabUnselected(TabLayout.Tab tab) {
-
-            switch (tab.getPosition())
-            {
-                case 0 : tab.setIcon(getResources().getDrawable(R.drawable.player_not_selected));break ;
-                case 1 : tab.setIcon(getResources().getDrawable(R.drawable.event_not_selected));break ;
-                case 2 :tab.setIcon(getResources().getDrawable(R.drawable.location_not_selected)) ; break ;
-            }
-        }
-
-        @Override
-        public void onTabReselected(TabLayout.Tab tab) {
-
-        }
-        private Fragment mCurrentFragment;
-
-        public Fragment getCurrentFragment() {
-            return mCurrentFragment;
-        }
-        //...
-        @Override
-        public void setPrimaryItem(ViewGroup container, int position, Object object) {
-            if (getCurrentFragment() != object) {
-                mCurrentFragment = ((Fragment) object);
-            }
-            super.setPrimaryItem(container, position, object);
-        }
-
-    }
 
 
 }

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+
     <color name="colorAccent">#FF4081</color>
-	   <color name="colorBackground">#f1d6a1</color>
+    <color name="colorBackground">#f1d6a1</color>
     <color name="DarkBrown">#592E1D</color>
     <color name="Linearcadre1">#f1d6a1</color>
     <color name="Linearmenu">#965a36</color>
@@ -35,7 +34,9 @@
         <item>@color/blue</item>
         <item>@color/yellow</item>
     </integer-array>
-    <color name="PrimaryColor">#2196F3</color>
-    <color name="PrimaryDarkColor">#1976D2</color>
+
+
+    <color name="PrimaryColor">#592E1D</color>
+    <color name="PrimaryDarkColor">#965a36</color>
 
 </resources>

@@ -1,14 +1,17 @@
 package com.fide.ae.chessfamilybeta;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,10 +53,10 @@ public class BaseActivity extends AppCompatActivity {
 
 
         // Initializing Toolbar and setting it as the actionbar
-     //   toolbar = (Toolbar) findViewById(R.id.toolbar);
-    //    setSupportActionBar(toolbar);
 
         //Initializing NavigationView
+
+
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
        Log.d("created" ,"yes") ;
         photo =(CircleImageView) findViewById(R.id.profile_image) ;
@@ -89,12 +92,30 @@ public class BaseActivity extends AppCompatActivity {
 
                    // For rest of the options we just show a toast on click
 
-                   case R.id.starred:
-                       Toast.makeText(getApplicationContext(), "Stared Selected", Toast.LENGTH_SHORT).show();
-                       return true;
+                   case R.id.starred: {
+
+                       if(!ProfileActivity.active) {
+                           Toast.makeText(getApplicationContext(), "Profile Selected", Toast.LENGTH_SHORT).show();
+                           Intent intent = new Intent(BaseActivity.this, ProfileActivity.class);
+                           startActivity(intent);
+                           return true;
+                       }else
+                       {
+                           return false ;
+                       }
+
+                   }
                    case R.id.sent_mail:
-                       Toast.makeText(getApplicationContext(), "Send Selected", Toast.LENGTH_SHORT).show();
-                       return true;
+                   {
+                           if (!DashboardActivity.active) {
+                               Toast.makeText(getApplicationContext(), "dashboard Selected", Toast.LENGTH_SHORT).show();
+                               Intent intent = new Intent(BaseActivity.this, DashboardActivity.class);
+                               startActivity(intent);
+                               return true;
+                           } else {
+                               return false;
+                           }
+                   }
                    case R.id.drafts:
                        Toast.makeText(getApplicationContext(), "Drafts Selected", Toast.LENGTH_SHORT).show();
                        return true;
@@ -117,7 +138,9 @@ public class BaseActivity extends AppCompatActivity {
 
         // Initializing Drawer Layout and ActionBarToggle
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-      /*  ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.openDrawer, R.string.closeDrawer){
+
+  /*s
+       ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.openDrawer, R.string.closeDrawer){
 
             @Override
             public void onDrawerClosed(View drawerView) {
@@ -145,14 +168,12 @@ public class BaseActivity extends AppCompatActivity {
 
 
 
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
 

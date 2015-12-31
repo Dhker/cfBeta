@@ -209,5 +209,6 @@
     <string name="Attendance" />
     <string name="attendance">Attendance</string>
 
-
+<string name="openDrawer"></string>
+<string name="closeDrawer"></string>
 </resources>

@@ -13,66 +13,29 @@
     android:orientation="vertical">
 
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.fide.ae.chessfamilybeta.Top_menu_fragment"
-        android:id="@+id/fragment"
-        tools:layout="@layout/fragment_top_menu" />
-
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/tool_bar"
+        />
     <LinearLayout
-        android:background="@color/DarkBrown"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="100"
-        android:paddingBottom="10dp">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/home_menu_btn"
-            android:layout_weight="25"
-            android:src="@drawable/ic_home_menu"
-            android:background="@drawable/image_background"
-            android:clickable="true"
-            android:onClick="HomeBtn"
-            android:nestedScrollingEnabled="false" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/favorite_menu_btn"
-            android:layout_weight="25"
-            android:src="@drawable/ic_favorite_menu"
-            android:background="@drawable/image_background"
-            android:clickable="true"
-            android:onClick="FavoriteBtn" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/message_menu_btn"
-            android:layout_weight="25"
-            android:src="@drawable/ic_message_menu"
-            android:background="@drawable/image_background"
-            android:clickable="true" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/notification_menu_btn"
-            android:layout_weight="25"
-            android:src="@drawable/ic_notification"
-            android:background="@drawable/image_background"
-            android:clickable="true" />
-    </LinearLayout>
-
-    <FrameLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/dashboard_content"></FrameLayout>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_dash"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBackground"
+
+
+            android:fillViewport="false" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager_dash"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 
 </LinearLayout>

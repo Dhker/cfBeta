@@ -37,7 +37,7 @@ import utils.ImageFromCamGal;
 
 import static utils.ChessFamilyUtils.convertStringToDate;
 
-public class EditProfileActivity extends AppCompatActivity implements  OnClickListener{
+public class EditProfileActivity extends BaseActivity implements  OnClickListener{
 
     private CheckBox isTitle,isArbiter,isOrganizer,isTrainer;
     private Spinner titles,trainer_for ;
@@ -48,12 +48,20 @@ public class EditProfileActivity extends AppCompatActivity implements  OnClickLi
     private Button editBtn ;
     private Member member ;
     private MemberRepository memberRepository = new MemberRepositoryImpl();
+    private DatePickerDialog fromDatePickerDialog;
+    private SimpleDateFormat dateFormatter;
+    private String lastNameValue,firstNameValue,passwordValue ;
+    private Date birthdayValue ;
+    private int isTrainerValue=0,isOrganizerValue=0,isTitleValue=0,isArbiterValue=0 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_edit_profile);
+
+
+
         this.setupViews();
        member = new Member();
         member.setID(143);
@@ -108,11 +116,7 @@ public class EditProfileActivity extends AppCompatActivity implements  OnClickLi
         this.titles.setVisibility(View.INVISIBLE);
         this.trainer_for.setVisibility(View.INVISIBLE);
     }
-    private DatePickerDialog fromDatePickerDialog;
-    private SimpleDateFormat dateFormatter;
-    private String lastNameValue,firstNameValue,passwordValue ;
-    private Date birthdayValue ;
-    private int isTrainerValue=0,isOrganizerValue=0,isTitleValue=0,isArbiterValue=0 ;
+
 
     private  void initValues()
     {

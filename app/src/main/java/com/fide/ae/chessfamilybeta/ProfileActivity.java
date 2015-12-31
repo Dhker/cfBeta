@@ -1,10 +1,17 @@
 package com.fide.ae.chessfamilybeta;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.media.Image;
 import android.os.AsyncTask;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,8 +22,9 @@ import model.Member;
 import repository.MemberRepositoryImpl;
 import repository.MemberRepository;
 import utils.AsyncTaskResult;
+import utils.SectionPagerAdapter;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends BaseActivity {
 
 
 
@@ -24,6 +32,9 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     private Member member ;
+    public ViewPager viewPager;
+
+    static boolean active = false;
 
 
     // UI Components
@@ -34,11 +45,38 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
+    private MemberFragment memberFragment ;
+    private FavoriteFragment favoriteFragment;
+    private MessageFragment messageFragment ;
+    private NotificationFragment  notificationFragment;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_profile);
+
+
+        memberFragment = new MemberFragment() ;
+        favoriteFragment = new FavoriteFragment() ;
+        messageFragment = new MessageFragment() ;
+        notificationFragment = new NotificationFragment() ;
+
+        this.active = true  ;
+
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.activity_profile, null, false);
+        drawerLayout.addView(contentView, 0);
+
+
+
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);                   // Setting toolbar as the ActionBar with setSupportActionBar() call
+
+
 
         // UI components initialization
         photo = (ImageView) findViewById(R.id.photo) ;
@@ -46,8 +84,78 @@ public class ProfileActivity extends AppCompatActivity {
         age=(TextView)findViewById(R.id.age);
         gender= (TextView)findViewById(R.id.gender) ;
         Bundle bundle= this.getIntent().getExtras();
-        member =(Member) bundle.get("member");
-        loadUserInformation("" + member.getID());
+
+
+
+
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_profile);
+        viewPager = (ViewPager) findViewById(R.id.pager_profile);
+        viewPager.setOffscreenPageLimit(1);
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.Linearcadre1));
+        tabLayout.setSelectedTabIndicatorHeight(5);
+
+        // this.home_btn = (ImageButton) findViewById(R.id.home_menu_btn);
+      /*  this.notif_btn=(ImageButton) findViewById(R.id.notification_menu_btn);
+        this.message_btn=(ImageButton) findViewById(R.id.message_menu_btn);
+        this.favorite_btn= (ImageButton) findViewById(R.id.favorite_menu_btn);
+
+
+*/
+
+
+
+
+
+
+
+        SectionPagerAdapter pagerAdapter = new SectionPagerAdapter(getSupportFragmentManager())  ;
+
+       /* pagerAdapter.addTitle("Member");
+        pagerAdapter.addTitle("Event");
+        pagerAdapter.addTitle("Location");*/
+
+
+        //  setting the resource when the tab is selected
+
+        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_profile));
+        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_place));
+        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_friends));
+        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_feeds));
+
+
+        // setting the resource when the tab is not selected
+        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_profile));
+        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_place));
+        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_friends));
+        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_feeds));
+
+        pagerAdapter.addFragement(memberFragment);
+        pagerAdapter.addFragement(messageFragment);
+        pagerAdapter.addFragement(favoriteFragment);
+        pagerAdapter.addFragement(notificationFragment);
+
+
+
+
+
+        viewPager.setAdapter(pagerAdapter);
+
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setIcon(getResources().getDrawable(R.drawable.ic_profile));
+        tabLayout.getTabAt(1).setIcon(getResources().getDrawable(R.drawable.ic_place));
+        tabLayout.getTabAt(2).setIcon(getResources().getDrawable(R.drawable.ic_friends));
+        tabLayout.getTabAt(3).setIcon(getResources().getDrawable(R.drawable.ic_feeds));
+
+        tabLayout.setTabTextColors(Color.GRAY, getResources().getColor(R.color.Linearmenu));
+
+        tabLayout.setOnTabSelectedListener(pagerAdapter);
+
+
+
+
+        // member =(Member) bundle.get("member");
+       // loadUserInformation("" + member.getID());
    //     Log.d("profileImage" , member.getPhoto()) ;
 
 
@@ -146,6 +254,15 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+       this.active = false ;
+    }
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        this.active = true ;
+    }
 }

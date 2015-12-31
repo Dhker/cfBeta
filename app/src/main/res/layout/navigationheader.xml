@@ -43,7 +43,7 @@
         android:textSize="14sp"
         android:textColor="#fff"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/username"
-        android:layout_alignStart="@+id/username" />
+        android:layout_alignLeft="@+id/drawUsername"
+        android:layout_alignStart="@+id/drawUsername" />
 
 </RelativeLayout>

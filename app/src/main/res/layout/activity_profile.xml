@@ -5,12 +5,14 @@
     android:weightSum="100"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/tool_bar"
+        />
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical" android:layout_width="match_parent"
             android:background="@color/couleur_layout_menu"
             android:layout_height="wrap_content"
-            android:layout_weight="20"
             android:weightSum="100"
             android:gravity="top">
             <ImageView
@@ -53,393 +55,27 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/Menue"
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/Linearmenu"
-            android:orientation="horizontal"
-            android:weightSum="100"
-            android:layout_gravity="center">
+            android:background="@color/DarkBrown"
 
-            <LinearLayout
-                android:id="@+id/MenuLayoutPlayer"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:background="@color/Linearmenu" android:layout_marginTop="5dp"
-                android:orientation="vertical"
-                android:layout_weight="25"
-                android:layout_gravity="center"
-                android:foregroundGravity="center"
-                android:layout_marginBottom="5dp">
-                <ImageView
-                    android:id="@+id/MenuPlayer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/player"
-                    android:layout_gravity="center" />
-                <TextView
-                    android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="  Player"
-                    android:textColor="#ffffff"
-                    android:textSize="13.0sp"
-                    style="@style/MyriadPro"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center"
-                    android:shadowColor="#000000" android:shadowDx="2.0" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/MenuLayoutMessage"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:background="@color/Linearmenu"
-                android:orientation="vertical"
-                android:weightSum="1"
-                android:layout_weight="25"
-                android:layout_marginTop="5dp"
-                android:layout_gravity="center"
-                android:foregroundGravity="center">
-                <ImageView
-                    android:id="@+id/MenuMessage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/message"
-                    android:layout_gravity="center" />
-                <TextView
-                    android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Message"
-                    android:textColor="#ffffff"
-                    android:textSize="13.0sp"
-                    style="@style/MyriadPro"
 
-                    android:shadowColor="#000000" android:shadowDx="2.0"
-                    android:layout_gravity="center" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/MenuLayoutfavoris"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:background="@color/Linearmenu"
-                android:orientation="vertical"
-                android:layout_weight="25"
-                android:layout_marginTop="5dp"
-                android:layout_gravity="center"
-                android:foregroundGravity="center"
-                android:layout_marginBottom="5dp">
-                <ImageView
-                    android:id="@+id/MenuFavoris"
-                    android:layout_width="wrap_content"
+            android:fillViewport="false" />
 
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/etoile"
-                    android:layout_gravity="center" />
-                <TextView
-                    android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="  Favorite"
-                    android:textColor="#ffffff"
-                    android:textSize="13.0sp"
-                    style="@style/MyriadPro"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center"
-                    android:shadowColor="#000000" android:shadowDx="2.0" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/MenuLayoutFeed"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:background="@color/Linearmenu"
-                android:orientation="vertical"
-                android:layout_weight="25"
-                android:layout_marginTop="5dp"
-                android:layout_gravity="center"
-                android:foregroundGravity="center"
-                android:layout_marginBottom="5dp">
-                <ImageView
-                    android:id="@+id/MenuFeed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/wi"
-                    android:layout_gravity="center" />
-                <TextView
-                    android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="  Feed"
-                    android:textColor="#ffffff"
-                    android:textSize="13.0sp"
-                    android:minWidth="50sp"
-                    style="@style/MyriadPro"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center"
-                    android:shadowColor="#000000" android:shadowDx="2.0" />
-            </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout android:id="@+id/linearInfoGenerale" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:orientation="vertical"
-            android:background="@color/colorPartieInformationTextEditProfil"
-            android:weightSum="100"
-            android:layout_weight="80">
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/age_lay"
-                android:layout_weight="10"
-                android:layout_gravity="center|right"
-                android:layout_marginLeft="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/age"
-                    android:textColor="@color/colorTextEditProfil1"
-                    android:textSize="18dip"
-                    android:layout_weight="10"
-                    android:layout_gravity="center|left" />
-
-                <TextView
-                    android:id="@+id/age"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/age"
-                    android:textColor="@color/colorTextEditProfil2"
-                    android:textSize="18dip"
-                    android:layout_weight="10"
-                    android:layout_gravity="center_vertical" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/gender_lay"
-                android:layout_weight="10"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center|right">
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/gender"
-                    android:textColor="@color/colorTextEditProfil1"
-                    android:textSize="18dip"
-                    android:layout_weight="10" />
-
-                <TextView
-                    android:id="@+id/gender"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/gender"
-                    android:textColor="@color/colorTextEditProfil2"
-                    android:textSize="18dip"
-                    android:layout_weight="10" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/location_lay"
-                android:layout_weight="10"
-                android:weightSum="10"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center|right">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Location"
-                    android:textColor="@color/colorTextEditProfil1"
-                    android:textSize="18dip"
-                    android:layout_weight="5" />
-
-                <TextView
-                    android:id="@+id/location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Location"
-                    android:textColor="@color/colorTextEditProfil2"
-                    android:textSize="18dip" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/languages_lay"
-                android:layout_weight="10"
-                android:layout_marginLeft="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Language"
-                    android:textColor="@color/colorTextEditProfil1"
-                    android:textSize="18dip"
-                    android:layout_weight="5" />
-
-                <TextView
-                    android:id="@+id/language"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Language"
-                    android:textColor="@color/colorTextEditProfil2"
-                    android:textSize="18dip"
-                    android:layout_weight="5" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/profile_lay"
-                android:layout_weight="60"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center|right"
-                android:weightSum="10">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/chessprofil"
-                    android:textColor="@color/colorTextEditProfil1"
-                    android:textSize="18dip"
-                    android:layout_weight="5" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/profile_lay_vertical"
-                    android:gravity="right">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:id="@+id/profile_title_lay"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="10dp">
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/player"
-                        android:textColor="@color/colorTextEditProfil2"
-                        android:textSize="18dip"
-                        android:id="@+id/player_p"
-                        android:layout_gravity="center" />
-
-                        <TextView
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/arbitre"
-                            android:textColor="@color/colorTextEditProfil2"
-                            android:textSize="18dip"
-                            android:id="@+id/arbitre_p"
-                            android:layout_gravity="center" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/trainer"
-                            android:textColor="@color/colorTextEditProfil2"
-                            android:textSize="18dip"
-                            android:id="@+id/trainer_p"
-                            android:layout_gravity="center" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/organizer"
-                            android:textColor="@color/colorTextEditProfil2"
-                            android:textSize="18dip"
-                            android:id="@+id/organizer_p"
-                            android:layout_gravity="center" />
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:id="@+id/checked_lay"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="10dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/checked_arbiter"
-                            android:src="@drawable/empty_round"
-                            android:layout_gravity="center" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/checked_player"
-                            android:src="@drawable/empty_round"
-                            android:layout_gravity="center" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/checked_trainer"
-                            android:src="@drawable/empty_round"
-                            android:layout_gravity="center" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/checked_oranizer"
-                            android:src="@drawable/empty_round"
-                            android:layout_gravity="center" />
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:id="@+id/profile_details_lay"
-                        android:layout_gravity="center">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:text="Small Text"
-                            android:id="@+id/player_details"
-                            android:layout_gravity="center" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:text="Small Text"
-                            android:id="@+id/arbiter_details"
-                            android:layout_gravity="center" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:text="Small Text"
-                            android:id="@+id/trainer_details"
-                            android:layout_gravity="center" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:text="Small Text"
-                            android:id="@+id/organizer_details"
-                            android:layout_weight="1"
-                            android:layout_gravity="center" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
 
 </LinearLayout>

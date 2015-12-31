@@ -2,8 +2,9 @@ package com.fide.ae.chessfamilybeta;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
+
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
