@@ -32,10 +32,14 @@ public class BaseActivity extends AppCompatActivity {
     private NavigationView navigationView;
     protected DrawerLayout drawerLayout;
 
-
+    private MemberRepository memberRepository = new MemberRepositoryImpl();
     private CircleImageView photo ;
     private TextView email ;
     private TextView userName;
+
+
+
+    protected Member member ;
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -45,7 +49,7 @@ public class BaseActivity extends AppCompatActivity {
 
     }
 
-    private MemberRepository memberRepository = new MemberRepositoryImpl();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,11 +102,9 @@ public class BaseActivity extends AppCompatActivity {
                            Toast.makeText(getApplicationContext(), "Profile Selected", Toast.LENGTH_SHORT).show();
                            Intent intent = new Intent(BaseActivity.this, ProfileActivity.class);
                            startActivity(intent);
-                           return true;
-                       }else
-                       {
-                           return false ;
+
                        }
+                       return true;
 
                    }
                    case R.id.sent_mail:
@@ -111,10 +113,9 @@ public class BaseActivity extends AppCompatActivity {
                                Toast.makeText(getApplicationContext(), "dashboard Selected", Toast.LENGTH_SHORT).show();
                                Intent intent = new Intent(BaseActivity.this, DashboardActivity.class);
                                startActivity(intent);
-                               return true;
-                           } else {
-                               return false;
+
                            }
+                       return true;
                    }
                    case R.id.drafts:
                        Toast.makeText(getApplicationContext(), "Drafts Selected", Toast.LENGTH_SHORT).show();

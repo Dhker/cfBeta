@@ -58,11 +58,14 @@ private ImageButton home_btn,favorite_btn,message_btn,notification_btn,menu_btn 
 
 
 
+
     private void buttonsOnClick()
     {
 
-   home_btn.setOnClickListener(this);
-
+        home_btn.setOnClickListener(this);
+        message_btn.setOnClickListener(this);
+        favorite_btn.setOnClickListener(this);
+        notification_btn.setOnClickListener(this);
 
     }
 
@@ -87,15 +90,31 @@ private ImageButton home_btn,favorite_btn,message_btn,notification_btn,menu_btn 
         if(v.equals(home_btn))
         {
             Intent intent = new Intent(this.getActivity() , DashboardActivity.class) ;
+            intent.putExtra("tabPosition" ,0) ;
             this.startActivity(intent);
 
         }
-        if(v.equals(home_btn))
+        if(v.equals(message_btn))
         {
             Intent intent = new Intent(this.getActivity() , DashboardActivity.class) ;
+            intent.putExtra("tabPosition" ,1) ;
             this.startActivity(intent);
-
         }
+
+        if(v.equals(favorite_btn))
+        {
+            Intent intent = new Intent(this.getActivity() , DashboardActivity.class) ;
+            intent.putExtra("tabPosition" ,2) ;
+            this.startActivity(intent);
+        }
+        if(v.equals(notification_btn))
+        {
+            Intent intent = new Intent(this.getActivity() , DashboardActivity.class) ;
+            intent.putExtra("tabPosition" ,3) ;
+            this.startActivity(intent);
+        }
+
+
     }
 /*
     public void setMessageNumber(int i ){

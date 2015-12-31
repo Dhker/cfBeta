@@ -1,6 +1,7 @@
 package com.fide.ae.chessfamilybeta;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.AsyncTask;
@@ -11,12 +12,15 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import model.MeetingPlace;
 import model.Member;
 
 import repository.MemberRepositoryImpl;
@@ -46,9 +50,9 @@ public class ProfileActivity extends BaseActivity {
 
 
     private MemberFragment memberFragment ;
-    private FavoriteFragment favoriteFragment;
-    private MessageFragment messageFragment ;
-    private NotificationFragment  notificationFragment;
+    private MeetingPlaceFragment meetingPlaceFragment;
+    private FriendsFragement friendsFragement ;
+    private FeedsFragment  feedsFragment;
 
 
 
@@ -59,9 +63,9 @@ public class ProfileActivity extends BaseActivity {
 
 
         memberFragment = new MemberFragment() ;
-        favoriteFragment = new FavoriteFragment() ;
-        messageFragment = new MessageFragment() ;
-        notificationFragment = new NotificationFragment() ;
+        meetingPlaceFragment = new MeetingPlaceFragment() ;
+        friendsFragement = new FriendsFragement() ;
+        feedsFragment = new FeedsFragment() ;
 
         this.active = true  ;
 
@@ -131,9 +135,9 @@ public class ProfileActivity extends BaseActivity {
         pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_feeds));
 
         pagerAdapter.addFragement(memberFragment);
-        pagerAdapter.addFragement(messageFragment);
-        pagerAdapter.addFragement(favoriteFragment);
-        pagerAdapter.addFragement(notificationFragment);
+        pagerAdapter.addFragement(meetingPlaceFragment);
+        pagerAdapter.addFragement(friendsFragement);
+        pagerAdapter.addFragement(feedsFragment);
 
 
 
@@ -264,5 +268,27 @@ public class ProfileActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         this.active = true ;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_search: {
+                Intent intent = new Intent(this, SearchActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            case R.id.menu_refresh:
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+
+        return  true ;
     }
 }

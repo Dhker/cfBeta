@@ -2,13 +2,10 @@ package com.fide.ae.chessfamilybeta;
 
 
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 
 public class EventFragment extends android.support.v4.app.Fragment {
@@ -43,7 +40,7 @@ public class EventFragment extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
 
 
-        return inflater.inflate(R.layout.fragment_event, container, false);
+        return inflater.inflate(R.layout.event_item, container, false);
     }
 
 

@@ -2,39 +2,24 @@ package com.fide.ae.chessfamilybeta;
 
 import android.app.Activity;
 import android.net.Uri;
-import android.os.Bundle ;
-
+import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import model.Event;
-import model.MemberPublication;
-import model.Message;
-import utils.ItemAdapter;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MessageFragment.OnFragmentInteractionListener} interface
+ * {@link FriendsFragement.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MessageFragment#newInstance} factory method to
+ * Use the {@link FriendsFragement#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MessageFragment extends Fragment {
 
-    RecyclerView recyclerView;
-    ItemAdapter adapter ;
-    List messages = new ArrayList<>();
-
+public class FriendsFragement extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -52,11 +37,11 @@ public class MessageFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MessageFragment.
+     * @return A new instance of fragment FriendsFragement.
      */
     // TODO: Rename and change types and number of parameters
-    public static MessageFragment newInstance(String param1, String param2) {
-        MessageFragment fragment = new MessageFragment();
+    public static FriendsFragement newInstance(String param1, String param2) {
+        FriendsFragement fragment = new FriendsFragement();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,15 +49,13 @@ public class MessageFragment extends Fragment {
         return fragment;
     }
 
-    public MessageFragment() {
+    public FriendsFragement() {
         // Required empty public constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -83,23 +66,7 @@ public class MessageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-      View  rootView =inflater.inflate(R.layout.fragment_message, container, false);
-
-        populate(); 
-
-        recyclerView = (RecyclerView)rootView.findViewById(R.id.message_list);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-
-
-        adapter = new ItemAdapter(getContext() ,messages) ;
-        recyclerView.setAdapter(adapter);
-
-
-        return  rootView ;
-
-
+        return inflater.inflate(R.layout.fragment_friends, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -107,17 +74,6 @@ public class MessageFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-       /* try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
     }
 
     @Override
@@ -131,7 +87,7 @@ public class MessageFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
@@ -140,18 +96,5 @@ public class MessageFragment extends Fragment {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
-
-    public void populate()
-    {
-        for(int i= 0 ; i<10 ; i++)
-        {
-            messages.add(new Message()) ;
-
-           //  messages.add(new Event());
-
-        }
-    }
-
-
 
 }

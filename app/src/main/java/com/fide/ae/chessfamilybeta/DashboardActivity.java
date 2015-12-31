@@ -6,6 +6,7 @@ package com.fide.ae.chessfamilybeta;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.util.Log;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -43,6 +45,7 @@ public class DashboardActivity extends BaseActivity {
     private FavoriteFragment favoriteFragment;
     private MessageFragment messageFragment ;
     private NotificationFragment  notificationFragment;
+
 
 
     private int currentTabPosition ;
@@ -144,8 +147,7 @@ public class DashboardActivity extends BaseActivity {
         tabLayout.getTabAt(2).setIcon(getResources().getDrawable(R.drawable.ic_favorite_menu));
         tabLayout.getTabAt(3).setIcon(getResources().getDrawable(R.drawable.ic_notification));
 
-        tabLayout.setTabTextColors(Color.GRAY, getResources().getColor(R.color.Linearmenu));
-
+        tabLayout.setTabTextColors(Color.GRAY, getResources().getColor(R.color.Linearmenu)) ;
         tabLayout.setOnTabSelectedListener(pagerAdapter);
 
 
@@ -169,6 +171,22 @@ public class DashboardActivity extends BaseActivity {
         return  true ;
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_search: {
+                Intent intent = new Intent(this, SearchActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            case R.id.menu_refresh:
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 
     @Override

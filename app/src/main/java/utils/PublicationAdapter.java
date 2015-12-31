@@ -1,20 +1,16 @@
 package utils;
 
-import android.content.Context;
-import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fide.ae.chessfamilybeta.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import co.dift.ui.SwipeToAction;
@@ -66,7 +62,7 @@ public class PublicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_publication, parent, false);
+                .inflate(R.layout.publication_item, parent, false);
 
         return new PublicationViewHolder(view);
     }

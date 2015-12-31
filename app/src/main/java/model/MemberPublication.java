@@ -15,7 +15,9 @@ public class MemberPublication {
 	private int perpage,page,nbreturn,nbtotale;
 	private String Video ; //	Link to vid�o (Major platforms: Youtube, Dailymotion)
 	private String link ; //	Web Link
-	private int visibile,urlkey ; //	Visibility (1= Published default, 0= Not published, 2=Banned)
+	private int visibile,urlkey ;
+
+	//	Visibility (1= Published default, 0= Not published, 2=Banned)
 	public MemberPublication(int id, Date time, Member member, String text,
 			ArrayList<Photo> photo, String video, String link,
 			int visibile,int perpage,int page,int nbreturn,int nbtotale,int urlkey) {

@@ -5,14 +5,14 @@
     <item android:id="@+id/action_settings" android:title="Helloworld"
         android:orderInCategory="100" app:showAsAction="never" />
     <item
-        android:id="@+id/inbox"
+        android:id="@+id/menu_refresh"
         android:icon="@drawable/ic_refresh"
         app:showAsAction="always"
         android:title="title"
         />
 
     <item
-        android:id="@+id/starred"
+        android:id="@+id/menu_search"
         android:icon="@drawable/ic_search_top"
         app:showAsAction="always"
         android:title="starred" />

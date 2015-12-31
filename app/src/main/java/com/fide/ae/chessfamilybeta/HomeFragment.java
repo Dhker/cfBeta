@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.dift.ui.SwipeToAction;
+import model.Event;
 import model.Member;
 import model.MemberPublication;
 import repository.MemberPublicationRepository;
@@ -28,6 +29,7 @@ import utils.AsyncTaskResult;
 import utils.CustomRcyclerView;
 
 import utils.EndlessRecyclerOnScrollListener;
+import utils.ItemAdapter;
 import utils.PublicationAdapter;
 
 
@@ -35,14 +37,13 @@ public class HomeFragment extends Fragment implements SwipeToAction.SwipeListene
 
     RecyclerView recyclerView;
 
-    CustomRcyclerView customRcyclerView ;
-    List<MemberPublication> publications = new ArrayList<>();
+    List  publications = new ArrayList<>();
 
     LinearLayoutManager layoutManager ;
     private Member  member ;
     private View RootView;
     private ListView  publicationList  ;
-    private PublicationAdapter adapter;
+    private ItemAdapter adapter;
     private boolean loading = true;
     private SwipeToAction swipeToAction;
 
@@ -81,14 +82,14 @@ public class HomeFragment extends Fragment implements SwipeToAction.SwipeListene
 
         this.RootView = inflater.inflate(R.layout.home_layout, container, false);
 
-
+        populate();
         recyclerView = (RecyclerView)RootView.findViewById(R.id.list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        loadPublications(page);
-        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
+        //loadPublications(page);
+        /*recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int current_page) {
                 // do something..
@@ -102,12 +103,11 @@ public class HomeFragment extends Fragment implements SwipeToAction.SwipeListene
                     //  adapter.notifyDataSetChanged();
                 }
             }
-        });
-        adapter = new PublicationAdapter(this.publications);
-
+        });*/
+        adapter = new ItemAdapter(getContext() ,publications) ;
         recyclerView.setAdapter(adapter);
 
-        swipeToAction = new SwipeToAction(recyclerView , this) ;
+       // swipeToAction = new SwipeToAction(recyclerView , this) ;
 
 
 
@@ -115,7 +115,6 @@ public class HomeFragment extends Fragment implements SwipeToAction.SwipeListene
 return RootView ;
 
     }
-
 
 
 
@@ -133,7 +132,7 @@ return RootView ;
             protected void onPostExecute(AsyncTaskResult<ArrayList<MemberPublication>> result) {
 
                if (result.getError() == null) {
-                    ArrayList<MemberPublication> publications = result.getResult();
+                    ArrayList publications = result.getResult();
 
                     if (publications != null)
 
@@ -175,7 +174,7 @@ return RootView ;
                         Log.d("page", ""+page) ;
 
 
-                        ArrayList<MemberPublication> publications = publicationRepository.GetFeeds("4", itemsPerPage, page);
+                        ArrayList publications = publicationRepository.GetFeeds("4", itemsPerPage, page);
 
                         result = new AsyncTaskResult<ArrayList<MemberPublication>>(publications);
 
@@ -228,7 +227,16 @@ return RootView ;
         //  displaySnackbar(itemData.getText() + " long clicked", null, null);
     }
 
+    public void populate()
+    {
+         for(int i= 0 ; i<10 ; i++)
+         {  if(i%2== 0)
+             publications.add(new MemberPublication()) ;
+            else
+             publications.add(new Event());
 
+         }
+    }
 
 }
 
