@@ -84,7 +84,7 @@ public class  ItemViewHolderFactory
 
         public NotificationViewHolder(View itemView) {
             super(itemView);
-            multipleContent = (TextView) itemView.findViewById(R.id.row_first_name_tv);
+            //multipleContent = (TextView) itemView.findViewById(R.id.row_first_name_tv);
 
         }
 
