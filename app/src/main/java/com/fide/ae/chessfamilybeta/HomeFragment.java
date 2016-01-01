@@ -233,6 +233,10 @@ return RootView ;
          {  if(i%2== 0)
              publications.add(new MemberPublication()) ;
             else
+
+             if(i%3==0)
+                 publications.add(new Member()) ;
+             else
              publications.add(new Event());
 
          }

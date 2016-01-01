@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.fide.ae.chessfamilybeta.R;
 
 import model.Event;
+import model.Member;
 import model.MemberPublication;
 import model.Message;
 import model.Notification;
@@ -23,6 +24,7 @@ public class  ItemViewHolderFactory
     public static final  int publication_viewHolder =1 ;
     public static final  int message_viewHolder =2 ;
     public static final  int notification_viewHolder =3 ;
+    public static final  int member_viewHodler = 4 ;
 
 
 
@@ -107,6 +109,18 @@ public class  ItemViewHolderFactory
 
     }
 
+    public class MemberViewHolder extends ItemViewHolder<Member>{
+
+        public MemberViewHolder(View itemView) {
+            super(itemView);
+        }
+
+        @Override
+        public void introduce(Member member) {
+
+        }
+    }
+
 
         public  ItemViewHolder  getViewHolderByType(int type , View itemView)
     {
@@ -118,7 +132,8 @@ public class  ItemViewHolderFactory
                 return  new MessageViewHolder(itemView) ;
               if(type==notification_viewHolder)
                 return  new NotificationViewHolder(itemView) ;
-
+            if(type==member_viewHodler)
+                return new MemberViewHolder(itemView) ;
         return null ;
 
     }

@@ -115,7 +115,7 @@ public class MeetingPlaceActivity extends AppCompatActivity {
         try {
 
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                    R.layout.item_member, this.meetingPlace.getOpeningtime());
+
             this.opening_time.setAdapter(adapter);
         } catch (Exception e) {
             e.printStackTrace();
