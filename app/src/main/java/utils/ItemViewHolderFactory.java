@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.fide.ae.chessfamilybeta.EventActivity;
 import com.fide.ae.chessfamilybeta.MeetingPlaceActivity;
+import com.fide.ae.chessfamilybeta.MemberProfileActivity;
 import com.fide.ae.chessfamilybeta.MessageActivity;
-import com.fide.ae.chessfamilybeta.ProfileVisitorActivity;
 import com.fide.ae.chessfamilybeta.R;
 import com.squareup.picasso.Picasso;
 
@@ -229,7 +229,7 @@ public class  ItemViewHolderFactory
         public void onClick(View v) {
             if(v.equals(base)) {
                 if(member!=null){
-                    Intent intent = new Intent(itemView.getContext(), ProfileVisitorActivity.class);
+                    Intent intent = new Intent(itemView.getContext(), MemberProfileActivity.class);
                     intent.putExtra("member",member) ;
                     itemView.getContext().startActivity(intent);
                 }

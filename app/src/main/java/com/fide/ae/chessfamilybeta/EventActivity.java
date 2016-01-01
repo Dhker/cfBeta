@@ -32,7 +32,7 @@ public class EventActivity extends BaseActivity {
 
 
  */
-        this.event=(Event)this.getIntent().getExtras().get("event");
+          //this.event=(Event)this.getIntent().getExtras().get("event");
 
         super.onCreate(savedInstanceState);
         LayoutInflater inflater = (LayoutInflater) this
@@ -139,8 +139,10 @@ public class EventActivity extends BaseActivity {
 
     @Override
     protected void onStop() {
-
+        if (imageSlider!= null)
         this.imageSlider.onStop();
+
+
         super.onStop();
 
     }
