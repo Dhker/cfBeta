@@ -51,9 +51,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
         else if (viewType ==publication_viewHolder)
             view = inflater.inflate(R.layout.publication_item, parent, false);
        else if (viewType ==message_viewHolder)
-           view = inflater.inflate(R.layout.publication_item, parent, false);
+           view = inflater.inflate(R.layout.message_item, parent, false);
        else if (viewType ==notification_viewHolder)
-           view = inflater.inflate(R.layout.publication_item, parent, false);
+           view = inflater.inflate(R.layout.notfication_item, parent, false);
 
         return itemViewHolderFactory.getViewHolderByType(viewType, view) ;
     }
