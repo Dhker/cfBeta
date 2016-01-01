@@ -2,7 +2,9 @@ package utils;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fide.ae.chessfamilybeta.R;
 
@@ -51,10 +53,19 @@ public class  ItemViewHolderFactory
 
     public class PublicationViewHolder  extends ItemViewHolder<MemberPublication> {
         public TextView multipleContent;
-        public PublicationViewHolder(View itemView) {
+        public Button button ;
+        public PublicationViewHolder(final View itemView) {
             super(itemView);
             multipleContent = (TextView)itemView.findViewById(R.id.row_first_name_tv);
+            button = (Button)itemView.findViewById(R.id.publication_button) ;
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
+
+                    Toast.makeText(itemView.getContext(), "publications button Selected", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         @Override
