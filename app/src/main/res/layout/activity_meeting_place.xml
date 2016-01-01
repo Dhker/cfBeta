@@ -52,14 +52,15 @@
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/start_date">
+                        android:id="@+id/start_date"
+                        android:background="@xml/shaded_border">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="@string/start"
-                            android:id="@+id/start_text"
+                            android:text="name"
+                            android:id="@+id/place_name"
                             android:layout_gravity="center"
                             android:layout_margin="5dp" />
 
@@ -67,51 +68,26 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:text="@string/date"
-                            android:id="@+id/start_date"
-                            android:layout_gravity="center" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:text="@string/time"
-                            android:id="@+id/start_time"
-                            android:layout_margin="5dp"
-                            android:layout_gravity="center" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/end_date">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="@string/end"
-                            android:id="@+id/end_text"
+                            android:text="type"
+                            android:id="@+id/place_type"
                             android:layout_gravity="center"
-                            android:layout_margin="5dp" />
+                            android:layout_weight="1" />
 
-                        <TextView
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:text="@string/date"
-                            android:id="@+id/end_date"
-                            android:layout_gravity="center" />
+                            android:id="@+id/favorite_btn"
+                            android:layout_gravity="center"
+                            android:background="@drawable/favorite_btn" />
 
-                        <TextView
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:text="@string/time"
-                            android:id="@+id/end_time"
+                            android:id="@+id/status_place"
+                            android:layout_gravity="center|right"
                             android:layout_margin="5dp"
-                            android:layout_gravity="center" />
+                            android:src="@android:drawable/presence_offline" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -195,31 +171,6 @@
                     android:weightSum="10">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/describe_lay"
-                        android:orientation="vertical"
-                        android:layout_weight="5"
-                        android:layout_margin="5dp"
-                        android:background="@xml/shaded_border">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="@string/description"
-                            android:id="@+id/desc"
-                            android:layout_margin="5dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Pour le moment, personne ne recevra de notification de nouveaux commentaires. Toutes les utilisateurs qui ont accès à ce fichier peuvent ajouter des commentaires."
-                            android:id="@+id/description_text"
-                            android:layout_margin="5dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -232,7 +183,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="@string/attendance"
+                            android:text="@string/opening_time"
                             android:id="@+id/text_atendance_liste"
                             android:autoText="false"
                             android:layout_margin="5dp" />
@@ -240,7 +191,7 @@
                         <ListView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/list_freinds_attendance"
+                            android:id="@+id/opening_time_list"
                             android:layout_margin="5dp" />
                     </LinearLayout>
                 </LinearLayout>

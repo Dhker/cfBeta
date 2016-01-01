@@ -208,6 +208,13 @@
     <string name="adresse">Adresse</string>
     <string name="Attendance" />
     <string name="attendance">Attendance</string>
+    <string name="opening_time">Opening time</string>
+    <string name="no_adresse">No adresse specified</string>
+    <string name="no_email">No email adresse specified</string>
+    <string name="no_phone">No phone number specified</string>
+    <string name="no_website">No website specified</string>
+    <string name="on_desc">No description</string>
+    <string name="no_desc">No description</string>
 
 <string name="openDrawer"></string>
 <string name="closeDrawer"></string>
