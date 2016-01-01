@@ -1,14 +1,26 @@
 package utils;
 
+import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fide.ae.chessfamilybeta.MeetingPlaceActivity;
+import com.fide.ae.chessfamilybeta.MessageActivity;
+import com.fide.ae.chessfamilybeta.ProfileVisitorActivity;
 import com.fide.ae.chessfamilybeta.R;
+import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import model.Event;
+import model.MeetingPlace;
 import model.Member;
 import model.MemberPublication;
 import model.Message;
@@ -25,6 +37,7 @@ public class  ItemViewHolderFactory
     public static final  int message_viewHolder =2 ;
     public static final  int notification_viewHolder =3 ;
     public static final  int member_viewHodler = 4 ;
+    public static final  int meeting_place_viewHolder=5 ;
 
 
 
@@ -53,42 +66,90 @@ public class  ItemViewHolderFactory
           }
       }
 
-    public class PublicationViewHolder  extends ItemViewHolder<MemberPublication> {
+    public class PublicationViewHolder  extends ItemViewHolder<MemberPublication> implements View.OnClickListener {
         public TextView multipleContent;
         public Button button ;
         public PublicationViewHolder(final View itemView) {
             super(itemView);
             multipleContent = (TextView)itemView.findViewById(R.id.row_first_name_tv);
             button = (Button)itemView.findViewById(R.id.publication_button) ;
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-
-                    Toast.makeText(itemView.getContext(), "publications button Selected", Toast.LENGTH_SHORT).show();
-                }
-            });
+            button.setOnClickListener(this);
         }
 
         @Override
         public void introduce(MemberPublication memberPublication) {
             multipleContent.setText("this a new text via introcution");
         }
-    }
 
-    public class MessageViewHolder  extends ItemViewHolder<Message> {
-        public TextView multipleContent;
-
-        public MessageViewHolder(View itemView) {
-            super(itemView);
-            multipleContent = (TextView) itemView.findViewById(R.id.row_first_name_tv);
+        @Override
+        public void onClick(View v) {
 
         }
+    }
+
+    public class MessageViewHolder  extends ItemViewHolder<Message> implements View.OnClickListener {
+        public TextView messageContent ;
+        public CircleImageView senderImage ;
+        public TextView senderName;
+        public LinearLayout base ;
+
+        private Member sender ;
+        private Member reciver ;
+
+        public View itemView  ;
+        public MessageViewHolder(final View itemView) {
+            super(itemView);
+            this.itemView = itemView;
+            messageContent = (TextView) itemView.findViewById(R.id.message_content);
+            senderName = (TextView) itemView.findViewById(R.id.sender_name);
+            senderImage = (CircleImageView) itemView.findViewById(R.id.sender_image);
+            base =(LinearLayout) itemView.findViewById(R.id.base_element);
+            base.setOnClickListener(this) ;
+        }
+
 
         @Override
         public void introduce(Message message) {
 
+            if(message!= null) {
 
+
+                sender = message.getSender();
+                reciver = message.getReceiver();
+
+                if(message.getMessage()!= null)
+                {
+                    messageContent.setText(message.getMessage());
+                }
+                if(sender != null)
+                {
+
+                    Picasso.with(itemView.getContext())
+                            .load(sender.getPhoto())
+                            .into(senderImage);
+                    senderName.setText(sender.getName()+" "+sender.getLast_Name());
+
+                }
+
+
+            }
+
+
+
+
+
+        }
+
+        @Override
+        public void onClick(View v) {
+           if(v.equals(base)) {
+               if((sender!=null)&&(reciver!=null)) {
+                   Intent intent = new Intent(itemView.getContext(), MessageActivity.class);
+                    intent.putExtra("sender",sender) ;
+                    intent.putExtra("reciver",reciver) ;
+                   itemView.getContext().startActivity(intent);
+               }
+           }
         }
     }
 
@@ -109,20 +170,79 @@ public class  ItemViewHolderFactory
 
     }
 
-    public class MemberViewHolder extends ItemViewHolder<Member>{
+    public class MemberViewHolder extends ItemViewHolder<Member> implements View.OnClickListener {
+
+        public CircleImageView memberImage ;
+        public TextView memberName;
+        private LinearLayout  base;
+        private  Member member ;
+        private View itemView ;
 
         public MemberViewHolder(View itemView) {
             super(itemView);
+           this. itemView = itemView ;
+            memberImage =(CircleImageView) itemView.findViewById(R.id.profile_image);
+            memberName =(TextView) itemView.findViewById(R.id.member_name) ;
+            base =(LinearLayout) itemView.findViewById(R.id.base_element) ;
+            base.setOnClickListener(this);
         }
 
         @Override
         public void introduce(Member member) {
 
+            this.member = member ;
+            if(member!=null)
+            {
+                Picasso.with(itemView.getContext())
+                        .load(member.getPhoto())
+                        .into(memberImage);
+                String name = member.getName()+" "+member.getLast_Name();
+                memberName.setText(name);
+            }
+        }
+
+        @Override
+        public void onClick(View v) {
+            if(v.equals(base)) {
+                if(member!=null){
+                    Intent intent = new Intent(itemView.getContext(), ProfileVisitorActivity.class);
+                    intent.putExtra("member",member) ;
+                    itemView.getContext().startActivity(intent);
+                }
+            }
+        }
+    }
+
+    public class MeetingPlaceViewHolder extends ItemViewHolder<MeetingPlace> implements View.OnClickListener{
+
+        LinearLayout base ;
+        public MeetingPlaceViewHolder(View itemView) {
+            super(itemView);
+            base =(LinearLayout) itemView.findViewById(R.id.meeting_base) ;
+            base.setOnClickListener(this);
+        }
+
+        @Override
+        public void introduce(MeetingPlace MeetingPlace) {
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            if(v.equals(base))
+            {
+                Intent intent = new Intent(itemView.getContext(), MeetingPlaceActivity.class);
+                itemView.getContext().startActivity(intent);
+            }
+
         }
     }
 
 
-        public  ItemViewHolder  getViewHolderByType(int type , View itemView)
+
+
+
+    public  ItemViewHolder  getViewHolderByType(int type , View itemView)
     {
             if(type==event_viewHolder)
                 return  new EventViewHolder(itemView) ;
@@ -134,6 +254,8 @@ public class  ItemViewHolderFactory
                 return  new NotificationViewHolder(itemView) ;
             if(type==member_viewHodler)
                 return new MemberViewHolder(itemView) ;
+            if(type==meeting_place_viewHolder)
+            return new MeetingPlaceViewHolder(itemView) ;
         return null ;
 
     }

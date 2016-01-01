@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Event;
+import model.Member;
 import model.MemberPublication;
 import model.Message;
 import utils.ItemAdapter;
@@ -77,6 +78,8 @@ public class MessageFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
@@ -145,7 +148,18 @@ public class MessageFragment extends Fragment {
     {
         for(int i= 0 ; i<10 ; i++)
         {
-            messages.add(new Message()) ;
+           Message message = new Message() ;
+            Member sender = new Member() ;
+            Member reciver = new Member() ;
+
+            sender.setName("senderName" + i);
+            sender.setLast_Name("senderlast_Name" + i);
+            reciver.setName("reciverName"+i);
+            reciver.setLast_Name("reciverlast_Name"+i);
+            message.setSender(sender);
+            message.setReceiver(reciver);
+            message.setMessage("this is my  message nb :"+i);
+            messages.add(message) ;
 
            //  messages.add(new Event());
 

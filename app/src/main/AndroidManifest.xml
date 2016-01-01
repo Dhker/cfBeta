@@ -54,7 +54,7 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-<!--                   IMPORTANT: Change "com.parse.starter" to match your app's package name. -->
+                <!-- IMPORTANT: Change "com.parse.starter" to match your app's package name. -->
                 <category android:name="com.fide.ae.chessfamilybeta" />
             </intent-filter>
         </receiver>
@@ -81,8 +81,6 @@
             android:name=".LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
-
-
         </activity>
         <activity android:name=".ProfileActivity" >
         </activity>
@@ -109,22 +107,29 @@
             android:launchMode="singleInstance"
             android:parentActivityName=".DashboardActivity"
             android:theme="@style/AppTheme.NoActionBar" >
-
-
         </activity>
         <activity android:name=".EditProfileActivity" >
-
-
         </activity>
         <activity
             android:name=".EventActivity"
             android:label="@string/title_activity_event"
             android:parentActivityName=".DashboardActivity"
             android:theme="@style/AppTheme" >
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.fide.ae.chessfamilybeta.DashboardActivity" />
+        </activity>
+        <activity
+            android:name=".MessageActivity"
+            android:label="@string/title_activity_message"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".MeetingPlaceActivity"
+            android:label="@string/title_activity_message"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity android:name=".ProfileVisitorActivity" >
         </activity>
     </application>
 

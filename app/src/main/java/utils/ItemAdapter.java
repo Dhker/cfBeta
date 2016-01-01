@@ -11,6 +11,7 @@ import com.fide.ae.chessfamilybeta.R;
 import java.util.List;
 
 import model.Event;
+import model.MeetingPlace;
 import model.Member;
 import model.MemberPublication;
 import model.Message;
@@ -55,8 +56,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
            view = inflater.inflate(R.layout.message_item, parent, false);
        else if (viewType ==notification_viewHolder)
            view = inflater.inflate(R.layout.notfication_item, parent, false);
-        else if(viewType==member_viewHodler)
+       else if(viewType==member_viewHodler)
            view=inflater.inflate(R.layout.member_item, parent, false) ;
+       else if(viewType==meeting_place_viewHolder)
+           view=inflater.inflate(R.layout.meeting_place_item, parent, false) ;
 
         return itemViewHolderFactory.getViewHolderByType(viewType, view) ;
     }
@@ -103,7 +106,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
             Member member = (Member) item ;
             memberViewHodler.introduce(member);
         }
-
+        if(holder instanceof  MeetingPlaceViewHolder)
+        {
+            MeetingPlaceViewHolder meetingPlaceViewHolder = (MeetingPlaceViewHolder) holder ;
+            MeetingPlace meetingPlace = (MeetingPlace) item ;
+            meetingPlaceViewHolder.introduce(meetingPlace);
+        }
 
 
     }
@@ -130,6 +138,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
             {return notification_viewHolder;}
             if(item instanceof Member)
             {return member_viewHodler;}
+            if(item instanceof MeetingPlace)
+            {return meeting_place_viewHolder;}
 
 
         }

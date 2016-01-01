@@ -21,6 +21,7 @@ import java.util.List;
 
 import co.dift.ui.SwipeToAction;
 import model.Event;
+import model.MeetingPlace;
 import model.Member;
 import model.MemberPublication;
 import repository.MemberPublicationRepository;
@@ -240,6 +241,7 @@ return RootView ;
              publications.add(new Event());
 
          }
+        publications.add(new MeetingPlace());
     }
 
 }

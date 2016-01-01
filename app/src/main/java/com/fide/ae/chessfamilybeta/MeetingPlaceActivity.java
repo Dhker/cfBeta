@@ -43,10 +43,9 @@ public class MeetingPlaceActivity extends AppCompatActivity {
 
         //INIT MEETING PLACE MODEL
 
-        this.meetingPlace = (MeetingPlace)this.getIntent().getExtras().get("meeting_place") ;
+/*        this.meetingPlace = (MeetingPlace)this.getIntent().getExtras().get("meeting_place") ;
 
-        this.currentmember=(Member)this.getIntent().getExtras().get("member") ;
-
+        this.currentmember=(Member)this.getIntent().getExtras().get("member") ; */
 
 
 
