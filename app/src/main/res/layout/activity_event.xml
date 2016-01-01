@@ -7,10 +7,6 @@
     tools:context="com.fide.ae.chessfamilybeta.EventActivity"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/tool_bar"
-        />
 
     <LinearLayout
         android:orientation="vertical"
@@ -47,7 +43,9 @@
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/start_date">
+                        android:id="@+id/start_date"
+                        android:background="@xml/shaded_border"
+                        android:layout_margin="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -69,22 +67,6 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:text="@string/time"
-                            android:id="@+id/start_time"
-                            android:layout_margin="5dp"
-                            android:layout_gravity="center" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/end_date">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:text="@string/end"
                             android:id="@+id/end_text"
@@ -99,14 +81,31 @@
                             android:id="@+id/end_date"
                             android:layout_gravity="center" />
 
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/organizer"
+                        android:background="@xml/shaded_border"
+                        android:layout_margin="5dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:text="@string/time"
-                            android:id="@+id/end_time"
-                            android:layout_margin="5dp"
-                            android:layout_gravity="center" />
+                            android:text="event name"
+                            android:id="@+id/event_name"
+                            android:layout_margin="5dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="@string/orgaized_by"
+                            android:id="@+id/organized_by"
+                            android:layout_margin="5dp" />
                     </LinearLayout>
 
                     <LinearLayout

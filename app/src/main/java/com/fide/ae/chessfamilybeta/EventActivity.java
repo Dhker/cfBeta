@@ -9,16 +9,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 
+import java.util.Iterator;
+
+import model.Event;
 import utils.ImageSlider;
 
 public class EventActivity extends BaseActivity {
 
     private SliderLayout slider;
     private ImageSlider imageSlider ;
+    private TextView startDate,endDate ,organizedby,eventname,website,phone,email,description,adresse;
 
+    private Event event ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
        /* super.onCreate(savedInstanceState);
@@ -26,6 +32,7 @@ public class EventActivity extends BaseActivity {
 
 
  */
+        this.event=(Event)this.getIntent().getExtras().get("event");
 
         super.onCreate(savedInstanceState);
         LayoutInflater inflater = (LayoutInflater) this
@@ -39,13 +46,88 @@ public class EventActivity extends BaseActivity {
         setSupportActionBar(toolbar);
 
 
-        this.slider = (SliderLayout)findViewById(R.id.slider);
 
 
-         imageSlider = new ImageSlider(this,slider);
-        this.imageSlider.addImage("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
-        this.imageSlider.addImage("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
-        this.imageSlider.setupSlider();
+    }
+
+    private void initViews()
+    {
+        //ADRESSE
+        this.adresse=(TextView)findViewById(R.id.adresse);
+        if(this.event.getPlace().getAdress()!=null)
+            this.adresse.setText(event.getPlace().getAdress());
+        else
+            this.adresse.setText(getResources().getString(R.string.no_adresse));
+
+        //description
+
+        this.description=(TextView)findViewById(R.id.description_text);
+
+        if(event.getDescription()!=null)
+        {
+            this.description.setText(event.getDescription());
+        }
+
+
+        //CONTACT
+
+        this.email=(TextView)findViewById(R.id.email_contact);
+        if(this.event.getPlace().getEmail()!=null)
+
+            this.email.setText(event.getPlace().getEmail());
+        else
+            this.email.setText(getResources().getString(R.string.no_email));
+
+        //Website
+
+        this.website=(TextView)findViewById(R.id.website_contact);
+        if(this.event.getWebsite()!=null)
+            this.website.setText(event.getWebsite());
+        else
+            this.website.setText(getResources().getString(R.string.no_website));
+
+//PHONE
+        this.phone=(TextView)findViewById(R.id.phone_contact);
+
+        if(this.event.getPhone()!=null)
+            this.phone.setText(event.getPhone());
+        else
+            this.phone.setText(getResources().getString(R.string.no_phone));
+//organizer NAME
+        this.organizedby=(TextView)findViewById(R.id.organized_by);
+        if(this.event.getOrganizer()!=null)
+        this.organizedby.append(event.getOrganizer());
+        //event name
+        this.eventname=(TextView)findViewById(R.id.event_name);
+        if (this.event.getName()!=null)
+
+        this.eventname.setText(event.getName());
+
+        //SETUP IMAGES
+        imageSlider = new ImageSlider(this,slider);
+        Iterator<String> iterator = this.event.getPlace().getPhotos().iterator();
+
+        while(iterator.hasNext())
+            this.imageSlider.addImage(this.event.getPlace().getName(),iterator.next());
+
+
+        //SETUP OPENING TIMES
+
+
+/*
+        try {
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                    R.layout.item_member, this.meetingPlace.getOpeningtime());
+            this.opening_time.setAdapter(adapter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+*/
+
+
+
 
     }
 

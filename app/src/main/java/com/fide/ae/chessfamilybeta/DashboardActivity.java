@@ -28,12 +28,17 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 
+import com.parse.ParseUser;
+
 import model.Member;
 import utils.ChessFamilyUtils;
+import utils.ParsePushNotif;
 import utils.SectionPagerAdapter;
 
 
 public class DashboardActivity extends BaseActivity {
+
+
 
     private   FrameLayout layout ;
     private ImageButton home_btn,notif_btn,message_btn,favorite_btn ;
@@ -59,6 +64,10 @@ public class DashboardActivity extends BaseActivity {
       /*  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_dashboard);
  */
+
+        ParsePushNotif.initParse(this);
+
+        ParsePushNotif.sendNotificationToChannel("Everyone","Happy 2016");
 
         //SETUP VIEWS
 

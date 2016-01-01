@@ -30,6 +30,8 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 import model.ChessProfile;
 import model.Member;
+import model.Title;
+import model.TrainerFor;
 import repository.MemberRepository;
 import repository.MemberRepositoryImpl;
 import utils.AsyncTaskResult;
@@ -204,13 +206,23 @@ public class EditProfileActivity extends BaseActivity implements  OnClickListene
 
         else if (v.equals(this.editBtn))
         {
+            Member member = new Member();
             ChessProfile chessProfile = new ChessProfile();
             chessProfile.setIsArbiter(this.isArbiterValue);
-            this.member.setBirthday(birthdayValue);
-            this.member.setPassword(this.passwordValue);
-            this.member.setName(this.firstNameValue);
-            this.member.setLast_Name(this.lastNameValue);
-            this.member.setProfile(chessProfile);
+            chessProfile.setIsOrganizer(this.isOrganizerValue);
+            chessProfile.setIsTitled(this.isTitleValue);
+            if(this.titles.getSelectedItem()!=null)
+                chessProfile.setTitle(Title.valueOf(this.titles.getSelectedItem().toString()));
+            chessProfile.setIsTrainer(this.isTrainerValue);
+            if(this.trainer_for.getSelectedItem()!=null)
+                chessProfile.setTrainerLevel(TrainerFor.valueOf(this.trainer_for.getSelectedItem().toString()));
+
+            member.setBirthday(birthdayValue);
+            member.setPassword(this.passwordValue);
+            member.setName(this.firstNameValue);
+            member.setLast_Name(this.lastNameValue);
+            member.setProfile(chessProfile);
+            updateUserInformation(member);
 
         }
     }

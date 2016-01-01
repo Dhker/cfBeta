@@ -82,4 +82,10 @@ public class MeetingPlaceRepositoryImpl implements MeetingPlaceRepository {
 		return jsonToMeetingPlace(json);
 	}
 
+	@Override
+	public ArrayList<MeetingPlace> getFavoriteMeetingPlace(String memberID) throws Exception {
+		return null;
+
+	}
+
 }

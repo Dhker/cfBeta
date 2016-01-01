@@ -5,9 +5,14 @@ import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.media.Image;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -93,6 +98,18 @@ public class ChessFamilyUtils {
                 return true;
             }
         });
+    }
+
+    public static void attchFragment(AppCompatActivity activity,Fragment fragment,int container)
+    {
+        FragmentManager fragMan = activity.getSupportFragmentManager();
+        FragmentTransaction fragTransaction = fragMan.beginTransaction();
+        int i=0;
+        i++ ;
+        fragTransaction.add(container, fragment , "fragment" + i).commit();
+
+
+
     }
 
     public static Member getFacebookData(JSONObject object) {

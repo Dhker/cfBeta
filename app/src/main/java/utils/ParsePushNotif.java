@@ -8,6 +8,8 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
+import com.parse.ParseSession;
+import com.parse.PushService;
 
 import java.util.LinkedList;
 
@@ -19,16 +21,23 @@ public class ParsePushNotif {
    public static final String applicationID ="0Ej5SNPfwkMoz57PlZatSp4nbk8DuBwXUqjYbe0V" ;
     public static final String clientKey ="FUEv83u49TkaZMpNxGgd1cFLMQEnh3u9DaUZRJen";
 
-    public static void initParse(Context context,int idMember)
+    public static void initParse(Context context)
     {
         Parse.enableLocalDatastore(context);
 
         Parse.initialize(context, applicationID, clientKey);
+
+
+    }
+    public static void MemberLogin(int idmember)
+    {
         ParseInstallation parseInstallation =  ParseInstallation.getCurrentInstallation() ;
-        parseInstallation.put("member_id",idMember);
+        parseInstallation.put("member_id", idmember);
         parseInstallation.saveInBackground() ;
-       // ParsePush.subscribeInBackground("Players") ;
-        //sendNotificationToChannel("Players","hello");
+    }
+    public static void MemberLogout()
+    {
+        ParseInstallation.getCurrentInstallation().deleteInBackground();
     }
 
     //SUBSCRIBE IN A CHANNEL

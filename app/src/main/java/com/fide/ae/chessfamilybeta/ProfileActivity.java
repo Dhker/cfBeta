@@ -1,26 +1,23 @@
 package com.fide.ae.chessfamilybeta;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.media.Image;
+
 import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import model.MeetingPlace;
+import de.hdodenhof.circleimageview.CircleImageView;
 import model.Member;
 
 import repository.MemberRepositoryImpl;
@@ -42,7 +39,7 @@ public class ProfileActivity extends BaseActivity {
 
 
     // UI Components
-    private ImageView  photo ;
+    private CircleImageView  photo ;
     private TextView userName ;
     private TextView age ;
     private TextView gender  ;
@@ -50,9 +47,9 @@ public class ProfileActivity extends BaseActivity {
 
 
     private MemberFragment memberFragment ;
-    private MeetingPlaceFragment meetingPlaceFragment;
-    private FriendsFragement friendsFragement ;
-    private FeedsFragment  feedsFragment;
+    private FavoriteFragment favoriteFragment;
+    private MessageFragment messageFragment ;
+    private NotificationFragment  notificationFragment;
 
 
 
@@ -63,9 +60,9 @@ public class ProfileActivity extends BaseActivity {
 
 
         memberFragment = new MemberFragment() ;
-        meetingPlaceFragment = new MeetingPlaceFragment() ;
-        friendsFragement = new FriendsFragement() ;
-        feedsFragment = new FeedsFragment() ;
+        favoriteFragment = new FavoriteFragment() ;
+        messageFragment = new MessageFragment() ;
+        notificationFragment = new NotificationFragment() ;
 
         this.active = true  ;
 
@@ -83,7 +80,7 @@ public class ProfileActivity extends BaseActivity {
 
 
         // UI components initialization
-        photo = (ImageView) findViewById(R.id.photo) ;
+        photo = (CircleImageView) findViewById(R.id.profile_image) ;
         userName= (TextView)findViewById(R.id.userName);
         age=(TextView)findViewById(R.id.age);
         gender= (TextView)findViewById(R.id.gender) ;
@@ -135,9 +132,9 @@ public class ProfileActivity extends BaseActivity {
         pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_feeds));
 
         pagerAdapter.addFragement(memberFragment);
-        pagerAdapter.addFragement(meetingPlaceFragment);
-        pagerAdapter.addFragement(friendsFragement);
-        pagerAdapter.addFragement(feedsFragment);
+        pagerAdapter.addFragement(messageFragment);
+        pagerAdapter.addFragement(favoriteFragment);
+        pagerAdapter.addFragement(notificationFragment);
 
 
 
@@ -268,27 +265,5 @@ public class ProfileActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         this.active = true ;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_search: {
-                Intent intent = new Intent(this, SearchActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.menu_refresh:
-
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-
-        return  true ;
     }
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class MeetingPlace  implements Serializable {
 
 	
-	private int id ;//�	ID
+	private int id ;//	ID
 	 private Member added_by ;//	Added by Member ID (Should be registered as member)
 	 private Member admin ; //	ID Administrator (If registered as member) (optional)
 	private String Name  ;// 	Place Name
@@ -24,12 +24,15 @@ public class MeetingPlace  implements Serializable {
 	private String website ;//	Website
 	private String phone ;//	Phone number
 	private ArrayList<String> photos ; //	Photos (Photo Gallery)
-	
-	
-	
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+
+
+		return this.getName() ;
+	}
+
 	public MeetingPlace() {
 		super();
 		// TODO Auto-generated constructor stub

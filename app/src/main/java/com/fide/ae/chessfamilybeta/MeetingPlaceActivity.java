@@ -1,7 +1,12 @@
 package com.fide.ae.chessfamilybeta;
 
+import android.content.Context;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -27,6 +32,7 @@ public class MeetingPlaceActivity extends AppCompatActivity {
     private ListView opening_time ;
     private ImageView status,favorite_btn ;
 
+    protected DrawerLayout drawerLayout;
 
     private  SliderLayout slider ;
     private  ImageSlider imageSlider ;
@@ -39,7 +45,16 @@ public class MeetingPlaceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meeting_place);
+        super.onCreate(savedInstanceState);
+        LayoutInflater inflater = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.activity_meeting_place, null, false);
+
+        drawerLayout.addView(contentView, 0);
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         //INIT MEETING PLACE MODEL
 

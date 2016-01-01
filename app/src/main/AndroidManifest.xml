@@ -96,11 +96,7 @@
             android:launchMode="singleInstance"
             android:parentActivityName=".DashboardActivity"
             android:theme="@style/AppTheme" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SearchActivity"
@@ -119,17 +115,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.fide.ae.chessfamilybeta.DashboardActivity" />
         </activity>
-        <activity
-            android:name=".MessageActivity"
-            android:label="@string/title_activity_message"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
-            android:name=".MeetingPlaceActivity"
-            android:label="@string/title_activity_message"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity android:name=".ProfileVisitorActivity" >
+        <activity android:name=".MemberProfileActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

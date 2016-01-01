@@ -29,6 +29,8 @@
     <string name="prompt_gender">Gender</string>
     <string name="prompt_register">Register</string>
 
+    <string name="send_msg" >Send a message</string>
+
 
     <string name="age">Ages</string>
     <string name="gender">Gender</string>
@@ -218,5 +220,8 @@
 
 <string name="openDrawer"></string>
 <string name="closeDrawer"></string>
-    <string name="title_activity_message">MessageActivity</string>
+    <string name="orgaized_by">Organized by :</string>
+    <string name="email_text">Email</string>
+    <string name="title">Title</string>
+    <string name="birthday">Birthday</string>
 </resources>

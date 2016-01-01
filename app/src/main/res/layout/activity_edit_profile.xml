@@ -283,7 +283,7 @@
         android:layout_height="wrap_content"
         android:name="com.fide.ae.chessfamilybeta.Bottom_Menu_Fragment"
         android:id="@+id/bottom_menu_edit"
-        tools:layout="@layout/fragment_bottom__menu"
+        tools:layout="@layout/fragment_bottom_menu"
         android:layout_gravity="center|bottom"
         class="com.fide.ae.chessfamilybeta.Bottom_Menu_Fragment" />
 </LinearLayout>

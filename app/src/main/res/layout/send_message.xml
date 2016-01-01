@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:background="#e1dddd">
+    android:background="#e1dddd"
+    android:id="@+id/send_msg_layout">
 
     <LinearLayout
         android:orientation="vertical"
@@ -12,11 +13,11 @@
         android:background="@xml/shaded_border"
         android:weightSum="10">
 
-        <TextView
+        <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/send_message"
+            android:hint="@string/send_message"
             android:id="@+id/message_text"
             android:layout_gravity="center_horizontal"
             android:autoText="false"
@@ -27,13 +28,13 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
+            android:id="@+id/send_btn"
             android:layout_gravity="center_vertical|right"
             android:layout_marginRight="10dp"
-            android:src="@drawable/ic_publish"
-            android:background="@android:color/transparent"
+            android:background="@drawable/image_background"
             android:layout_marginBottom="10dp"
-            android:clickable="true" />
+            android:clickable="true"
+            android:src="@drawable/ic_send" />
     </LinearLayout>
 
 </LinearLayout>

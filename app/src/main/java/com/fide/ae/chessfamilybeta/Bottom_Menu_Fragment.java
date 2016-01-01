@@ -2,7 +2,6 @@ package com.fide.ae.chessfamilybeta;
 
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,8 +11,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import com.readystatesoftware.viewbadger.BadgeView;
-
-import utils.ChessFamilyUtils;
 
 
 public class Bottom_Menu_Fragment extends Fragment implements View.OnClickListener {
@@ -44,7 +41,7 @@ private ImageButton home_btn,favorite_btn,message_btn,notification_btn,menu_btn 
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        rootV = inflater.inflate(R.layout.fragment_bottom__menu, container, false);
+        rootV = inflater.inflate(R.layout.fragment_bottom_menu, container, false);
         frameLayout = (FrameLayout)  rootV.findViewById(R.id.notification_button_lay) ;
         this.message_btn =(ImageButton) rootV.findViewById(R.id.message_btn);
         this.notification_btn =(ImageButton) rootV.findViewById(R.id.notification_btn);
