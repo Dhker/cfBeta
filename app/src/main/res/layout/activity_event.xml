@@ -7,15 +7,10 @@
     tools:context="com.fide.ae.chessfamilybeta.EventActivity"
     android:orientation="vertical">
 
-
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.fide.ae.chessfamilybeta.Top_menu_fragment"
-        android:id="@+id/top_bar"
-        android:layout_gravity="center_horizontal"
-        tools:layout="@layout/fragment_top_menu"
-        class="com.fide.ae.chessfamilybeta.Top_menu_fragment" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/tool_bar"
+        />
 
     <LinearLayout
         android:orientation="vertical"

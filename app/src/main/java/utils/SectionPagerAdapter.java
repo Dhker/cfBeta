@@ -60,14 +60,14 @@ public class SectionPagerAdapter extends FragmentPagerAdapter implements TabLayo
 
 
 
-    public SectionPagerAdapter(FragmentManager fm ) {
+    public SectionPagerAdapter(FragmentManager fm , ViewPager viewPager) {
         super(fm);
         this.fm=fm;
         titles = new ArrayList<String>();
         fragments = new ArrayList<Fragment>();
         selectedResources=new ArrayList<Drawable>();
         unselectedResources =new ArrayList<Drawable>();
-
+        this.viewPager = viewPager ;
 
       /*  fm.beginTransaction().add(new FragmentSearchMember(),"Member").commit();
         fm.beginTransaction().add(new FragmentSearchLocation(),"Location").commit();
@@ -140,6 +140,8 @@ public class SectionPagerAdapter extends FragmentPagerAdapter implements TabLayo
 
         if(selectedResources!=null )
         tab.setIcon(selectedResources.get(tab.getPosition())) ;
+
+        viewPager.setCurrentItem(tab.getPosition());
 
     }
 

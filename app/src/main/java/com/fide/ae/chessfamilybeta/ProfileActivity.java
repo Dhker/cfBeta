@@ -113,7 +113,7 @@ public class ProfileActivity extends BaseActivity {
 
 
 
-        SectionPagerAdapter pagerAdapter = new SectionPagerAdapter(getSupportFragmentManager())  ;
+        SectionPagerAdapter pagerAdapter = new SectionPagerAdapter(getSupportFragmentManager(), viewPager)  ;
 
        /* pagerAdapter.addTitle("Member");
         pagerAdapter.addTitle("Event");

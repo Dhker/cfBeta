@@ -5,11 +5,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fide.ae.chessfamilybeta.EventActivity;
 import com.fide.ae.chessfamilybeta.MeetingPlaceActivity;
 import com.fide.ae.chessfamilybeta.MessageActivity;
 import com.fide.ae.chessfamilybeta.ProfileVisitorActivity;
@@ -42,28 +44,46 @@ public class  ItemViewHolderFactory
 
 
 
-    public abstract class  ItemViewHolder<E> extends RecyclerView.ViewHolder{
+    public abstract class  ItemViewHolder<E> extends RecyclerView.ViewHolder {
 
+
+        protected  View itemView ;
          public ItemViewHolder(View itemView) {
              super(itemView);
+             this.itemView = itemView ;
          }
 
          public abstract  void  introduce(E e) ;
      }
 
-    public class EventViewHolder  extends ItemViewHolder<Event> {
+    public class EventViewHolder  extends ItemViewHolder<Event> implements View.OnClickListener{
+
+        private FrameLayout  base;
+        public TextView multipleContent;
           @Override
           public void introduce(Event event) {
-            multipleContent.setText("this a new text via introcution");
+              multipleContent.setText("this a new text via introcution");
+              base =(FrameLayout) itemView.findViewById(R.id.base_element);
+              base.setOnClickListener(this) ;
           }
 
-          public TextView multipleContent;
+
           public EventViewHolder(View itemView) {
 
               super(itemView) ;
 
               multipleContent = (TextView)itemView.findViewById(R.id.gameText);
           }
+
+        @Override
+        public void onClick(View v) {
+            if(v.equals(base)) {
+                if(true) {
+                    Intent intent = new Intent(itemView.getContext(), EventActivity.class);
+                    itemView.getContext().startActivity(intent);
+                }
+            }
+        }
       }
 
     public class PublicationViewHolder  extends ItemViewHolder<MemberPublication> implements View.OnClickListener {
@@ -96,10 +116,10 @@ public class  ItemViewHolderFactory
         private Member sender ;
         private Member reciver ;
 
-        public View itemView  ;
+
         public MessageViewHolder(final View itemView) {
             super(itemView);
-            this.itemView = itemView;
+
             messageContent = (TextView) itemView.findViewById(R.id.message_content);
             senderName = (TextView) itemView.findViewById(R.id.sender_name);
             senderImage = (CircleImageView) itemView.findViewById(R.id.sender_image);
@@ -153,7 +173,7 @@ public class  ItemViewHolderFactory
         }
     }
 
-    public class NotificationViewHolder  extends ItemViewHolder<Notification> {
+    public class NotificationViewHolder  extends ItemViewHolder<Notification> implements View.OnClickListener {
         public TextView multipleContent;
 
         public NotificationViewHolder(View itemView) {
@@ -168,6 +188,10 @@ public class  ItemViewHolderFactory
         }
 
 
+        @Override
+        public void onClick(View v) {
+
+        }
     }
 
     public class MemberViewHolder extends ItemViewHolder<Member> implements View.OnClickListener {
