@@ -7,15 +7,15 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import com.chessFamilly.model.City;
-import com.chessFamilly.model.Country;
-import com.chessFamilly.utils.JSONParser;
+import model.City;
+import model.Country;
+import utils.JSONParser;
 
 public class CityRepositoryImpl implements CityRepository {
 	private final String URL  =   "http://api.chessfamily.net/api/query"; 
 	private final String AUTH  = "chessfemily" ;
 	@Override
-	public City GetCityByID(String IDCity) {
+	public City GetCityByID(String IDCity) throws Exception{
 		City result =null;
 		JSONParser jsonParser  = new JSONParser() ;
 		List<NameValuePair> params = new ArrayList<NameValuePair>();

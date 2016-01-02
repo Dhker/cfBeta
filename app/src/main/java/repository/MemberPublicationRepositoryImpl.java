@@ -72,13 +72,12 @@ public class MemberPublicationRepositoryImpl  implements MemberPublicationReposi
 		return Result;
 	}
 	@Override
-	public ArrayList<MemberPublication> GetFeeds(String IDMember, int perpage, int page) throws Exception{
+	public ArrayList<MemberPublication> GetFeeds( int perpage, int page) throws Exception{
 		ArrayList<MemberPublication> result = new ArrayList<MemberPublication>() ;
 		JSONParser jsonParser  = new JSONParser() ;
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 	    params.add(new BasicNameValuePair("authentication", AUTH));
 	    params.add(new BasicNameValuePair("action", "publications"));
-	    params.add(new BasicNameValuePair("member_id", IDMember));
 	    params.add(new BasicNameValuePair("perpage", ""+perpage));
 	    params.add(new BasicNameValuePair("force_object", "0"));
 	    params.add(new BasicNameValuePair("page", ""+page));

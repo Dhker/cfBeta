@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment implements SwipeToAction.SwipeListene
         recyclerView.setHasFixedSize(true);
 
         //loadPublications(page);
-        /*recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
+        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int current_page) {
                 // do something..
@@ -104,7 +104,7 @@ public class HomeFragment extends Fragment implements SwipeToAction.SwipeListene
                     //  adapter.notifyDataSetChanged();
                 }
             }
-        });*/
+        });
         adapter = new ItemAdapter(getContext() ,publications) ;
         recyclerView.setAdapter(adapter);
 
@@ -175,7 +175,7 @@ return RootView ;
                         Log.d("page", ""+page) ;
 
 
-                        ArrayList publications = publicationRepository.GetFeeds("4", itemsPerPage, page);
+                        ArrayList publications = publicationRepository.GetFeeds( itemsPerPage, page);
 
                         result = new AsyncTaskResult<ArrayList<MemberPublication>>(publications);
 

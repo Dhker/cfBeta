@@ -1,8 +1,8 @@
 package repository;
 
-import com.chessFamilly.model.City;
+import model.City;
 
 public interface CityRepository {
 
-	City GetCityByID(String IDCity);
+	City GetCityByID(String IDCity) throws Exception;
 }
