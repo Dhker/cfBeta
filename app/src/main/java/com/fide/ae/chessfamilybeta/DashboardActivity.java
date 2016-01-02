@@ -65,10 +65,10 @@ public class DashboardActivity extends BaseActivity {
         setContentView(R.layout.activity_dashboard);
  */
 
-        ParsePushNotif.initParse(this);
+    /*    ParsePushNotif.initParse(this);
 
         ParsePushNotif.sendNotificationToChannel("Everyone","Happy 2016");
-
+*/
         //SETUP VIEWS
 
 

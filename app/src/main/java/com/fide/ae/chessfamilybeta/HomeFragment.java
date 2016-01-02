@@ -231,17 +231,12 @@ return RootView ;
     public void populate()
     {
          for(int i= 0 ; i<10 ; i++)
-         {  if(i%2== 0)
+         {
              publications.add(new MemberPublication()) ;
-            else
 
-             if(i%3==0)
-                 publications.add(new Member()) ;
-             else
-             publications.add(new Event());
 
          }
-        publications.add(new MeetingPlace());
+        // publications.add(new MeetingPlace());
     }
 
 }

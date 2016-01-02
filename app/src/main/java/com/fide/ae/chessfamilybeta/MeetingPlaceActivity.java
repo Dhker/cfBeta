@@ -27,7 +27,7 @@ import utils.ImageSlider;
 
 
 
-public class MeetingPlaceActivity extends AppCompatActivity {
+public class MeetingPlaceActivity extends BaseActivity {
     private TextView placeName, placetype,website,email,phone,adresse;
     private ListView opening_time ;
     private ImageView status,favorite_btn ;
@@ -45,20 +45,20 @@ public class MeetingPlaceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.onCreate(savedInstanceState);
+
+
         LayoutInflater inflater = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_meeting_place, null, false);
 
-        drawerLayout.addView(contentView, 0);
+        super.drawerLayout.addView(contentView, 0);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //INIT MEETING PLACE MODEL
-
-/*        this.meetingPlace = (MeetingPlace)this.getIntent().getExtras().get("meeting_place") ;
+        /*        this.meetingPlace = (MeetingPlace)this.getIntent().getExtras().get("meeting_place") ;
 
         this.currentmember=(Member)this.getIntent().getExtras().get("member") ; */
 
