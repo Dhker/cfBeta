@@ -61,16 +61,15 @@ public class DashboardActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      /*  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        setContentView(R.layout.activity_dashboard);
- */
 
-        ParsePushNotif.initParse(this);
+        super.userName.setText("ya rabbi");
+        super.header.invalidate();
 
-        ParsePushNotif.sendNotificationToChannel("Everyone","Happy 2016");
 
-        //SETUP VIEWS
+        this.member=(Member)this.getIntent().getExtras().get("member") ;
+        Log.d("email",member.getEmail());
 
+        super.updateUI(member);
 
         Bundle bundle= this.getIntent().getExtras();
         if(bundle!=null) {

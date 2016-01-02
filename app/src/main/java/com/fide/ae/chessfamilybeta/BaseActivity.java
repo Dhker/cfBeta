@@ -1,5 +1,6 @@
 package com.fide.ae.chessfamilybeta;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,11 +33,12 @@ public class BaseActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private NavigationView navigationView;
     protected DrawerLayout drawerLayout;
+    protected         View header ;
 
     private MemberRepository memberRepository = new MemberRepositoryImpl();
     private CircleImageView photo ;
     private TextView email ;
-    private TextView userName;
+    protected TextView userName;
 
 
 
@@ -62,10 +65,18 @@ public class BaseActivity extends AppCompatActivity {
 
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
-       Log.d("created" ,"yes") ;
-        photo =(CircleImageView) findViewById(R.id.profile_image) ;
-        email = (TextView) findViewById(R.id.drawerEmail) ;
-        userName =(TextView) findViewById(R.id.drawUsername) ;
+       Log.d("created", "yes") ;
+
+
+        LayoutInflater inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        header = inflater.inflate(R.layout.navigationheader, null);
+
+        photo =(CircleImageView) header.findViewById(R.id.profile_image) ;
+        email = (TextView) header.findViewById(R.id.drawerEmail) ;
+        userName =(TextView) header.findViewById(R.id.drawUsername) ;
+
+
+
 
 
 
@@ -98,7 +109,7 @@ public class BaseActivity extends AppCompatActivity {
 
                    case R.id.starred: {
 
-                       if(!ProfileActivity.active) {
+                       if (!ProfileActivity.active) {
                            Toast.makeText(getApplicationContext(), "Profile Selected", Toast.LENGTH_SHORT).show();
                            Intent intent = new Intent(BaseActivity.this, ProfileActivity.class);
                            startActivity(intent);
@@ -107,14 +118,13 @@ public class BaseActivity extends AppCompatActivity {
                        return true;
 
                    }
-                   case R.id.sent_mail:
-                   {
-                           if (!DashboardActivity.active) {
-                               Toast.makeText(getApplicationContext(), "dashboard Selected", Toast.LENGTH_SHORT).show();
-                               Intent intent = new Intent(BaseActivity.this, DashboardActivity.class);
-                               startActivity(intent);
+                   case R.id.sent_mail: {
+                       if (!DashboardActivity.active) {
+                           Toast.makeText(getApplicationContext(), "dashboard Selected", Toast.LENGTH_SHORT).show();
+                           Intent intent = new Intent(BaseActivity.this, DashboardActivity.class);
+                           startActivity(intent);
 
-                           }
+                       }
                        return true;
                    }
                    case R.id.drafts:
@@ -197,10 +207,9 @@ public class BaseActivity extends AppCompatActivity {
 
     public void updateUI(Member member)
     {
+        this.userName.setText("Hello");
         if(member!= null)
         {
-
-
 
 
             String userNameText = member.getName()+" "+ member.getLast_Name() ;
@@ -216,6 +225,8 @@ public class BaseActivity extends AppCompatActivity {
 
 
         }
+
+        this.header.invalidate();
     }
 
     // update user information

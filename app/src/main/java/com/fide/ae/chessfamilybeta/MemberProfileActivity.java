@@ -93,6 +93,9 @@ public class MemberProfileActivity extends AppCompatActivity implements View.OnC
         else if(v.equals(this.follow))
         {
 
+
+
+
         }
         else if (v.equals(this.feeds))
         {
