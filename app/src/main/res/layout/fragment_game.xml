@@ -8,17 +8,17 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:weightSum="100"
         android:layout_gravity="center">
 
-        <RelativeLayout
+        <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@color/Linearmenu"
-            android:baselineAligned="true">
+          >
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -37,7 +37,8 @@
                 android:layout_toRightOf="@+id/cup"
                 android:layout_toEndOf="@+id/cup"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp" />
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -49,52 +50,28 @@
                 android:textColor="#ffffff"
                 android:layout_alignBottom="@+id/cup"
                 android:layout_alignLeft="@+id/gameText"
-                android:layout_alignStart="@+id/gameText" />
+                android:layout_alignStart="@+id/gameText"
+                android:layout_gravity="center" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Date"
-                android:id="@+id/event_date"
-                android:layout_alignBaseline="@+id/member_name"
-                android:layout_alignBottom="@+id/member_name"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:textColor="#ffffff"
-                android:layout_marginRight="25dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="1:pm"
-                android:id="@+id/event_time"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:textColor="#ffffff"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="25dp" />
-
-        </RelativeLayout>
+        </LinearLayout>
 
         <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
 
-            android:weightSum="10"
-            android:layout_weight="90">
+            android:weightSum="10">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView"
-                android:src="@drawable/test"
-                android:layout_margin="5dp"
-                android:layout_weight="2" />
-
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/inviter_photo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/com_facebook_profile_picture_blank_portrait"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#ffffff"
+                android:clickable="true"
+                android:layout_gravity="center" />
             <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -102,7 +79,7 @@
             android:layout_gravity="left|top"
                 android:weightSum="1"
             android:id="@+id/accept_layout"
-                android:isScrollContainer="true"
+                android:isScrollContainer="false"
                 android:layout_weight="8">
 
                 <TextView
@@ -111,28 +88,29 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Nouveau flash-back, 1968. Le jeune auteur est en villégiature au Grand Budapest Hotel, qui n’est plus que l’ombre de l’établissement prestigieux qu’il fut. Il est intrigué par un personnage apparemment esseulé, dont il s’enquiert aupcvcxccxcxcxcxcxcrès du"
                 android:id="@+id/event_details"
-                    android:textColor="@color/Black"
-                    android:layout_margin="10dp" />
+                    android:textColor="@color/Black" />
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center">
 
                 <Button
-                    android:layout_width="101dp"
-                    android:layout_height="28dp"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
                     android:text="@string/accept"
                     android:id="@+id/join_btn"
                     android:background="@drawable/oval_border"
                     android:textSize="12sp"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:layout_marginRight="10dp" />
 
                 <Button
-                    android:layout_width="100dp"
-                    android:layout_height="28dp"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
                     android:text="@string/ignore"
                     android:id="@+id/ignore_btn"
                     android:background="@drawable/oval_border"
@@ -152,8 +130,7 @@
             android:background="@color/Linearcadre1"
             android:orientation="horizontal"
             android:weightSum="10"
-            android:gravity="bottom"
-            android:layout_weight="10">
+            android:gravity="bottom">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -162,26 +139,25 @@
                 android:text="8:00 PM"
                 android:id="@+id/Time"
                 android:textStyle="bold"
-                android:drawableLeft="@drawable/time"
-                android:drawablePadding="5dp"
                 android:layout_weight="9"
                 android:layout_gravity="center" />
 
-            <TextView
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Grand Hotel Budapest"
-                android:id="@+id/event_adress"
-                android:drawableLeft="@drawable/location_event"
-                android:drawablePadding="5dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Grand Hotel Budapest"
+                    android:id="@+id/event_adress"
 
 
-
-                android:ellipsize="end"
-
-                android:scrollHorizontally="true"
-                android:scrollIndicators="bottom"
-                android:layout_gravity="center" />
+                    android:scrollHorizontally="true"
+                    android:scrollIndicators="bottom"
+                    android:layout_gravity="center" />
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
