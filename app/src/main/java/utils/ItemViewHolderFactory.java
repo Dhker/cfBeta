@@ -1,15 +1,11 @@
 package utils;
 
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fide.ae.chessfamilybeta.EventActivity;
 import com.fide.ae.chessfamilybeta.MeetingPlaceActivity;
@@ -18,7 +14,6 @@ import com.fide.ae.chessfamilybeta.MessageActivity;
 import com.fide.ae.chessfamilybeta.R;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import model.Event;
@@ -87,18 +82,38 @@ public class  ItemViewHolderFactory
       }
 
     public class PublicationViewHolder  extends ItemViewHolder<MemberPublication> implements View.OnClickListener {
-        public TextView multipleContent;
-        public Button button ;
+        public TextView publicationContent;
+        public TextView memberName ;
+        public TextView publicationDate;
+        public CircleImageView  userImage ;
         public PublicationViewHolder(final View itemView) {
             super(itemView);
-            multipleContent = (TextView)itemView.findViewById(R.id.row_first_name_tv);
-            button = (Button)itemView.findViewById(R.id.publication_button) ;
-            button.setOnClickListener(this);
+            publicationContent = (TextView)itemView.findViewById(R.id.pub_content);
+            memberName =(TextView)itemView.findViewById(R.id.sender_name);
+            publicationDate =(TextView)itemView.findViewById(R.id.pub_date);
+            userImage=(CircleImageView)itemView.findViewById(R.id.sender_image) ;
+
         }
 
         @Override
         public void introduce(MemberPublication memberPublication) {
-            multipleContent.setText("this a new text via introcution");
+           if(memberPublication!=null)
+           {
+             Member member =   memberPublication.getMember();
+                if(member!=null )
+                {
+                    Picasso.with(itemView.getContext())
+                            .load(member.getPhoto())
+                            .into(userImage);
+
+                    String name = member.getName()+" "+member.getLast_Name() ;
+                    memberName.setText(name);
+                }
+               publicationContent.setText(""+memberPublication.getId());
+
+
+
+           }
         }
 
         @Override
@@ -120,7 +135,7 @@ public class  ItemViewHolderFactory
         public MessageViewHolder(final View itemView) {
             super(itemView);
 
-            messageContent = (TextView) itemView.findViewById(R.id.message_content);
+            messageContent = (TextView) itemView.findViewById(R.id.message_object);
             senderName = (TextView) itemView.findViewById(R.id.sender_name);
             senderImage = (CircleImageView) itemView.findViewById(R.id.sender_image);
             base =(LinearLayout) itemView.findViewById(R.id.base_element);

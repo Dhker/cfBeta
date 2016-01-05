@@ -122,14 +122,14 @@ public class ProfileActivity extends BaseActivity {
         pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_profile));
         pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_place));
         pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_friends));
-        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_feeds));
+        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_event));
 
 
         // setting the resource when the tab is not selected
         pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_profile));
         pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_place));
         pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_friends));
-        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_feeds));
+        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_event));
 
         pagerAdapter.addFragement(memberFragment);
         pagerAdapter.addFragement(messageFragment);
@@ -146,7 +146,7 @@ public class ProfileActivity extends BaseActivity {
         tabLayout.getTabAt(0).setIcon(getResources().getDrawable(R.drawable.ic_profile));
         tabLayout.getTabAt(1).setIcon(getResources().getDrawable(R.drawable.ic_place));
         tabLayout.getTabAt(2).setIcon(getResources().getDrawable(R.drawable.ic_friends));
-        tabLayout.getTabAt(3).setIcon(getResources().getDrawable(R.drawable.ic_feeds));
+        tabLayout.getTabAt(3).setIcon(getResources().getDrawable(R.drawable.ic_event));
 
         tabLayout.setTabTextColors(Color.GRAY, getResources().getColor(R.color.Linearmenu));
 

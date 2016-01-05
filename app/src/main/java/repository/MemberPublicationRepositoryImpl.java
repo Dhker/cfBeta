@@ -97,12 +97,12 @@ public class MemberPublicationRepositoryImpl  implements MemberPublicationReposi
 	    	 MBpub.setLink(MSGJson.getString("web_link"));
 	    	 MBpub.setVideo(MSGJson.getString("video_link"));
 	    	 MBpub.setVisibile(MSGJson.getInt("visibility"));
-			   /*
-			   JSONObject  memberJson = MSGJson.getJSONObject
-			 Member member = memberRepository.getMemberById()
+
+			   JSONObject  memberJson = MSGJson.getJSONObject("member");
+			 Member member = memberRepository.getMemberById(memberJson.getString(memberJson.getString("member_id")));
 			   MBpub.setMember(member);
 
-			   */
+
 			   result.add(MBpub);
 			
 		   }
@@ -130,14 +130,15 @@ public class MemberPublicationRepositoryImpl  implements MemberPublicationReposi
 	    JSONArray pub = json.getJSONArray("publications");
 
 	    for (int i=0;i<pub.length();i++){
-		    Member memberObj = new Member();
+
 		    Photo photoObj = new Photo();
 		    JSONObject pubJson = pub.getJSONObject(i);
-		    memberObj.setID(pubJson.getInt("member_id"));
+			Member memberObj = memberRepository.getMemberById(pubJson.getString("member_id")) ;
 		    MemberPub.setMember(memberObj);
 		    MemberPub.setLink(pubJson.getString("web_link"));
 		    MemberPub.setVideo(pubJson.getString("video_link"));
 		    MemberPub.setVisibile(pubJson.getInt("visibility"));
+			MemberPub.setId(pubJson.getInt("id"));
 		    ArrayList<Photo> ListePhotoPub = new ArrayList<Photo>() ;
 		    JSONArray Arrayphotos = pubJson.getJSONArray("photos");
 		    for (int j=0;j<Arrayphotos.length();j++)

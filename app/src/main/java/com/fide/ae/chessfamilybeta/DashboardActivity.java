@@ -47,7 +47,7 @@ public class DashboardActivity extends BaseActivity {
     public ViewPager viewPager;
 
     private HomeFragment homeFragment ;
-    private FavoriteFragment favoriteFragment;
+    private FeedsFragment feedsFragment;
     private MessageFragment messageFragment ;
     private NotificationFragment  notificationFragment;
 
@@ -65,9 +65,9 @@ public class DashboardActivity extends BaseActivity {
         setContentView(R.layout.activity_dashboard);
  */
 
-        ParsePushNotif.initParse(this);
+     /*   ParsePushNotif.initParse(this);
 
-        ParsePushNotif.sendNotificationToChannel("Everyone","Happy 2016");
+        ParsePushNotif.sendNotificationToChannel("Everyone","Happy 2016");*/
 
         //SETUP VIEWS
 
@@ -83,7 +83,7 @@ public class DashboardActivity extends BaseActivity {
 
 
         homeFragment = new HomeFragment() ;
-        favoriteFragment = new FavoriteFragment() ;
+        feedsFragment = new FeedsFragment() ;
         messageFragment = new MessageFragment() ;
         notificationFragment = new NotificationFragment() ;
 
@@ -129,19 +129,19 @@ public class DashboardActivity extends BaseActivity {
 
         pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_home_menu));
         pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_message_menu));
-        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_favorite_menu));
+        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_feeds));
         pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_notification));
 
 
       // setting the resource when the tab is not selected
         pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_home_menu));
         pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_message_menu));
-        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_favorite_menu));
+        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_feeds));
         pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_notification));
 
         pagerAdapter.addFragement(homeFragment);
         pagerAdapter.addFragement(messageFragment);
-        pagerAdapter.addFragement(favoriteFragment);
+        pagerAdapter.addFragement(feedsFragment);
         pagerAdapter.addFragement(notificationFragment);
 
 
@@ -153,11 +153,12 @@ public class DashboardActivity extends BaseActivity {
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(getResources().getDrawable(R.drawable.ic_home_menu));
         tabLayout.getTabAt(1).setIcon(getResources().getDrawable(R.drawable.ic_message_menu));
-        tabLayout.getTabAt(2).setIcon(getResources().getDrawable(R.drawable.ic_favorite_menu));
+        tabLayout.getTabAt(2).setIcon(getResources().getDrawable(R.drawable.ic_feeds));
         tabLayout.getTabAt(3).setIcon(getResources().getDrawable(R.drawable.ic_notification));
 
         tabLayout.setTabTextColors(Color.GRAY, getResources().getColor(R.color.Linearmenu)) ;
         tabLayout.setOnTabSelectedListener(pagerAdapter);
+
 
 
 

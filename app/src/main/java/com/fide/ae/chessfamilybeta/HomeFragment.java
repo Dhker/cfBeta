@@ -34,7 +34,7 @@ import utils.ItemAdapter;
 import utils.PublicationAdapter;
 
 
-public class HomeFragment extends Fragment implements SwipeToAction.SwipeListener<MemberPublication> {
+public class HomeFragment extends Fragment implements Paginate.Callbacks {
 
     RecyclerView recyclerView;
 
@@ -46,18 +46,15 @@ public class HomeFragment extends Fragment implements SwipeToAction.SwipeListene
     private ListView  publicationList  ;
     private ItemAdapter adapter;
     private boolean loading = true;
-    private SwipeToAction swipeToAction;
-
     private Paginate paginate;
 
    //  pagination parameters
-    private int page = 1;
-    private int itemsPerPage = 2;
+    private int nbpage = 1;
+    private int itemsPerPage = 5;
 
 
     protected boolean  finish = false ;
 
-    protected long networkDelay = 5000;
 
     private MemberPublicationRepository  publicationRepository =  new MemberPublicationRepositoryImpl()  ;
 
@@ -83,13 +80,15 @@ public class HomeFragment extends Fragment implements SwipeToAction.SwipeListene
 
         this.RootView = inflater.inflate(R.layout.home_layout, container, false);
 
-        populate();
+      //  populate();
         recyclerView = (RecyclerView)RootView.findViewById(R.id.list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
         //loadPublications(page);
+
+       /* loadPublications(page);
         recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int current_page) {
@@ -100,15 +99,28 @@ public class HomeFragment extends Fragment implements SwipeToAction.SwipeListene
                     Log.d("currentPage", "" + current_page);
 
                     //  populate();
-                    loadPublications(current_page);
-                    //  adapter.notifyDataSetChanged();
-                }
-            }
-        });
+                               loadPublications(current_page);
+                                //  adapter.notifyDataSetChanged();
+                            }
+                        }
+                    });*/
+
         adapter = new ItemAdapter(getContext() ,publications) ;
         recyclerView.setAdapter(adapter);
 
-       // swipeToAction = new SwipeToAction(recyclerView , this) ;
+        loading =false ;
+
+          if (paginate != null) {
+                    paginate.unbind();
+
+
+                }
+
+       paginate = Paginate.with(recyclerView, this)
+                .setLoadingTriggerThreshold(2)
+                .addLoadingListItem(true )
+                .build();
+
 
 
 
@@ -123,7 +135,7 @@ return RootView ;
 
 
 
-    public  void loadPublications(int page )
+    public  void loadPublications(final int page )
     {
 
 
@@ -140,10 +152,9 @@ return RootView ;
                     {
                          ; Log.d("length", "" + publications.size()) ;
                         adapter.add(publications);
-                      //  adapter.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged();
 
-                        finish=false ;
-
+                            nbpage++ ;
                     }
                     else
                     {
@@ -175,7 +186,7 @@ return RootView ;
                         Log.d("page", ""+page) ;
 
 
-                        ArrayList publications = publicationRepository.GetFeeds( itemsPerPage, page);
+                        ArrayList publications = publicationRepository.GetPublicationsByIDMember("4", itemsPerPage, page);
 
                         result = new AsyncTaskResult<ArrayList<MemberPublication>>(publications);
 
@@ -202,42 +213,43 @@ return RootView ;
         return pos;
     }
 
-
-    @Override
-    public boolean swipeLeft(final MemberPublication itemData) {
-        final int pos = removePublication(itemData);
-
-        Log.d("swipeLeft", "" + true) ;
-        return true;
-    }
-
-    @Override
-    public boolean swipeRight(MemberPublication itemData) {
-        //  displaySnackbar(itemData.getTitle() + " loved", null, null);
-        Log.d("swipeRight",""+true) ;
-        return true;
-    }
-
-    @Override
-    public void onClick(MemberPublication itemData) {
-        //  displaySnackbar(itemData.getText() + " clicked", null, null);
-    }
-
-    @Override
-    public void onLongClick(MemberPublication itemData) {
-        //  displaySnackbar(itemData.getText() + " long clicked", null, null);
-    }
-
+/*
     public void populate()
     {
+        page++;
+        Log.d("mypage" ,""+page) ;
          for(int i= 0 ; i<10 ; i++)
          {
              publications.add(new MemberPublication()) ;
 
-
          }
-        // publications.add(new MeetingPlace());
+        if(page==3)
+        {
+            finish=true ;
+            loading =false;
+            paginate.setHasMoreDataToLoad(false);
+        }
+        adapter.notifyDataSetChanged();
+
+    }
+*/
+    @Override
+    public void onLoadMore() {
+
+       // loading = true;
+        loadPublications(nbpage);
     }
 
+    @Override
+    public boolean isLoading() {
+        return loading;
+    }
+
+    @Override
+    public boolean hasLoadedAllItems() {
+        return finish;
+    }
 }
+
+
 

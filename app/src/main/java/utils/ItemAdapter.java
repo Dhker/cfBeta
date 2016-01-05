@@ -34,8 +34,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
      public void add(Object item)
      {
-
+                listItems.add(item) ;
      }
+    public void add(List items)
+    {
+        listItems.addAll(items) ;
+    }
+
+
     public ItemAdapter(Context context, List<Object> listItems){
         this.listItems =  listItems ;
         inflater = LayoutInflater.from(context);
