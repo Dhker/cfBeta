@@ -8,10 +8,6 @@
     android:weightSum="100">
 
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/tool_bar"
-        />
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -143,11 +139,12 @@
                    android:id="@+id/birthday_button"
                    android:layout_marginTop="10dp"
                    android:layout_marginLeft="10dp"
-                   android:textAppearance="?android:attr/textAppearanceLarge"
+                   android:textAppearance="?android:attr/textAppearanceMedium"
                    android:layout_gravity="center"
                    android:layout_marginBottom="10dp"
                    android:background="@drawable/clickable_text"
-                   android:autoText="false" />
+                   android:autoText="false"
+                   android:textColor="@color/Black" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -158,8 +155,43 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_marginBottom="10dp"
+                        android:textSize="10sp" />
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spokenlang">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/spoken_lang"
+                        android:id="@+id/textView2"
+                        android:textColor="@color/Black"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp" />
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lang_list"
+                        tools:listitem="@layout/spoken_languages_item"
+                        android:layout_gravity="center"
+                        android:layout_weight="1" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/add_lang_btn"
+                        android:background="@drawable/image_background"
+                        android:src="@drawable/ic_add"
+                        android:layout_gravity="right" />
                 </LinearLayout>
 
             </LinearLayout>

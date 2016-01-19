@@ -1,17 +1,21 @@
 package utils;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.fide.ae.chessfamilybeta.FragmentSearchEvent;
 import com.fide.ae.chessfamilybeta.FragmentSearchLocation;
 import com.fide.ae.chessfamilybeta.FragmentSearchMember;
 import com.fide.ae.chessfamilybeta.R;
+import com.readystatesoftware.viewbadger.BadgeView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -31,19 +35,9 @@ public class SectionPagerAdapter extends FragmentPagerAdapter implements TabLayo
     private ArrayList<Drawable>  unselectedResources ;
 
     private ArrayList<Drawable>  selectedResources ;
-
-    public void  addUnSelectedResource(Drawable resource)
-    {
-        if(resource!=null)
-            unselectedResources.add(resource) ;
-    }
-
-
-    public void  addSelectedResource(Drawable resource)
-    {
-        if(resource!=null)
-            selectedResources.add(resource) ;
-    }
+    private Context context;
+   private  ArrayList<Integer> tabpos ;
+    private boolean iconsMode=false;
 
 
     public void  addTitle(String title)
@@ -68,6 +62,7 @@ public class SectionPagerAdapter extends FragmentPagerAdapter implements TabLayo
         selectedResources=new ArrayList<Drawable>();
         unselectedResources =new ArrayList<Drawable>();
         this.viewPager = viewPager ;
+        this.tabpos= new ArrayList<Integer>();
 
       /*  fm.beginTransaction().add(new FragmentSearchMember(),"Member").commit();
         fm.beginTransaction().add(new FragmentSearchLocation(),"Location").commit();
@@ -138,17 +133,38 @@ public class SectionPagerAdapter extends FragmentPagerAdapter implements TabLayo
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
 
-        if(selectedResources!=null )
-        tab.setIcon(selectedResources.get(tab.getPosition())) ;
+
+        //   if (selectedResources != null)
+        //     tab.setIcon(selectedResources.get(tab.getPosition()));
+
 
         viewPager.setCurrentItem(tab.getPosition());
+        if ((this.badgedtab == tab.getPosition()) && (this.badge != null)) {
 
+            this.badge.hide();
+
+        }
+        if (iconsMode) {
+
+            if ((this.selectedResources != null)) {
+
+                tab.setIcon(selectedResources.get(tab.getPosition()));
+            }
+
+        }
     }
+
 
     @Override
     public void onTabUnselected(TabLayout.Tab tab) {
-        if(unselectedResources!=null )
-            tab.setIcon(unselectedResources.get(tab.getPosition())) ;
+     //   if(unselectedResources!=null )
+       //     tab.setIcon(unselectedResources.get(tab.getPosition())) ;
+
+        if(this.iconsMode) {
+            if ((this.unselectedResources != null)) {
+                tab.setIcon(unselectedResources.get(tab.getPosition()));
+            }
+        }
 
     }
 
@@ -169,5 +185,28 @@ public class SectionPagerAdapter extends FragmentPagerAdapter implements TabLayo
         }
         super.setPrimaryItem(container, position, object);
     }
+
+private BadgeView badge ;
+    private int badgedtab ;
+
+    public void unBadgeTab(int tab, BadgeView badge)
+    {
+this.badge=badge ;
+        this.badgedtab=tab ;
+    }
+
+
+    public void setIcons(int pos,Drawable selectedIcon,Drawable Unselectedicon)
+    {
+        this.unselectedResources.add(pos,Unselectedicon);
+        this.selectedResources.add(pos,selectedIcon);
+    }
+
+    public void setIconMode()
+    {
+        this.iconsMode = true ;
+    }
+
+
 
 }

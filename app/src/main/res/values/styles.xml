@@ -46,6 +46,9 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+
+
+
     <style name="CustomFbButton">
         <item name="android:background">@drawable/fb_btn</item>
         <item name="android:layout_height">300dp</item>
@@ -60,6 +63,10 @@
     <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
-
+    <style name="SwitchButtonStyle">
+    <item name="android:paddingLeft">10dp</item>
+    <item name="android:paddingRight">10dp</item>
+    <item name="android:paddingTop">4dp</item>
+    <item name="android:paddingBottom">4dp</item></style>
 
 </resources>

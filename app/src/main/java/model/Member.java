@@ -146,8 +146,11 @@ public class Member implements Serializable  {
 	public void setGoogle_ID(String google_ID) {
 		Google_ID = google_ID;
 	}
+
 	public String getPhoto() {
+		if(Photo!=null)
 		return Photo;
+		return getFaceboohPhoto() ;
 	}
 	public void setPhoto(String photo) {
 		Photo = photo;
@@ -176,6 +179,11 @@ public class Member implements Serializable  {
 	}
 	public void setProfile(ChessProfile profile) {
 		this.profile = profile;
+	}
+
+	private String getFaceboohPhoto()
+	{
+		return "https://graph.facebook.com/" + getFacebook_ID()+ "/picture?width=200&height=150";
 	}
 	
 	

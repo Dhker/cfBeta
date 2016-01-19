@@ -317,6 +317,20 @@ public class MemberRepositoryImpl implements MemberRepository {
 
 	}
 
+	@Override
+	public boolean setAvailibility(String memberID, String status) throws Exception{
+		JSONParser jsonParser  = new JSONParser() ;
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("authentication", AUTH));
+		params.add(new BasicNameValuePair("action", "not_read_messages"));
+		params.add(new BasicNameValuePair("member_id",memberID));
+		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
+
+
+		boolean  success = json.getInt("success") ==  1;
+		return success ;
+	}
+
 
 	private Member jsonToMember(JSONObject  memberJson) throws Exception
 	{

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -85,13 +86,13 @@ public class  ItemViewHolderFactory
         public TextView publicationContent;
         public TextView memberName ;
         public TextView publicationDate;
-        public CircleImageView  userImage ;
+        public ImageView  userImage ;
         public PublicationViewHolder(final View itemView) {
             super(itemView);
             publicationContent = (TextView)itemView.findViewById(R.id.pub_content);
             memberName =(TextView)itemView.findViewById(R.id.sender_name);
             publicationDate =(TextView)itemView.findViewById(R.id.pub_date);
-            userImage=(CircleImageView)itemView.findViewById(R.id.sender_image) ;
+            userImage=(ImageView)itemView.findViewById(R.id.sender_image) ;
 
         }
 
@@ -257,7 +258,7 @@ public class  ItemViewHolderFactory
         LinearLayout base ;
         public MeetingPlaceViewHolder(View itemView) {
             super(itemView);
-            base =(LinearLayout) itemView.findViewById(R.id.meeting_base) ;
+            //base =(LinearLayout) itemView.findViewById(R.id.meeting_base) ;
             base.setOnClickListener(this);
         }
 

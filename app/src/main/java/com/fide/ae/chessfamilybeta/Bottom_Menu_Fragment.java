@@ -3,7 +3,9 @@ package com.fide.ae.chessfamilybeta;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,9 @@ import android.widget.ImageButton;
 
 import com.readystatesoftware.viewbadger.BadgeView;
 
+import utils.ChessFamilyUtils;
+import utils.SessionSotrage;
+
 
 public class Bottom_Menu_Fragment extends Fragment implements View.OnClickListener {
 
@@ -19,6 +24,7 @@ private ImageButton home_btn,favorite_btn,message_btn,notification_btn,menu_btn 
 
     private FrameLayout frameLayout ;
     public Bottom_Menu_Fragment() {
+
 
     }
 
@@ -46,9 +52,9 @@ private ImageButton home_btn,favorite_btn,message_btn,notification_btn,menu_btn 
         this.message_btn =(ImageButton) rootV.findViewById(R.id.message_btn);
         this.notification_btn =(ImageButton) rootV.findViewById(R.id.notification_btn);
         this.favorite_btn=(ImageButton) rootV.findViewById(R.id.favorite_btn);
-        this.menu_btn=(ImageButton)rootV.findViewById(R.id.menu_btn);
         this.home_btn =(ImageButton) rootV.findViewById(R.id.home_btn) ;
-        setNotificationNumber(10) ;
+        //setNotificationNumber() ;
+        setMessagesNumber();
         buttonsOnClick() ;
     return rootV ;
     }
@@ -64,15 +70,16 @@ private ImageButton home_btn,favorite_btn,message_btn,notification_btn,menu_btn 
         favorite_btn.setOnClickListener(this);
         notification_btn.setOnClickListener(this);
 
+
     }
 
 
-    public void setNotificationNumber(int i ){
+    public void setNotificationNumber(){
 
 
         BadgeView badge = new BadgeView(this.getActivity(),notification_btn );
 
-        badge.setText(String.valueOf(i));
+        badge.setText(ChessFamilyUtils.getUnreadNotificationNumber(String.valueOf(SessionSotrage.CurrentSessionMember)));
         badge.setBadgePosition(badge.POSITION_TOP_RIGHT);
         badge.setBackgroundResource(R.drawable.cercle);
 
@@ -80,6 +87,20 @@ private ImageButton home_btn,favorite_btn,message_btn,notification_btn,menu_btn 
 
 
     }
+    public void setMessagesNumber(){
+
+
+        BadgeView badge = new BadgeView(this.getActivity(),notification_btn );
+
+        badge.setText(ChessFamilyUtils.getUnreadMessagesNumber());
+        badge.setBadgePosition(badge.POSITION_TOP_RIGHT);
+        badge.setBackgroundResource(R.drawable.cercle);
+
+        badge.show();
+
+
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -112,6 +133,17 @@ private ImageButton home_btn,favorite_btn,message_btn,notification_btn,menu_btn 
         }
 
 
+    }
+
+    private DrawerLayout drawer ;
+    public  void setdrawerMenu(DrawerLayout drawer)
+    {
+        this.drawer=drawer ;
+    }
+
+    public DrawerLayout getDrawer()
+    {
+        return this.drawer ;
     }
 /*
     public void setMessageNumber(int i ){

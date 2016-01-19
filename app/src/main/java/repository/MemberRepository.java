@@ -19,5 +19,6 @@ public interface MemberRepository {
 	Member connectWithGoogle(String gId) ;
 	boolean sendForgetPasswordEmail(String email) throws Exception ;
 	void addPhotoToMember(String memberId , File photo) throws Exception ;
+	boolean setAvailibility(String memberID, String status) throws Exception;
 }
  

@@ -54,6 +54,7 @@ import repository.MemberRepositoryImpl;
 import utils.AsyncTaskResult;
 import utils.ChessFamilyUtils;
 import utils.FacebookLogin;
+import utils.SessionSotrage;
 
 import static utils.ChessFamilyUtils.*;
 
@@ -94,6 +95,16 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //Chechking session
+
+        if(SessionSotrage.checkLogin(this))
+        {
+            SessionSotrage.getCurrentSessionMember(LoginActivity.this);
+            Intent intent = new Intent(this, DashboardActivity.class);
+
+            startActivity(intent);
+        }
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -265,9 +276,12 @@ public class LoginActivity extends AppCompatActivity {
                        Member member = (Member) result.getResult();
 
                        if(member!=null) {
-                           Log.d("member is null", "false");
+
+
+                           SessionSotrage.saveCurrentSessionMember(member,LoginActivity.this);
                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                           intent.putExtra("member", member);
+
+                           SessionSotrage.SessionLogin(LoginActivity.this);
                            startActivity(intent);
                          //  LoginActivity.this.finish();
 
@@ -616,7 +630,6 @@ public class LoginActivity extends AppCompatActivity {
                     result = new  AsyncTaskResult<Member>(e) ;
                     return result ;
                 }
-                // publishProgress();
 
             }
 
@@ -632,8 +645,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     if(member!=null) {
                         Log.d("add", "false");
+                        SessionSotrage.checkLogin(LoginActivity.this);
                         Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                        intent.putExtra("member", member);
+                        //intent.putExtra("member", member);
 
                         startActivity(intent);
                     }
@@ -762,9 +776,15 @@ public class LoginActivity extends AppCompatActivity {
                         Member member = (Member) result.getResult();
 
                         if(member!=null) {
-                            Log.d("member is null", "false");
+
+                            SessionSotrage.saveCurrentSessionMember(member,LoginActivity.this);
+
+                            SessionSotrage.SessionLogin(LoginActivity.this);
+
+
+
                             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                            intent.putExtra("member", member);
+
                             startActivity(intent);
                              LoginActivity.this.finish();
 
@@ -814,10 +834,13 @@ public class LoginActivity extends AppCompatActivity {
 
         progressDialog = new SpotsDialog(LoginActivity.this, R.style.progressDialogCustom);
         progressDialog.show();
+        Log.d("ChessSucess", "onSuccess1") ;
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
+
+                        Log.d("ChessSucess","onSuccess") ;
 
 
                         GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {

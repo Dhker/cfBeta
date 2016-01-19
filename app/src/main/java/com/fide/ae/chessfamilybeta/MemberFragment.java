@@ -17,6 +17,7 @@ import org.w3c.dom.Text;
 
 import model.Member;
 import utils.ChessFamilyUtils;
+import utils.SessionSotrage;
 
 
 public class MemberFragment extends Fragment {
@@ -33,7 +34,8 @@ public class MemberFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        this.currentMember=(Member)this.getActivity().getIntent().getExtras().get("member");
+        this.currentMember= SessionSotrage.CurrentSessionMember;
+
 
     }
 
@@ -57,8 +59,8 @@ public class MemberFragment extends Fragment {
         this.isPlayer=(ImageView)root.findViewById(R.id.checked_player) ;
         this.isOrganizer=(ImageView)root.findViewById(R.id.checked_oranizer) ;
         this.setFBprofilelink(facebookLink);
-
-     //   this.setUpViews();
+if(SessionSotrage.CurrentSessionMember!=null)
+       this.setUpViews(SessionSotrage.CurrentSessionMember);
 
 
         // Inflate the layout for this fragment
@@ -70,37 +72,41 @@ public class MemberFragment extends Fragment {
         this.facebookLink = facebookLink;
     }
 
-    public void setUpViews ()
+    public void setUpViews (Member currentMember)
     {
+        if(currentMember.getBirthday()!=null) {
+            this.birthday.setText(currentMember.getBirthday().toString());
+        }
+        if(currentMember.getLastlocation()!=null)
+            this.location.setText(currentMember.getLastlocation().toString());
+        if(currentMember.getEmail()!=null)
+            this.email.setText(currentMember.getEmail());
 
-        this.birthday.setText(currentMember.getBirthday().toString());
-        this.email.setText(currentMember.getEmail());
+
         if(currentMember.getGender()==1)
         this.gender.setText("Male");
         else
             this.gender.setText("Female");
+        if(currentMember.getProfile()!=null) {
 
+            if (this.currentMember.getProfile().getIsArbiter() == 1)
+                this.isArbiter.setImageResource(R.drawable.ic_green_checked);
+            if (this.currentMember.getProfile().getIsPlayer() == 1)
+                this.isPlayer.setImageResource(R.drawable.ic_green_checked);
+            if (this.currentMember.getProfile().getIsOrganizer() == 1)
+                this.isOrganizer.setImageResource(R.drawable.ic_green_checked);
 
-        if (this.currentMember.getProfile().getIsArbiter()==1)
-            this.isArbiter.setImageResource(R.drawable.ic_green_checked);
-        if(this.currentMember.getProfile().getIsPlayer()==1)
-            this.isPlayer.setImageResource(R.drawable.ic_green_checked);
-        if (this.currentMember.getProfile().getIsOrganizer()==1)
-            this.isOrganizer.setImageResource(R.drawable.ic_green_checked);
-
-        if (this.currentMember.getProfile().getIsTitled()==1) {
-            this.title_details.setText(currentMember.getProfile().getTitle().toString());
-            this.isTitled.setImageResource(R.drawable.ic_green_checked);
+            if (this.currentMember.getProfile().getIsTitled() == 1) {
+                this.title_details.setText(currentMember.getProfile().getTitle().toString());
+                this.isTitled.setImageResource(R.drawable.ic_green_checked);
+            } else
+                this.title_details.setText("");
+            if (this.currentMember.getProfile().getIsTrainer() == 1) {
+                this.trainer_for.setText(currentMember.getProfile().getTrainerLevel().toString());
+                this.isTrainer.setImageResource(R.drawable.ic_green_checked);
+            } else
+                this.trainer_for.setText("");
         }
-        else
-        this.title_details.setText("");
-        if (this.currentMember.getProfile().getIsTrainer()==1) {
-            this.trainer_for.setText(currentMember.getProfile().getTrainerLevel().toString());
-            this.isTrainer.setImageResource(R.drawable.ic_green_checked);
-        }
-        else
-            this.trainer_for.setText("");
-
     }
 
     private void setFBprofilelink(boolean type)

@@ -65,7 +65,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
        else if(viewType==member_viewHodler)
            view=inflater.inflate(R.layout.member_item, parent, false) ;
        else if(viewType==meeting_place_viewHolder)
-           view=inflater.inflate(R.layout.meeting_place_item, parent, false) ;
+           view=inflater.inflate(R.layout.item_location, parent, false) ;
 
         return itemViewHolderFactory.getViewHolderByType(viewType, view) ;
     }

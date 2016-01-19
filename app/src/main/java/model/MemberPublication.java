@@ -98,8 +98,9 @@ public class MemberPublication {
 	public ArrayList<Photo> getPhoto() {
 		return Photo;
 	}
-	public void setPhoto(ArrayList<Photo> photo) {
-		Photo = photo;
+	public void setPhoto(Photo photo) {
+		Photo = new ArrayList<Photo>();
+		this.Photo.add(photo);
 	}
 	public String getVideo() {
 		return Video;

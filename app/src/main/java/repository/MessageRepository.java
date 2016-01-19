@@ -12,5 +12,7 @@ public interface MessageRepository {
 	 ArrayList<Message>  messagesReceived(String IDMember, String is_not_read, String PerPage, String Page) throws Exception;
 	 int message_received_read(String IDMember, String IDMessage) throws Exception;
 	 int message_received_delete(String IDMember, String IDMessage) throws Exception;
+	int getUnreadMessages(String MemberID) throws Exception;
+
 	 
 }

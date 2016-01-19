@@ -17,6 +17,7 @@ import java.util.Iterator;
 
 import model.Event;
 import utils.ImageSlider;
+import utils.SessionSotrage;
 
 public class EventActivity extends BaseActivity {
 
@@ -27,14 +28,11 @@ public class EventActivity extends BaseActivity {
     private Event event ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-       /* super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event);
 
-
- */
           //this.event=(Event)this.getIntent().getExtras().get("event");
 
         super.onCreate(savedInstanceState);
+        super.updateUI(SessionSotrage.CurrentSessionMember);
         LayoutInflater inflater = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_event, null, false);
@@ -46,7 +44,7 @@ public class EventActivity extends BaseActivity {
         setSupportActionBar(toolbar);
 
 
-
+//        this.initViews();
 
     }
 

@@ -4,45 +4,37 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/inbox"
+            android:id="@+id/myprofile"
             android:checked="false"
-            android:icon="@drawable/ic_inbox_black"
-            android:title="inbox" />
+            android:icon="@drawable/ic_action"
+            android:title="@string/myprofile" />
 
-        <item
-            android:id="@+id/starred"
-            android:checked="false"
-            android:icon="@drawable/ic_star_black"
-            android:title="favorit" />
-
-        <item
-            android:id="@+id/sent_mail"
-            android:checked="false"
-            android:icon="@drawable/ic_send_black"
-            android:title="sent" />
-
-        <item
-            android:id="@+id/drafts"
-            android:checked="false"
-            android:icon="@drawable/ic_drafts_black"
-            android:title="draft" />
 
 
         <item
-            android:id="@+id/allmail"
+            android:id="@+id/setting"
             android:checked="false"
-            android:icon="@drawable/ic_email_black"
-            android:title="Message" />
+            android:icon="@drawable/ic_setting"
+            android:title="@string/setting" />
+
         <item
-            android:id="@+id/trash"
+            android:id="@+id/privacy"
             android:checked="false"
-            android:icon="@drawable/ic_delete_black"
-            android:title="trash" />
+            android:icon="@drawable/ic_password"
+            android:title="@string/privacy" />
         <item
-            android:id="@+id/spam"
+            android:id="@+id/faq"
             android:checked="false"
-            android:icon="@drawable/ic_error_black"
-            android:title="FAQ" />
+            android:icon="@drawable/ic_faq"
+            android:title="@string/faq" />
+
+
+        <item
+            android:id="@+id/logout"
+            android:checked="false"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/logout" />
+
 
     </group>
 </menu>

@@ -3,7 +3,13 @@
     android:layout_height="match_parent"
     tools:context="com.fide.ae.chessfamilybeta.MessageFragment">
 
-
+    <com.cjj.MaterialRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
 
     <android.support.v7.widget.RecyclerView
@@ -15,6 +21,6 @@
         tools:listitem="@layout/publication_item"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"/>
-
+</com.cjj.MaterialRefreshLayout>
 
 </FrameLayout>

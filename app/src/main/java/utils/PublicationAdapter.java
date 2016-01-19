@@ -34,13 +34,16 @@ public class PublicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         public TextView titleView;
         public TextView authorView;
         public ImageView imageView;
+        public TextView dateView ;
 
         public PublicationViewHolder(View v) {
             super(v);
             view =v ;
-            titleView = (TextView) v.findViewById(R.id.title);
-            authorView = (TextView) v.findViewById(R.id.author1);
-            imageView = (ImageView) v.findViewById(R.id.image);
+            titleView = (TextView) v.findViewById(R.id.pub_content);
+            authorView = (TextView) v.findViewById(R.id.sender_name);
+            imageView = (ImageView) v.findViewById(R.id.sender_image);
+            dateView =(TextView)v.findViewById(R.id.pub_date);
+
         }
     }
 
@@ -73,6 +76,7 @@ public class PublicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         PublicationViewHolder vh = (PublicationViewHolder) holder;
         vh.titleView.setText(item.getText());
         vh.authorView.setText("" + item.getId()) ;
+        vh.dateView.setText(item.getTime().toString());
       member = item.getMember() ;
      if(member!= null)
         {

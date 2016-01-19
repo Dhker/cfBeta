@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="190dp"
-    android:background="@drawable/navidrw"
-    android:orientation="vertical"
-    >
+    android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/Linearcadre1"
+    android:orientation="vertical">
 
     <de.hdodenhof.circleimageview.CircleImageView
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/profile_image"
         android:layout_width="76dp"
     android:layout_height="76dp"
     android:src="@drawable/com_facebook_profile_picture_blank_portrait"
 
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="20dp"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="24dp" />
+        android:layout_marginStart="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="your name "
         android:textSize="14sp"
-        android:textColor="#FFF"
+        android:textColor="#000000"
         android:textStyle="bold"
         android:gravity="left"
         android:paddingBottom="4dp"
         android:id="@+id/drawUsername"
         android:layout_above="@+id/drawerEmail"
         android:layout_alignLeft="@+id/profile_image"
-        android:layout_alignStart="@+id/profile_image" />
+        android:layout_alignStart="@+id/profile_image"
+        android:typeface="serif" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,9 +41,22 @@
         android:gravity="left"
         android:layout_marginBottom="8dp"
         android:textSize="14sp"
-        android:textColor="#fff"
+        android:textColor="#000000"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/drawUsername"
         android:layout_alignStart="@+id/drawUsername" />
+
+    <com.kyleduo.switchbutton.SwitchButton
+        android:id="@+id/availibiaty_btn"
+        style="@style/SwitchButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:kswFadeBack="false"
+        app:kswTintColor="@color/DarkBrown"
+
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/drawUsername"
+        android:layout_toEndOf="@+id/drawUsername" />
+
 
 </RelativeLayout>

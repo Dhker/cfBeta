@@ -224,4 +224,25 @@
     <string name="email_text">Email</string>
     <string name="title">Title</string>
     <string name="birthday">Birthday</string>
+    <string name="myprofile">My profile</string>
+    <string name="faq">FAQ</string>
+    <string name="logout">Logout</string>
+    <string name="privacy">Privacy policy</string>
+    <string name="setting">Setting</string>
+    <string name="say_somthing">Say Somthing</string>
+    <string name="edit_my_profile">Edit my profile</string>
+    <string name="refreshpos">Refresh my position</string>
+    <string name="spoken_lang">Spoken languages :</string>
+    <string name="lang">Language</string>
+    <string name="choose_lang">Choose a language from list below</string>
+    <string name="add">Add</string>
+    <string name="create_event">Create new event</string>
+    <string name="add_meeting_place">Add new meeting place</string>
+    <string name="publish">Publish</string>
+    <string name="add_link">Add your link below</string>
+    <string name="add_new_photo">Add new photo</string>
+    <string name="finish">Finish</string>
+    <string name="add_photo_text">Click add photos to add new photo to your publication</string>
+    <string name="clear_all">Clear all</string>
+    <string name="published">Published</string>
 </resources>

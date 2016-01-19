@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cjj.MaterialRefreshLayout;
+import com.cjj.MaterialRefreshListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,13 +29,14 @@ public class NotificationFragment extends Fragment {
     private View RootView ;
     private ItemAdapter adapter ;
     private  List notifications = new ArrayList<>();
+    private MaterialRefreshLayout materialRefreshLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    @Nullable
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.RootView = inflater.inflate(R.layout.fragment_notification, container, false);
@@ -45,6 +49,20 @@ public class NotificationFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         adapter = new ItemAdapter(getContext() ,notifications) ;
         recyclerView.setAdapter(adapter);
+
+        materialRefreshLayout = (MaterialRefreshLayout) RootView.findViewById(R.id.refresh);
+        materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
+            @Override
+            public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {
+                //refreshing...
+            }
+
+            @Override
+            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
+                //load more refreshing...
+            }
+
+        });
 
         return RootView ;
     }

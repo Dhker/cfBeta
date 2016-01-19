@@ -1,27 +1,38 @@
 package model;
 
+import java.io.File;
+
 public class Photo {
 private int id ;
 private String link;
-private int IDpublication;
+	private File photo ;
+private MemberPublication publication;
+
 public Photo ()
 {
 
 	}
-public Photo (int id ,String link,int IDpublication)
-{
-	super();
-	this.id=id;
-	this.link=link;
-	this.IDpublication=IDpublication;
+
+
+
+
+	public MemberPublication getpublication() {
+	return publication;
+}
+public void setpublication(MemberPublication IDpublication) {
+	this.publication = IDpublication;
+}
+
+	public File getPhoto() {
+		return photo;
 	}
-public int getIDpublication() {
-	return IDpublication;
-}
-public void setIDpublication(int IDpublication) {
-	this.IDpublication = IDpublication;
-}
-public int getId() {
+
+	public void setPhoto(String path) {
+		if (path!=null)
+		this.photo = new File(path);
+	}
+
+	public int getId() {
 	return id;
 }
 public void setId(int id) {

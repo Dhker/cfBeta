@@ -3,10 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="10"
-    android:background="@color/colorTextEditProfil1">
+    android:weightSum="10">
 
-
+    <include layout="@layout/list_view_header"
+        android:id="@+id/status_header"/>
+    <com.cjj.MaterialRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
 
     <android.support.v7.widget.RecyclerView
@@ -20,5 +27,5 @@
             android:layout_marginRight="2dp"/>
 
 
-
+</com.cjj.MaterialRefreshLayout>
 </LinearLayout>

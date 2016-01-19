@@ -28,6 +28,7 @@ import model.Member;
 /**
  * Created by Dhker on 12/22/2015.
  */
+
 public class FacebookLogin {
     public static   CallbackManager callbackManager;
 
@@ -82,6 +83,12 @@ public class FacebookLogin {
 
     }
 
+    public static void fbLogout()
+    {
+        LoginManager.getInstance().logOut();
+
+    }
+
 
 
 
@@ -119,10 +126,10 @@ public class FacebookLogin {
                 }
             }
             try {
-                URL profile_pic = new URL("https://graph.facebook.com/" + member.getFacebook_ID()+ "/picture?width=200&height=150");
-                member.setPhoto(profile_pic.toString());
 
-            } catch (MalformedURLException e) {
+                member.setPhoto("https://graph.facebook.com/" + member.getFacebook_ID()+ "/picture?width=200&height=150");
+
+            } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }

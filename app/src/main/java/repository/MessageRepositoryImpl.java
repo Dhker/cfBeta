@@ -174,6 +174,19 @@ public class MessageRepositoryImpl implements MessageRepository {
 		
 		return json.getInt("success");
 	}
+
+	@Override
+	public int getUnreadMessages(String MemberID) throws Exception
+	{
+		JSONParser jsonParser  = new JSONParser() ;
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("authentication", AUTH));
+		params.add(new BasicNameValuePair("action", "not_read_messages"));
+		params.add(new BasicNameValuePair("member_id",MemberID));
+		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
+		return json.getInt("not_read_messages") ;
+	}
+
 	public Date convertStringToDate(String dateString)
 	{   
 		Date date = null;

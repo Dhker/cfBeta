@@ -1,10 +1,14 @@
 package utils;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.media.Image;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,19 +20,34 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.fide.ae.chessfamilybeta.DashboardActivity;
 import com.fide.ae.chessfamilybeta.R;
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
+import com.michael.easydialog.EasyDialog;
+import com.readystatesoftware.viewbadger.BadgeView;
 
+import org.apache.http.conn.ConnectTimeoutException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
+import dmax.dialog.SpotsDialog;
+import model.Language;
 import model.Member;
+import repository.LanguageRepository;
+import repository.LanguageRepositoryImpl;
+import repository.MessageRepository;
+import repository.MessageRepositoryImpl;
+import repository.NotificationRepository;
+import repository.NotificationRepositoryImpl;
 
 /**
  * Created by wassim on 21/12/15.
@@ -108,8 +127,6 @@ public class ChessFamilyUtils {
         i++ ;
         fragTransaction.add(container, fragment , "fragment" + i).commit();
 
-
-
     }
 
     public static Member getFacebookData(JSONObject object) {
@@ -158,4 +175,180 @@ public class ChessFamilyUtils {
         }
         return member ;
     }
+
+   public static String getUnreadMessagesNumber()
+    {
+        AsyncTask<String,String,Integer> serviceCall =
+
+        new AsyncTask<String , String , Integer>()
+        {
+   Integer result   ;
+
+
+            @Override
+            protected void onPreExecute() {
+
+
+            }
+
+            @Override
+            protected void onProgressUpdate(String... values) {
+
+                Log.d("Progress Update","true") ;
+
+            }
+
+            @Override
+            protected  Integer doInBackground(String... params) {
+
+
+
+             result =null ;
+
+                MessageRepository messageRepository = new MessageRepositoryImpl() ;
+                try {
+                    result = Integer.valueOf(messageRepository.getUnreadMessages(params[0]));
+                    Log.d("value",result.toString());
+                } catch (Exception e) {
+                    Log.d("value",e.getMessage());
+                    e.printStackTrace();
+                }
+
+                return result;
+
+            }
+
+            @Override
+            protected void onPostExecute(Integer result) {
+
+
+            }
+
+
+
+
+        };
+         serviceCall.execute(String.valueOf(SessionSotrage.CurrentSessionMember.getID()));
+       /* try {
+            return serviceCall.get().toString();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return "0" ;
+*/
+        return "" ;
+    }
+    public static String getUnreadNotificationNumber(String memberID)
+    {
+        AsyncTask<String,String,Integer> serviceCall =
+
+                new AsyncTask<String , String , Integer>()
+                {
+                    Integer result   ;
+
+
+                    @Override
+                    protected void onPreExecute() {
+
+
+                    }
+
+                    @Override
+                    protected void onProgressUpdate(String... values) {
+
+                        Log.d("Progress Update","true") ;
+
+                    }
+
+                    @Override
+                    protected  Integer doInBackground(String... params) {
+
+
+
+                        result =null ;
+
+                        NotificationRepository notificationRepository = new NotificationRepositoryImpl() ;
+                        try {
+                            result = Integer.valueOf(notificationRepository.getUnreadNotifications(params[0]));
+                            Log.d("value",result.toString());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        return result;
+
+                    }
+
+                    @Override
+                    protected void onPostExecute(Integer result) {
+
+
+                    }
+
+
+
+
+                };
+        serviceCall.execute(memberID);
+        try {
+            return serviceCall.get().toString();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return "0" ;
+
+    }
+
+
+    public static void logoutActivity(final AppCompatActivity activity)
+    {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("LOGOUT");
+        activity.registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.d("onReceive", "Logout in progress");
+                //At this point you should start the login activity and finish this one
+                activity.finish();
+            }
+        }, intentFilter);
+
+
+    }
+
+    private static EasyDialog easeyDialog;
+    public static void EasyDialog(View view,Context context,View attachedto)
+    {
+
+        if(view!=null)
+        {
+        easeyDialog =new EasyDialog(context)
+                // .setLayoutResourceId(R.layout.layout_tip_content_horizontal)//layout resource id
+                .setLayout(view)
+                .setBackgroundColor(context.getResources().getColor(R.color.background_color_black))
+                        // .setLocation(new location[])//point in screen
+                .setLocationByAttachedView(attachedto)
+                .setGravity(EasyDialog.GRAVITY_BOTTOM)
+                .setAnimationTranslationShow(EasyDialog.DIRECTION_X, 1000, -600, 100, -50, 50, 0)
+                .setAnimationAlphaShow(1000, 0.3f, 1.0f)
+                .setAnimationTranslationDismiss(EasyDialog.DIRECTION_X, 500, -50, 800)
+                .setAnimationAlphaDismiss(500, 1.0f, 0.0f)
+                .setTouchOutsideDismiss(true)
+                .setMatchParent(true)
+                .setMarginLeftAndRight(24, 24)
+                .setOutsideColor(context.getResources().getColor(android.R.color.transparent))
+                .show();
+}
+    }
+
+    public static void hideEasyDialog()
+    {
+        easeyDialog.dismiss();
+    }
+
+
 }

@@ -103,14 +103,10 @@ public class LastLocation  implements Serializable {
 	public void setPlace(MeetingPlace place) {
 		this.place = place;
 	}
-	
-	
 
-	
-	
-	
-	
-	
-	
 
+	@Override
+	public String toString() {
+		return getCity()+", "+getCountry() ;
+	}
 }

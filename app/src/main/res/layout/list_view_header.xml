@@ -1,47 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="120dp">
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+
+    <TableRow
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/say_somthing"
-        android:background="@xml/shaded_border"
-        android:layout_margin="5dp"
-        android:weightSum="10">
+        android:layout_gravity="center_horizontal|bottom"></TableRow>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/profile_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/com_facebook_profile_picture_blank_portrait"
-            app:civ_border_width="2dp"
-            app:civ_border_color="#ffffff"
-            android:layout_margin="5dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:divider="@xml/divider_vertical"
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/status_text"
-            android:layout_gravity="center"
-            android:layout_weight="10"
-            android:paddingTop="@dimen/pad_10dp"/>
+        android:showDividers="middle"
+        android:layout_margin="5dp">
 
-        <ImageButton
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/status_publish"
-            android:src="@drawable/ic_publish"
-            android:background="@drawable/image_background"
-            android:layout_gravity="center|right"
-            android:layout_marginRight="10dp"
-            />
+            android:id="@+id/say_somthing"
+            android:layout_margin="5dp"
+            android:weightSum="10"
+            android:padding="5dp"
+            android:focusableInTouchMode="true"
+            android:background="#ffffff"
+            android:divider="@xml/divider"
+
+            android:showDividers="middle">
+
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/com_facebook_profile_picture_blank_portrait"
 
 
+                android:layout_margin="5dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceSmallPopupMenu"
+                android:hint="@string/say_somthing"
+                android:id="@+id/status_text"
+                android:layout_weight="10"
+                android:linksClickable="true"
+                android:windowSoftInputMode="stateHidden"
+                android:autoLink="web|email"
+                android:background="@android:color/transparent"
+                android:nextFocusRight="@id/profile_image"
+                android:layout_gravity="center"
+                android:paddingTop="5dp"
+                android:layout_marginLeft="5dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:divider="@xml/divider"
+
+            android:showDividers="middle"
+            android:weightSum="100"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="50"
+                android:gravity="center_horizontal"
+                android:divider="@xml/divider"
+
+                android:showDividers="middle">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_link"
+                    android:src="@drawable/ic_link"
+                    android:background="@drawable/image_background"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp" />
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_photo"
+                    android:src="@drawable/ic_add_photos"
+                    android:background="@drawable/image_background"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp" />
+            </LinearLayout>
+
+
+            <com.dd.processbutton.iml.ActionProcessButton
+                android:id="@+id/status_publish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/publish"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                custom:pb_colorComplete="@color/green"
+                custom:pb_colorNormal="@color/Linearcadre1"
+                custom:pb_colorPressed="@color/DarkBrown"
+                custom:pb_colorProgress="@color/blue"
+                custom:pb_textComplete="published"
+                custom:pb_textProgress="publishing"
+                custom:pb_textError="Error"
+                custom:pb_colorError="@color/red"
+                android:layout_weight="50"
+                android:layout_margin="5dp" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>

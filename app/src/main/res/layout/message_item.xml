@@ -17,14 +17,15 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
 
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/sender_image"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/com_facebook_profile_picture_blank_portrait"
                 android:layout_gravity="center" />
@@ -32,7 +33,10 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/sender_name"
@@ -40,32 +44,35 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/image"
                     android:singleLine="true"
-                    android:textSize="16dp"
                     android:textStyle="bold"
                     android:text="sender name"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp"
+                    android:drawableRight="@android:drawable/presence_online"
+                    android:drawablePadding="10dp" />
 
                 <TextView
                     android:id="@+id/message_object"
                     android:layout_width="wrap_content"
-                    android:textStyle="bold"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="18sp"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="This is the message text" />
+                    android:layout_gravity="center"
+                    android:text="This is the message text"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp" />
 
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="22/11/1992"
                 android:id="@+id/message_date"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center|top"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="10dp" />
 
 
         </LinearLayout>

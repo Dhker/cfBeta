@@ -1,6 +1,7 @@
 package com.fide.ae.chessfamilybeta;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 
 import android.os.AsyncTask;
@@ -10,7 +11,10 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.TextView;
@@ -23,7 +27,9 @@ import model.Member;
 import repository.MemberRepositoryImpl;
 import repository.MemberRepository;
 import utils.AsyncTaskResult;
+import utils.ChessFamilyUtils;
 import utils.SectionPagerAdapter;
+import utils.SessionSotrage;
 
 public class ProfileActivity extends BaseActivity {
 
@@ -55,9 +61,13 @@ public class ProfileActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
+        super.updateUI(SessionSotrage.CurrentSessionMember);
+        super.header.invalidate();
 
+        ChessFamilyUtils.logoutActivity(this);
 
         memberFragment = new MemberFragment() ;
         favoriteFragment = new FavoriteFragment() ;
@@ -75,8 +85,11 @@ public class ProfileActivity extends BaseActivity {
 
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(myToolbar);                   // Setting toolbar as the ActionBar with setSupportActionBar() call
+        myToolbar.setTitle(getResources().getString(R.string.myprofile));
+        myToolbar.setNavigationIcon(R.drawable.ic_navigation_btn);
 
+        setSupportActionBar(myToolbar);                   // Setting toolbar as the ActionBar with setSupportActionBar() call
+getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
         // UI components initialization
@@ -84,8 +97,7 @@ public class ProfileActivity extends BaseActivity {
         userName= (TextView)findViewById(R.id.userName);
         age=(TextView)findViewById(R.id.age);
         gender= (TextView)findViewById(R.id.gender) ;
-        Bundle bundle= this.getIntent().getExtras();
-
+       this.member= SessionSotrage.CurrentSessionMember;
 
 
 
@@ -96,13 +108,6 @@ public class ProfileActivity extends BaseActivity {
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.Linearcadre1));
         tabLayout.setSelectedTabIndicatorHeight(5);
 
-        // this.home_btn = (ImageButton) findViewById(R.id.home_menu_btn);
-      /*  this.notif_btn=(ImageButton) findViewById(R.id.notification_menu_btn);
-        this.message_btn=(ImageButton) findViewById(R.id.message_menu_btn);
-        this.favorite_btn= (ImageButton) findViewById(R.id.favorite_menu_btn);
-
-
-*/
 
 
 
@@ -112,24 +117,10 @@ public class ProfileActivity extends BaseActivity {
 
         SectionPagerAdapter pagerAdapter = new SectionPagerAdapter(getSupportFragmentManager(), viewPager)  ;
 
-       /* pagerAdapter.addTitle("Member");
-        pagerAdapter.addTitle("Event");
-        pagerAdapter.addTitle("Location");*/
-
 
         //  setting the resource when the tab is selected
 
-        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_profile));
-        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_place));
-        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_friends));
-        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_event));
 
-
-        // setting the resource when the tab is not selected
-        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_profile));
-        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_place));
-        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_friends));
-        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_event));
 
         pagerAdapter.addFragement(memberFragment);
         pagerAdapter.addFragement(messageFragment);
@@ -155,8 +146,9 @@ public class ProfileActivity extends BaseActivity {
 
 
 
-        // member =(Member) bundle.get("member");
-       // loadUserInformation("" + member.getID());
+super.updateUI(member);
+
+        this.updateUI(member);
    //     Log.d("profileImage" , member.getPhoto()) ;
 
 
@@ -184,11 +176,7 @@ public class ProfileActivity extends BaseActivity {
               {
                   // calculate age
               }
-              if(member.getGender()!=0)
-              {
 
-                  gender.setText((member.getGender()==1)?  R.string.Male:R.string.Female );
-              }
 
 
         }
@@ -265,5 +253,31 @@ public class ProfileActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         this.active = true ;
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_profile_menu, menu);
+
+        return true ;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.editprofile: {
+                Intent intent = new Intent(this, EditProfileActivity.class);
+                startActivity(intent);
+                return true;
+            }
+
+            case android.R.id.home :
+                super.drawerLayout.openDrawer(Gravity.LEFT);
+                return true ;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

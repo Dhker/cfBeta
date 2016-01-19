@@ -49,6 +49,18 @@ public class NotificationRepositoryImpl implements NotificationRepository {
 	    }
 		return notification;
 	}
+
+	@Override
+	public int getUnreadNotifications(String MemberID) throws Exception {
+		JSONParser jsonParser  = new JSONParser() ;
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("authentication", AUTH));
+		params.add(new BasicNameValuePair("action", "not_read_notifications"));
+		params.add(new BasicNameValuePair("member_id",MemberID));
+		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
+		return json.getInt("nb_notifications") ;
+	}
+
 	public Date convertStringToDate(String dateString)
 	{   
 		Date date = null;

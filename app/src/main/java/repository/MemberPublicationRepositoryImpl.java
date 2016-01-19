@@ -1,6 +1,13 @@
 package repository;
 
 
+import android.util.Log;
+
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.SyncHttpClient;
+
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
@@ -13,6 +20,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import configuration.Configuration;
+import cz.msebera.android.httpclient.Header;
 import model.Member;
 import model.Photo;
 import utils.JSONParser;
@@ -24,34 +33,34 @@ public class MemberPublicationRepositoryImpl  implements MemberPublicationReposi
     private MemberPublication MemberPublication = null;
 	private MemberRepository memberRepository = new MemberRepositoryImpl();
 	@Override
-	public MemberPublication addMemberPublication(String IDMember, String TextFormat, 
-			String LinkVideo, String WebLink,String visibility) throws Exception{
+	public MemberPublication addMemberPublication(MemberPublication publication) throws Exception{
 	   
 		JSONParser jsonParser  = new JSONParser() ;
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 	    params.add(new BasicNameValuePair("authentication", AUTH));
 	    params.add(new BasicNameValuePair("action", "member_publication_add"));
-	    params.add(new BasicNameValuePair("member_id", IDMember));
-	    params.add(new BasicNameValuePair("formatted_text", TextFormat));
-	    params.add(new BasicNameValuePair("video_link", LinkVideo));
-	    params.add(new BasicNameValuePair("web_link", WebLink));
-	    params.add(new BasicNameValuePair("visibility", visibility));
-	    JSONObject json = jsonParser.getJSONFromUrl(URL, params); 
-	    System.out.println(json);	  
-        boolean  success = json.getInt("success") ==  1;     
-	    if (success){
-	    	JSONObject PublactionJSON = json.getJSONObject("member_publication");
-	    	MemberPublication = new MemberPublication();
-	    	MemberPublication.setId(PublactionJSON.getInt("id"));
-	    	MemberPublication.setLink(PublactionJSON.getString("web_link"));
-	    	MemberPublication.setVideo(PublactionJSON.getString("video_link"));
-	    	MemberPublication.setVisibile(PublactionJSON.getInt("visibility"));
-	    	Member mb = new Member();
-	    	mb.setID(PublactionJSON.getInt("member_id"));
-            MemberPublication.setTime(convertStringToDate(PublactionJSON.getString("date")));
-	    	
-	    }
-	    
+	    params.add(new BasicNameValuePair("member_id", String.valueOf(publication.getMember().getID())));
+		params.add(new BasicNameValuePair("formatted_text", publication.getText()));
+		params.add(new BasicNameValuePair("video_link", publication.getVideo()));
+		params.add(new BasicNameValuePair("web_link", publication.getLink()));
+		params.add(new BasicNameValuePair("visibility", String.valueOf((publication.getVisibile()))));
+		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
+		System.out.println(json);
+		boolean  success = json.getInt("success") ==  1;
+		if (success){
+			JSONObject PublactionJSON = json.getJSONObject("member_publication");
+			MemberPublication = new MemberPublication();
+			MemberPublication.setId(PublactionJSON.getInt("id"));
+			MemberPublication.setLink(PublactionJSON.getString("web_link"));
+			MemberPublication.setVideo(PublactionJSON.getString("video_link"));
+			MemberPublication.setVisibile(PublactionJSON.getInt("visibility"));
+			Member mb = new Member();
+			MemberPublication.setMember(mb);
+			mb.setID(PublactionJSON.getInt("member_id"));
+			MemberPublication.setTime(convertStringToDate(PublactionJSON.getString("date")));
+
+		}
+
 		return MemberPublication;
 	}
 	private  Date convertStringToDate(String dateString)
@@ -66,10 +75,33 @@ public class MemberPublicationRepositoryImpl  implements MemberPublicationReposi
 	    return date;
 	}
 	@Override
-	public boolean PublicationaddPhoto(File Source) {
-		boolean Result=false;
-		
-		return Result;
+	public void PublicationaddPhoto(File photo,String memberId,String publicationId ) {
+		RequestParams params1 = new RequestParams();
+
+		params1.add("authentication", AUTH);
+		params1.add("action", "member_publication_add_photo");
+		params1.add("member_id",memberId);
+		params1.add("publication_id",publicationId);
+		try {
+			params1.put("photo", photo);
+		} catch(FileNotFoundException e) {}
+
+		SyncHttpClient client = new SyncHttpClient();
+		client.post(Configuration.URL, params1, new AsyncHttpResponseHandler() {
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, byte[] bytes) {
+				// handle success response*
+				System.out.println("Sucessssssssssssssssss");
+
+			}
+
+			@Override
+			public void onFailure(int statusCode, Header[] headers, byte[] bytes, Throwable throwable) {
+
+				System.out.println("Failure");
+
+			}
+		});
 	}
 	@Override
 	public ArrayList<MemberPublication> GetFeeds( int perpage, int page) throws Exception{
@@ -147,9 +179,10 @@ public class MemberPublicationRepositoryImpl  implements MemberPublicationReposi
 		    	 photoObj.setId(JSONphoto.getInt("id"));
 		    
 		    	 photoObj.setLink(JSONphoto.getString("image"));
-		    	 ListePhoto.add(photoObj);
-		    }
-		    MemberPub.setPhoto(ListePhotoPub);
+
+				MemberPub.setPhoto(photoObj);
+			}
+
 		    ListeMemberPublication.add(MemberPub);
 	    }
 	  

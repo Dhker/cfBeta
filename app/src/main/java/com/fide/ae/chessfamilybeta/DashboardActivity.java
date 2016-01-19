@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,14 +27,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 
 import com.parse.ParseUser;
+import com.readystatesoftware.viewbadger.BadgeView;
 
 import model.Member;
 import utils.ChessFamilyUtils;
+import utils.ImageResource;
 import utils.ParsePushNotif;
 import utils.SectionPagerAdapter;
+import utils.SessionSotrage;
 
 
 public class DashboardActivity extends BaseActivity {
@@ -51,25 +56,28 @@ public class DashboardActivity extends BaseActivity {
     private MessageFragment messageFragment ;
     private NotificationFragment  notificationFragment;
 
-
+private TabLayout tabLayout;
 
     private int currentTabPosition ;
 
 
     static boolean active  ;
     private  Member  member ;
+    private ImageView iv1;
+    private ImageView iv3;
+    private SectionPagerAdapter pagerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      /*  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        setContentView(R.layout.activity_dashboard);
- */
 
-     /*   ParsePushNotif.initParse(this);
+ChessFamilyUtils.logoutActivity(this);
 
-        ParsePushNotif.sendNotificationToChannel("Everyone","Happy 2016");*/
 
-        //SETUP VIEWS
+        this.member= SessionSotrage.CurrentSessionMember ;
+
+        super.updateUI(member);
+
 
 
         Bundle bundle= this.getIntent().getExtras();
@@ -82,7 +90,10 @@ public class DashboardActivity extends BaseActivity {
         }
 
 
+
+
         homeFragment = new HomeFragment() ;
+       
         feedsFragment = new FeedsFragment() ;
         messageFragment = new MessageFragment() ;
         notificationFragment = new NotificationFragment() ;
@@ -94,23 +105,22 @@ public class DashboardActivity extends BaseActivity {
 
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        myToolbar.setNavigationIcon(R.drawable.ic_navigation_btn);
+
+
+
         setSupportActionBar(myToolbar);                   // Setting toolbar as the ActionBar with setSupportActionBar() call
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_dash);
+         tabLayout = (TabLayout) findViewById(R.id.tab_dash);
         viewPager = (ViewPager) findViewById(R.id.pager_dash);
         viewPager.setOffscreenPageLimit(1);
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.DarkBrown));
         tabLayout.setSelectedTabIndicatorHeight(5);
 
-        // this.home_btn = (ImageButton) findViewById(R.id.home_menu_btn);
-      /*  this.notif_btn=(ImageButton) findViewById(R.id.notification_menu_btn);
-        this.message_btn=(ImageButton) findViewById(R.id.message_menu_btn);
-        this.favorite_btn= (ImageButton) findViewById(R.id.favorite_menu_btn);
-
-
-*/
 
 
 
@@ -118,7 +128,8 @@ public class DashboardActivity extends BaseActivity {
 
 
 
-       SectionPagerAdapter pagerAdapter = new SectionPagerAdapter(getSupportFragmentManager(), viewPager)  ;
+
+        pagerAdapter = new SectionPagerAdapter(getSupportFragmentManager(), viewPager)  ;
 
        /* pagerAdapter.addTitle("Member");
         pagerAdapter.addTitle("Event");
@@ -127,17 +138,6 @@ public class DashboardActivity extends BaseActivity {
 
      //  setting the resource when the tab is selected
 
-        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_home_menu));
-        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_message_menu));
-        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_feeds));
-        pagerAdapter.addSelectedResource(getResources().getDrawable(R.drawable.ic_notification));
-
-
-      // setting the resource when the tab is not selected
-        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_home_menu));
-        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_message_menu));
-        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_feeds));
-        pagerAdapter.addUnSelectedResource(getResources().getDrawable(R.drawable.ic_notification));
 
         pagerAdapter.addFragement(homeFragment);
         pagerAdapter.addFragement(messageFragment);
@@ -151,16 +151,19 @@ public class DashboardActivity extends BaseActivity {
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(currentTabPosition);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(getResources().getDrawable(R.drawable.ic_home_menu));
-        tabLayout.getTabAt(1).setIcon(getResources().getDrawable(R.drawable.ic_message_menu));
-        tabLayout.getTabAt(2).setIcon(getResources().getDrawable(R.drawable.ic_feeds));
-        tabLayout.getTabAt(3).setIcon(getResources().getDrawable(R.drawable.ic_notification));
+        ImageView iv0 = new ImageView(this);iv0.setImageResource(R.drawable.ic_home_menu);
+         iv1 = new ImageView(this);iv1.setImageResource(R.drawable.ic_message_menu);
+        ImageView iv2 = new ImageView(this);iv2.setImageResource(R.drawable.ic_feeds);
+         iv3 = new ImageView(this);iv3.setImageResource(R.drawable.ic_notification);
+        tabLayout.getTabAt(0).setCustomView(iv0);
+        tabLayout.getTabAt(1).setCustomView(iv1);
+        tabLayout.getTabAt(2).setCustomView(iv2);
+        tabLayout.getTabAt(3).setCustomView(iv3);
 
         tabLayout.setTabTextColors(Color.GRAY, getResources().getColor(R.color.Linearmenu)) ;
         tabLayout.setOnTabSelectedListener(pagerAdapter);
 
-
-
+this.setNotificationNumber();
 
 
 
@@ -176,7 +179,7 @@ public class DashboardActivity extends BaseActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        getMenuInflater().inflate(R.menu.dashboard, menu);
 
         return  true ;
     }
@@ -193,6 +196,9 @@ public class DashboardActivity extends BaseActivity {
             case R.id.menu_refresh:
 
                 return true;
+            case android.R.id.home :
+                super.drawerLayout.openDrawer(Gravity.LEFT);
+                return true ;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -212,8 +218,26 @@ public class DashboardActivity extends BaseActivity {
     }
 
 
+    public void setNotificationNumber(){
 
 
 
+        BadgeView badge = new BadgeView(this,iv3);
 
+        badge.setText("3");
+        badge.setBadgePosition(badge.POSITION_TOP_RIGHT);
+        badge.setBackgroundResource(R.drawable.cercle);
+
+        badge.show();this.pagerAdapter.unBadgeTab(3,badge);
+
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("Activity", "Dashboard");
+        ImageResource.handleResult(requestCode, resultCode, data);
+    }
 }

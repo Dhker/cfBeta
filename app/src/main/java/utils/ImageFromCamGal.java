@@ -1,6 +1,5 @@
 package utils;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
@@ -13,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -75,9 +75,11 @@ public class ImageFromCamGal {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        Log.d("EditActivity", "NotPassed") ;
         if (resultCode == AppCompatActivity.RESULT_OK) {
+            Log.d("EditActivity", "NotPassed") ;
             if (requestCode == REQUEST_CAMERA) {
+                Log.d("EditActivity", "Passed") ;
                 Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
@@ -100,7 +102,8 @@ public class ImageFromCamGal {
                             {
                                 return  false ;
                             }
-                        } catch (Exception e) {
+                        } catch (Exception e)
+                        {
                             e.printStackTrace();
                             return false;
                         }
